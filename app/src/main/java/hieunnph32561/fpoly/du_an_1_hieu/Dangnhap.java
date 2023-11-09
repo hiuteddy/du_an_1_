@@ -59,6 +59,16 @@ public class Dangnhap extends AppCompatActivity {
             }
         });
 
+<<<<<<< HEAD
+=======
+        // Lưu mã user khi đăng nhập
+        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("userId", edtuser.getText().toString()); // Sử dụng key là "userId" thay vì "tenDN"
+        editor.apply();
+
+
+>>>>>>> 8d89440 (Initial commit)
     }
 
     private void loadData() {
@@ -75,6 +85,17 @@ public class Dangnhap extends AppCompatActivity {
         edtpass.setText(pref.getString("password", ""));
     }
 
+<<<<<<< HEAD
+=======
+    private void saveUserId(int userId) {
+        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("userId", userId);
+        editor.apply();
+    }
+
+
+>>>>>>> 8d89440 (Initial commit)
 
     private void checkRememberUser(String a, String b, boolean status) {
         SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);

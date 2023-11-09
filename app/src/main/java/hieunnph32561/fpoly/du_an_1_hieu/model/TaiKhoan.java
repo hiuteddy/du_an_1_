@@ -11,6 +11,12 @@ package hieunnph32561.fpoly.du_an_1_hieu.model;
             this.matKhau = matKhau;
         }
 
+<<<<<<< HEAD
+=======
+        public TaiKhoan() {
+        }
+
+>>>>>>> 8d89440 (Initial commit)
         public int getMaTk() {
             return maTk;
         }

@@ -44,4 +44,18 @@ public class taikhoanDAO {
             return 1;
         }
     }
+<<<<<<< HEAD
+=======
+    public TaiKhoan getID(String id) {
+        String sql = "select * from TaiKhoan where tenDN=?";
+        ArrayList<TaiKhoan> list = getALLTT(sql, id);
+
+        if (!list.isEmpty()) {
+            return list.get(0);
+        } else {
+            // Trả về một giá trị LoaiSach mặc định hoặc tạo một đối tượng mới tùy ý
+            return new TaiKhoan();
+        }
+    }
+>>>>>>> 8d89440 (Initial commit)
 }

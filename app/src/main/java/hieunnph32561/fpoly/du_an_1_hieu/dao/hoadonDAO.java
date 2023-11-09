@@ -73,6 +73,14 @@ public class hoadonDAO {
         cursor.close();
         return maGioHang;
     }
+<<<<<<< HEAD
+=======
+    public long delete(int mssp) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        long check = database.delete("HoaDon", "maHD=?", new String[]{String.valueOf(mssp)});
+        return check; // Trả về số hàng bị xóa
+    }
+>>>>>>> 8d89440 (Initial commit)
     public HoaDon getID(String id) {
         String sql = "select * from HoaDon where maHD=?";
         ArrayList<HoaDon> list = getALLSACH(sql, id);
