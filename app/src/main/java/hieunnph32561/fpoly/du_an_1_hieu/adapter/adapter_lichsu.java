@@ -1,0 +1,107 @@
+package hieunnph32561.fpoly.du_an_1_hieu.adapter;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+
+import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.khachhangDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_chi_tiet_ls;
+import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
+import hieunnph32561.fpoly.du_an_1_hieu.model.KhachHang;
+
+public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHodelsanpham> {
+    Context context;
+    ArrayList<HoaDon> list;
+    chitietDAO dao;
+    hoadonDAO hoadonDAO;
+    dienthoaiDAO dienthoaiDAO;
+    khachhangDAO khachhangDAO;
+
+
+    public adapter_lichsu(Context context, ArrayList<HoaDon> list) {
+        this.context = context;
+        this.list = list;
+        this.dao = new chitietDAO(context);
+        hoadonDAO = new hoadonDAO(context);
+        dienthoaiDAO = new dienthoaiDAO(context);
+        khachhangDAO = new khachhangDAO(context);
+    }
+
+    @NonNull
+    @Override
+    public adapter_lichsu.ViewHodelsanpham onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(context).inflate(R.layout.item_lich_su, parent, false);
+        return new ViewHodelsanpham(view);
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull adapter_lichsu.ViewHodelsanpham holder, int position) {
+        HoaDon hoaDon = list.get(position);
+
+//        DienThoai dienThoai=dienthoaiDAO.getID(String.valueOf(chiTiet1.getMadt()));
+
+        KhachHang khachHang = khachhangDAO.getID(String.valueOf(hoaDon.getMaKH()));
+        holder.txtmadon.setText("Mã hóa đơn: " + String.valueOf(hoaDon.getMaHD()));
+        holder.txtngay.setText("Ngày đặt: " + String.valueOf(hoaDon.getNgay()));
+        holder.txtdienthoai.setText("Số điện thoại: " + "" + khachHang.getDienThoai());
+        holder.txtmaKH.setText("Tên khách hàng: " + "" + khachHang.getHoTen());
+        holder.txttongTien.setText("Tổng tiền: " + hoaDon.getTongTien());
+        holder.txttrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
+        if (hoaDon.getTrangThai() == 0) {
+            holder.txttrangThai.setText("Chờ xác nhân");
+        }
+        holder.txtdiaChi.setText("Địa chỉ: " + hoaDon.getDiaChi());
+
+
+        holder.btnchitiet.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Bạn đã chọn hóa đơn: " + hoaDon.getMaHD(), Toast.LENGTH_SHORT).show();
+//                // Chuyển sang Activity ProductDetailActivity
+                Intent intent = new Intent(context, MainActivity_chi_tiet_ls.class);
+                intent.putExtra("productId", hoaDon.getMaHD()); // Truyền mã sản phẩm
+                context.startActivity(intent);
+            }
+        });
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return list.size();
+    }
+
+    public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
+        TextView txtmaKH, txttongTien, txtngay, txttrangThai, txtdiaChi, txtmadon, txtdienthoai;
+        Button btnchitiet;
+
+
+        public ViewHodelsanpham(@NonNull View itemView) {
+            super(itemView);
+            txtmadon = itemView.findViewById(R.id.txtmadon);
+            txtmaKH = itemView.findViewById(R.id.txtmakh);
+            txtngay = itemView.findViewById(R.id.txtngaydat);
+            txttrangThai = itemView.findViewById(R.id.txttrangthai);
+            txtdiaChi = itemView.findViewById(R.id.txtdiachi);
+            txttongTien = itemView.findViewById(R.id.tongTien);
+            txtdienthoai = itemView.findViewById(R.id.txtdienthoai);
+
+            btnchitiet = itemView.findViewById(R.id.btnchitiett);
+
+        }
+    }
+}
