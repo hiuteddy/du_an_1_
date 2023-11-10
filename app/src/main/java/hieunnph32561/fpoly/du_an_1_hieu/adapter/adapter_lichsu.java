@@ -1,12 +1,9 @@
 package hieunnph32561.fpoly.du_an_1_hieu.adapter;
 
-<<<<<<< HEAD
 import android.content.Context;
-=======
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
->>>>>>> 8d89440 (Initial commit)
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,6 +26,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_chi_tiet_l
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.KhachHang;
 
+
 public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHodelsanpham> {
     Context context;
     ArrayList<HoaDon> list;
@@ -41,10 +39,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     public adapter_lichsu(Context context, ArrayList<HoaDon> list) {
         this.context = context;
         this.list = list;
-<<<<<<< HEAD
         this.dao = new chitietDAO(context);
-=======
->>>>>>> 8d89440 (Initial commit)
         hoadonDAO = new hoadonDAO(context);
         dienthoaiDAO = new dienthoaiDAO(context);
         khachhangDAO = new khachhangDAO(context);
@@ -67,11 +62,8 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
         holder.txtmadon.setText("Mã hóa đơn: " + String.valueOf(hoaDon.getMaHD()));
         holder.txtngay.setText("Ngày đặt: " + String.valueOf(hoaDon.getNgay()));
         holder.txtdienthoai.setText("Số điện thoại: " + "" + khachHang.getDienThoai());
-<<<<<<< HEAD
         holder.txtmaKH.setText("Tên khách hàng: " + "" + khachHang.getHoTen());
-=======
         holder.txtmaKH.setText("Tên khách hàng: " + "" + hoaDon.getMaKH());
->>>>>>> 8d89440 (Initial commit)
         holder.txttongTien.setText("Tổng tiền: " + hoaDon.getTongTien());
         holder.txttrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
         if (hoaDon.getTrangThai() == 0) {
@@ -90,11 +82,8 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
                 context.startActivity(intent);
             }
         });
-<<<<<<< HEAD
 
-    }
 
-=======
         holder.btnhuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,19 +121,16 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     }
 
 
->>>>>>> 8d89440 (Initial commit)
     @Override
     public int getItemCount() {
         return list.size();
     }
 
+
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
         TextView txtmaKH, txttongTien, txtngay, txttrangThai, txtdiaChi, txtmadon, txtdienthoai;
-<<<<<<< HEAD
         Button btnchitiet;
-=======
-        Button btnchitiet, btnhuy;
->>>>>>> 8d89440 (Initial commit)
+        Button btnchitiett, btnhuy;
 
 
         public ViewHodelsanpham(@NonNull View itemView) {
@@ -157,11 +143,8 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             txttongTien = itemView.findViewById(R.id.tongTien);
             txtdienthoai = itemView.findViewById(R.id.txtdienthoai);
 
-            btnchitiet = itemView.findViewById(R.id.btnchitiett);
-<<<<<<< HEAD
-=======
+            btnchitiett = itemView.findViewById(R.id.btnchitiett);
             btnhuy = itemView.findViewById(R.id.btnxoa);
->>>>>>> 8d89440 (Initial commit)
 
         }
     }

@@ -30,11 +30,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         String createTaiKhoanTable = "CREATE TABLE TaiKhoan " +
-<<<<<<< HEAD
-                "(maTk INTEGER PRIMARY KEY," +
-=======
                 "(maTk INTEGER PRIMARY KEY AUTOINCREMENT," +
->>>>>>> 8d89440 (Initial commit)
                 " tenDN TEXT , " +
                 "matKhau TEXT)";
 

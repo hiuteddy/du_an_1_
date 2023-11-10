@@ -59,8 +59,6 @@ public class Dangnhap extends AppCompatActivity {
             }
         });
 
-<<<<<<< HEAD
-=======
         // Lưu mã user khi đăng nhập
         SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -68,7 +66,6 @@ public class Dangnhap extends AppCompatActivity {
         editor.apply();
 
 
->>>>>>> 8d89440 (Initial commit)
     }
 
     private void loadData() {
@@ -85,8 +82,6 @@ public class Dangnhap extends AppCompatActivity {
         edtpass.setText(pref.getString("password", ""));
     }
 
-<<<<<<< HEAD
-=======
     private void saveUserId(int userId) {
         SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
@@ -95,7 +90,6 @@ public class Dangnhap extends AppCompatActivity {
     }
 
 
->>>>>>> 8d89440 (Initial commit)
 
     private void checkRememberUser(String a, String b, boolean status) {
         SharedPreferences pref = getSharedPreferences("USER_FILE", MODE_PRIVATE);

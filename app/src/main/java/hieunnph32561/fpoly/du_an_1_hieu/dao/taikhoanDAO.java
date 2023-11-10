@@ -44,8 +44,6 @@ public class taikhoanDAO {
             return 1;
         }
     }
-<<<<<<< HEAD
-=======
     public TaiKhoan getID(String id) {
         String sql = "select * from TaiKhoan where tenDN=?";
         ArrayList<TaiKhoan> list = getALLTT(sql, id);
@@ -57,5 +55,4 @@ public class taikhoanDAO {
             return new TaiKhoan();
         }
     }
->>>>>>> 8d89440 (Initial commit)
 }

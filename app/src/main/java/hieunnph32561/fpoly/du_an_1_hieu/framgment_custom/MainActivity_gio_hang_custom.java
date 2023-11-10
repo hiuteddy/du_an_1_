@@ -7,11 +7,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-<<<<<<< HEAD
-=======
 import android.content.Intent;
 import android.content.SharedPreferences;
->>>>>>> 8d89440 (Initial commit)
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,18 +26,12 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.giohangDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.khachhangDAO;
-<<<<<<< HEAD
-=======
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
->>>>>>> 8d89440 (Initial commit)
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.KhachHang;
-<<<<<<< HEAD
-=======
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
->>>>>>> 8d89440 (Initial commit)
 
 
 public class MainActivity_gio_hang_custom extends AppCompatActivity {
@@ -54,10 +45,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     hoadonDAO hoadonDAO;
     khachhangDAO khachhangDAO;
     chitietDAO chitietDAO;
-<<<<<<< HEAD
-=======
     taikhoanDAO taikhoanDAO;
->>>>>>> 8d89440 (Initial commit)
     ArrayList<KhachHang> listkh = new ArrayList<>();
     ArrayList<GioHang> list = new ArrayList<>();
 
@@ -73,10 +61,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         hoadonDAO = new hoadonDAO(this);
         khachhangDAO = new khachhangDAO(this);
         chitietDAO=new chitietDAO(this);
-<<<<<<< HEAD
-=======
         taikhoanDAO=new taikhoanDAO(this);
->>>>>>> 8d89440 (Initial commit)
         loaddata();
         updateTotalValues();
 
@@ -99,11 +84,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         });
     }
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 8d89440 (Initial commit)
     private void showKhachHangInputDialog() {
         android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
         LayoutInflater inflater = LayoutInflater.from(this);
@@ -114,13 +95,10 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         EditText edtDiaChi = view.findViewById(R.id.edtDiaChi);
         Button button = view.findViewById(R.id.btndat);
 
-<<<<<<< HEAD
-=======
 
 
 
 
->>>>>>> 8d89440 (Initial commit)
         listkh = khachhangDAO.getAll();
         if (!listkh.isEmpty()) {
              edtDiaChi.setText(listkh.get(0).getDiachi());
@@ -134,15 +112,12 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-<<<<<<< HEAD
-=======
 //                SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
 //                String userId = preferences.getString("userId", ""); // Sử dụng key là "userId"
 //                TaiKhoan taiKhoan =taikhoanDAO.getID(userId);
 //                hoaDon.setMaKH(taiKhoan.getMaTk());
 
 
->>>>>>> 8d89440 (Initial commit)
                 int maKhachHang = listkh.get(0).getMaKh();
 
                 HoaDon hoaDon = new HoaDon();
