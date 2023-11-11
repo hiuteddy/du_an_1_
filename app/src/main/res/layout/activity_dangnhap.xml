@@ -128,7 +128,7 @@
                 android:textColorLink="@color/black" />
 
             <TextView
-                android:id="@+id/myTextView"
+                android:id="@+id/btnclick"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:clickable="true"
