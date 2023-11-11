@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
@@ -22,6 +23,7 @@ public class Dangnhap extends AppCompatActivity {
     Button btnsig;
     CheckBox checkBox;
     taikhoanDAO dao;
+    TextView txtload;
 
 
     @Override
@@ -34,7 +36,7 @@ public class Dangnhap extends AppCompatActivity {
         edtpass = findViewById(R.id.editPassword);
         btnsig = findViewById(R.id.btnLogin);
         checkBox = findViewById(R.id.chkb);
-
+        txtload = findViewById(R.id.btnclick);
         dao = new taikhoanDAO(this);
         btnsig.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,13 +65,19 @@ public class Dangnhap extends AppCompatActivity {
             }
         });
 
-        // Lưu mã user khi đăng nhập
-        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("userId", edtuser.getText().toString()); // Sử dụng key là "userId" thay vì "tenDN"
-        editor.apply();
+//        // Lưu mã user khi đăng nhập
+//        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putString("userId", edtuser.getText().toString()); // Sử dụng key là "userId" thay vì "tenDN"
+//        editor.apply();
 
 
+        txtload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(Dangnhap.this,Dang_ky.class));
+            }
+        });
     }
 
     private void loadData() {
@@ -85,8 +93,6 @@ public class Dangnhap extends AppCompatActivity {
         edtuser.setText(pref.getString("username", ""));
         edtpass.setText(pref.getString("password", ""));
     }
-
-
 
 
     private void checkRememberUser(String a, String b, boolean status) {

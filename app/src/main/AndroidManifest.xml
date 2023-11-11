@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Du_an_1_hieu"
         tools:targetApi="31">
         <activity
+            android:name=".Dang_ky"
+            android:exported="false" />
+        <activity
             android:name=".framgment_custom.MainActivity_chi_tiet_ls"
             android:exported="false" />
         <activity

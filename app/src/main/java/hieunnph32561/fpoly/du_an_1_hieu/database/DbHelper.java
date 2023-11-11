@@ -43,6 +43,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 " maDT TEXT," +
                 " giaTien DOUBLE," +
                 " soLuong INTEGER," +
+                "phanLoai INTERGER," +
                 " FOREIGN KEY (maDT) REFERENCES DienThoai(maDT))";
 
         String createHoaDonTable = "CREATE TABLE HoaDon " +
