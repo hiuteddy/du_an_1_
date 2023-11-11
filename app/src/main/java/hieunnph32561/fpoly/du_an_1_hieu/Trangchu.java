@@ -20,9 +20,11 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_gio_hang_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ds_dt;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_lich_su_hoa_don;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_taikhoan;
+import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 
 public class Trangchu extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -91,6 +93,9 @@ public class Trangchu extends AppCompatActivity {
                 }
                 if(item.getItemId() ==R.id.sub_taikhoan){
                     fragment=new framgment_taikhoan();
+                }
+                if(item.getItemId() ==R.id.sub_giohang){
+                    startActivity(new Intent(Trangchu.this, MainActivity_gio_hang_custom.class));
                 }
 
                 if (item.getItemId() == R.id.sub_Logout) {
