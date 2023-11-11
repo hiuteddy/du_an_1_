@@ -7,13 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,13 +21,10 @@ import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_giohang;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.giohangDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
-import hieunnph32561.fpoly.du_an_1_hieu.dao.khachhangDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
-import hieunnph32561.fpoly.du_an_1_hieu.model.KhachHang;
-import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
 public class MainActivity_gio_hang_custom extends AppCompatActivity {
@@ -43,10 +36,8 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     private TextView dathang;
 
     hoadonDAO hoadonDAO;
-    khachhangDAO khachhangDAO;
     chitietDAO chitietDAO;
     taikhoanDAO taikhoanDAO;
-    ArrayList<KhachHang> listkh = new ArrayList<>();
     ArrayList<GioHang> list = new ArrayList<>();
 
     @Override
@@ -59,7 +50,6 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         txtTongGia = findViewById(R.id.totalTxt);
         dathang = findViewById(R.id.txtdathang);
         hoadonDAO = new hoadonDAO(this);
-        khachhangDAO = new khachhangDAO(this);
         chitietDAO=new chitietDAO(this);
         taikhoanDAO=new taikhoanDAO(this);
         loaddata();
@@ -85,44 +75,22 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     }
 
 
-    private void showKhachHangInputDialog() {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(this);
-        LayoutInflater inflater = LayoutInflater.from(this);
-        View view = inflater.inflate(R.layout.dialog_dat_hang, null);
-
-        EditText edtHoTen = view.findViewById(R.id.edtHoTen);
-        EditText edtDienThoai = view.findViewById(R.id.edtDienThoai);
-        EditText edtDiaChi = view.findViewById(R.id.edtDiaChi);
-        Button button = view.findViewById(R.id.btndat);
-
-
-
-
-
-        listkh = khachhangDAO.getAll();
-        if (!listkh.isEmpty()) {
-             edtDiaChi.setText(listkh.get(0).getDiachi());
-            edtDienThoai.setText(String.valueOf(listkh.get(0).getDienThoai()));
-            edtHoTen.setText(listkh.get(0).getHoTen());
-        }
-
-        builder.setView(view);
-        AlertDialog dialog = builder.create();
-        dialog.show();
-        button.setOnClickListener(new View.OnClickListener() {
+    public void showKhachHangInputDialog() {
+        // Lấy đối tượng khóa học tương ứng
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Xác nhận đặt hàng");
+        builder.setMessage("Bạn có chắc chắn muốn đặt hàng này?");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(View v) {
-//                SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
-//                String userId = preferences.getString("userId", ""); // Sử dụng key là "userId"
-//                TaiKhoan taiKhoan =taikhoanDAO.getID(userId);
-//                hoaDon.setMaKH(taiKhoan.getMaTk());
-
-
-                int maKhachHang = listkh.get(0).getMaKh();
+            public void onClick(DialogInterface dialog, int which) {
+                // Xóa khóa học khỏi cơ sở dữ liệu
+                SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+                String username = preferences.getString("username", "");
+                hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan maKhachHang = taikhoanDAO.getID(username);
 
                 HoaDon hoaDon = new HoaDon();
-                hoaDon.setMaKH(maKhachHang);
-                hoaDon.setDiaChi(edtDiaChi.getText().toString());
+                hoaDon.setMaKH(maKhachHang.getMaTk());
+                hoaDon.setDiaChi(maKhachHang.getDiachi());
                 hoaDon.setTongTien((int) adapter_giohang.getTotalPrice());
                 hoaDon.setTrangThai(0);
                 hoaDon.setNgay(String.valueOf(new Date()));
@@ -130,52 +98,40 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 long result = hoadonDAO.insert(hoaDon);
 
                 if (result > 0) {
-                    int maHoaDonMoiNhat = hoadonDAO.getMaHoaDonMoiNhat(); // Lấy mã hóa đơn mới nhất từ bảng hóa đơn
-                  //  list = ghDAO.getAll();
+                    int maHoaDonMoiNhat = hoadonDAO.getMaHoaDonMoiNhat();
 
                     for (GioHang gioHang : list) {
-                        int maHoaDon = maHoaDonMoiNhat; // Sử dụng mã hóa đơn mới nhất
-
+                        int maHoaDon = maHoaDonMoiNhat;
                         ChiTiet chiTietSanPham = new ChiTiet(0, maHoaDon, gioHang.getMadt(), gioHang.getSoLuong(), gioHang.getGia());
-
                         long chiTietResult = chitietDAO.insert(chiTietSanPham);
                         if (chiTietResult > 0) {
-                        Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                         }
                     }
-            //    }
 
-
-//                else {
-//                    Toast.makeText(MainActivity_gio_hang_custom.this, "Thành công", Toast.LENGTH_SHORT).show();
-//                }
-
-//                if (result > 0) {
-//                    Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                     ghDAO.deleteAllGioHang();
                     list.clear();
                     adapter_giohang.notifyDataSetChanged();
-                 //   loaddata();
                     updateTotalValues();
-
-
-                }
-                else {
+                } else {
                     Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thất bại", Toast.LENGTH_SHORT).show();
                 }
                 dialog.dismiss();
             }
         });
 
-        builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int which) {
-                dialogInterface.dismiss();
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
             }
         });
-
+        AlertDialog dialog = builder.create();
+        dialog.show();
 
     }
+
+
 
     public void loaddata() {
         ghDAO = new giohangDAO(this);

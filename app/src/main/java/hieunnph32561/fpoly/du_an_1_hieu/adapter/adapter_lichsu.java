@@ -2,7 +2,6 @@ package hieunnph32561.fpoly.du_an_1_hieu.adapter;
 
 import android.content.Context;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -21,10 +20,9 @@ import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
-import hieunnph32561.fpoly.du_an_1_hieu.dao.khachhangDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_chi_tiet_ls;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
-import hieunnph32561.fpoly.du_an_1_hieu.model.KhachHang;
 
 
 public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHodelsanpham> {
@@ -33,7 +31,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     chitietDAO dao;
     hoadonDAO hoadonDAO;
     dienthoaiDAO dienthoaiDAO;
-    khachhangDAO khachhangDAO;
+    taikhoanDAO taikhoanDAO;
 
 
     public adapter_lichsu(Context context, ArrayList<HoaDon> list) {
@@ -42,7 +40,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
         this.dao = new chitietDAO(context);
         hoadonDAO = new hoadonDAO(context);
         dienthoaiDAO = new dienthoaiDAO(context);
-        khachhangDAO = new khachhangDAO(context);
+        taikhoanDAO=new taikhoanDAO(context);
     }
 
     @NonNull
@@ -58,19 +56,23 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
 
 //        DienThoai dienThoai=dienthoaiDAO.getID(String.valueOf(chiTiet1.getMadt()));
 
-        KhachHang khachHang = khachhangDAO.getID(String.valueOf(hoaDon.getMaKH()));
+        hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan taiKhoan = taikhoanDAO.getIDma(String.valueOf(hoaDon.getMaKH()));
         holder.txtmadon.setText("Mã hóa đơn: " + String.valueOf(hoaDon.getMaHD()));
         holder.txtngay.setText("Ngày đặt: " + String.valueOf(hoaDon.getNgay()));
-        holder.txtdienthoai.setText("Số điện thoại: " + "" + khachHang.getDienThoai());
-        holder.txtmaKH.setText("Tên khách hàng: " + "" + khachHang.getHoTen());
-        holder.txtmaKH.setText("Tên khách hàng: " + "" + hoaDon.getMaKH());
+        holder.txtdienthoai.setText("Số điện thoại: " + "" + taiKhoan.getSdt());
+        holder.txtmaKH.setText("Tên khách hàng: " + "" + taiKhoan.getHoten());
         holder.txttongTien.setText("Tổng tiền: " + hoaDon.getTongTien());
         holder.txttrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
         if (hoaDon.getTrangThai() == 0) {
             holder.txttrangThai.setText("Chờ xác nhân");
+        } else if (hoaDon.getTrangThai() == 1) {
+            holder.txttrangThai.setText("Đã xác nhân");
+        } else if (hoaDon.getTrangThai() == 2) {
+            holder.txttrangThai.setText("Đang giao");
+        } else if (hoaDon.getTrangThai() == 3) {
+            holder.txttrangThai.setText("Giao hàng thành công");
         }
-        holder.txtdiaChi.setText("Địa chỉ: " + hoaDon.getDiaChi());
-
+        holder.txtdiaChi.setText("Địa chỉ: " + taiKhoan.getDiachi());
 
         holder.btnchitiet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -143,7 +145,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             txttongTien = itemView.findViewById(R.id.tongTien);
             txtdienthoai = itemView.findViewById(R.id.txtdienthoai);
 
-            btnchitiett = itemView.findViewById(R.id.btnchitiett);
+            btnchitiet = itemView.findViewById(R.id.btnchitiett);
             btnhuy = itemView.findViewById(R.id.btnxoa);
 
         }

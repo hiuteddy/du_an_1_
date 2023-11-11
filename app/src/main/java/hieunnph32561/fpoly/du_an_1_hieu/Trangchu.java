@@ -22,6 +22,7 @@ import com.google.android.material.navigation.NavigationView;
 
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ds_dt;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_lich_su_hoa_don;
+import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_taikhoan;
 
 public class Trangchu extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -65,7 +66,7 @@ public class Trangchu extends AppCompatActivity {
                     .replace(R.id.framelayout, defaultFragment)
                     .commit();
         }
-        if ((user != null && user.equalsIgnoreCase("admin"))) {
+       else {
             navigationView.getMenu().findItem(R.id.nav_quanly).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_thongke).setVisible(true);
             navigationView.getMenu().findItem(R.id.sub_canhan).setVisible(true);
@@ -87,6 +88,9 @@ public class Trangchu extends AppCompatActivity {
                 if(item.getItemId() == R.id.sub_ls){
                     fragment = new framgment_lich_su_hoa_don();
 
+                }
+                if(item.getItemId() ==R.id.sub_taikhoan){
+                    fragment=new framgment_taikhoan();
                 }
 
                 if (item.getItemId() == R.id.sub_Logout) {

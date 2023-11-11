@@ -51,6 +51,10 @@ public class Dangnhap extends AppCompatActivity {
                         intent.putExtra("user", edUsername);
                         startActivity(intent);
                         finish();
+                        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.putString("username", edUsername); // Lưu tên đăng nhập vào SharedPreferences
+                        editor.apply();
                     } else {
                         Toast.makeText(Dangnhap.this, "Đăng nhập thất bại username hoặc password sai", Toast.LENGTH_SHORT)
                                 .show();
@@ -82,12 +86,6 @@ public class Dangnhap extends AppCompatActivity {
         edtpass.setText(pref.getString("password", ""));
     }
 
-    private void saveUserId(int userId) {
-        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("userId", userId);
-        editor.apply();
-    }
 
 
 

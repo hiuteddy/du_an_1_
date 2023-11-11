@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,7 +15,6 @@ import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
-import hieunnph32561.fpoly.du_an_1_hieu.dao.khachhangDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
@@ -29,7 +27,6 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
     chitietDAO dao;
     hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO hoadonDAO;
     hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO dienthoaiDAO;
-    hieunnph32561.fpoly.du_an_1_hieu.dao.khachhangDAO khachhangDAO;
     loaidtDAO loaidtDAO;
 
     public adapter_chitietls(Context context, ArrayList<ChiTiet> list) {
@@ -38,7 +35,6 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
         this.dao = new chitietDAO(context);
         hoadonDAO = new hoadonDAO(context);
         dienthoaiDAO = new dienthoaiDAO(context);
-        khachhangDAO = new khachhangDAO(context);
         loaidtDAO=new loaidtDAO(context);
     }
 
