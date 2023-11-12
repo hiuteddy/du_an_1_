@@ -23,6 +23,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_chi_tiet_ls;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
 public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHodelsanpham> {
@@ -56,7 +57,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
 
 //        DienThoai dienThoai=dienthoaiDAO.getID(String.valueOf(chiTiet1.getMadt()));
 
-        hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan taiKhoan = taikhoanDAO.getIDma(String.valueOf(hoaDon.getMaKH()));
+        TaiKhoan taiKhoan = taikhoanDAO.getIDma(String.valueOf(hoaDon.getMaKH()));
         holder.txtmadon.setText("Mã hóa đơn: " + String.valueOf(hoaDon.getMaHD()));
         holder.txtngay.setText("Ngày đặt: " + String.valueOf(hoaDon.getNgay()));
         holder.txtdienthoai.setText("Số điện thoại: " + "" + taiKhoan.getSdt());

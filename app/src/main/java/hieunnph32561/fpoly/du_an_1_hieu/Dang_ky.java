@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class Dang_ky extends AppCompatActivity {
     EditText edttendn, edtmk, edthoten, edtdiach, edtsdt;
@@ -34,7 +35,7 @@ public class Dang_ky extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan taiKhoan = new hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan();
+                    TaiKhoan taiKhoan = new TaiKhoan();
                     taiKhoan.setTenDN(edttendn.getText().toString());
                     taiKhoan.setMatKhau(edtmk.getText().toString());
                     taiKhoan.setHoten(edthoten.getText().toString());
