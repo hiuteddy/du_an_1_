@@ -43,15 +43,15 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     chitietDAO chitietDAO;
     taikhoanDAO taikhoanDAO;
     ArrayList<GioHang> list = new ArrayList<>();
-
     TaiKhoan taiKhoan;
+    RadioGroup radioGroup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_gio_hang_custom);
-        RadioGroup radioGroup = findViewById(R.id.rdovc);
 
+        radioGroup = findViewById(R.id.rdovc);
         txthoten = findViewById(R.id.txthoten);
         txtsdt = findViewById(R.id.txtsdt);
         txtdiachi = findViewById(R.id.txtdiachi);
@@ -91,11 +91,11 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         dathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(list.isEmpty()){
+                if (list.isEmpty()) {
                     Toast.makeText(MainActivity_gio_hang_custom.this, "Giỏ hàng trống bạn không thể đặt hàng", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if(radioGroup.getCheckedRadioButtonId()==-1){
+                if (radioGroup.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(MainActivity_gio_hang_custom.this, "Vui lòng chọn phương thức giao hàng", Toast.LENGTH_SHORT).show();
                     return;
 
@@ -149,11 +149,9 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                         long chiTietResult = chitietDAO.insert(chiTietSanPham);
                         if (chiTietResult > 0) {
                             Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-
+                            radioGroup.clearCheck();
                         }
-
                     }
-
                     ghDAO.deleteAllGioHang();
                     list.clear();
                     adapter_giohang.notifyDataSetChanged();
@@ -175,7 +173,6 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         dialog.show();
 
     }
-
 
 
     public void loaddata() {
