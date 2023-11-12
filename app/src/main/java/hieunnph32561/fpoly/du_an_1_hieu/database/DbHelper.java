@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 12;
+    public static final int DB_VERSION = 15;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -43,17 +43,16 @@ public class DbHelper extends SQLiteOpenHelper {
                 " maDT TEXT," +
                 " giaTien DOUBLE," +
                 " soLuong INTEGER," +
-                "phanLoai INTERGER," +
                 " FOREIGN KEY (maDT) REFERENCES DienThoai(maDT))";
 
         String createHoaDonTable = "CREATE TABLE HoaDon " +
                 "(maHD INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "maKH INTEGER, " +
+                "maTk INTEGER, " +
                 "tongTien INTEGER, " +
                 "ngay DATE, " +
                 "trangThai INTEGER, " +
-                "diaChi TEXT, " +
-                "FOREIGN KEY (maKH) REFERENCES KhachHang(maKh))";
+                "phuongThuc TEXT, " +
+                "FOREIGN KEY (maTk) REFERENCES TaiKhoan(maTk))";
 
         String createChiTietDonHangTable = "CREATE TABLE ChiTietDonHang " +
                 "(maCTDH INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -91,8 +90,8 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         // Thêm dữ liệu mẫu vào bảng HoaDon
-        db.execSQL("INSERT INTO HoaDon (maKH, tongTien, ngay, trangThai, diaChi) VALUES (1, 5000, '2023-11-01', 1, 'Địa chỉ A')");
-        db.execSQL("INSERT INTO HoaDon (maKH, tongTien, ngay, trangThai, diaChi) VALUES (2, 7000, '2023-11-02', 1, 'Địa chỉ B')");
+        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 5000, '2023-11-01', 1, '1')");
+        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (2, 7000, '2023-11-02', 1, '2')");
 
         // Thêm dữ liệu mẫu vào bảng GioHang
         db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (1, 1000, 2)");

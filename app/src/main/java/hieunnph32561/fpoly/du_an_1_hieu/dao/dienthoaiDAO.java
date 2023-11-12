@@ -54,4 +54,8 @@ public class dienthoaiDAO {
             return new DienThoai();
         }
     }
+    public ArrayList<DienThoai> getDienThoaiByLoai(int maLoaiSeries) {
+        String sql = "SELECT * FROM DienThoai WHERE maLoaiSeries = ?";
+        return getALLSACH(sql, String.valueOf(maLoaiSeries));
+    }
 }
