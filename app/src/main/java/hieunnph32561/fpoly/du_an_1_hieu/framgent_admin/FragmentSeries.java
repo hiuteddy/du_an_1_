@@ -1,0 +1,107 @@
+package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
+
+import android.app.Dialog;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.SpinnerTypeAdapter;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_qlSeries;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
+import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
+
+public class FragmentSeries extends Fragment {
+
+    private RecyclerView recyclerView;
+    private adapter_qlSeries adapter;
+    private List<LoaiSeries> dataList;
+    FloatingActionButton btnadd;
+    private loaidtDAO dao;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_series, container, false);
+        recyclerView = view.findViewById(R.id.rcvqldt);
+        btnadd = view.findViewById(R.id.floatBtnAdd);
+        dao = new loaidtDAO(getContext());
+        dataList = dao.getAll();
+
+        adapter = new adapter_qlSeries(getContext(), dataList);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+
+        btnadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showAddDialog();
+            }
+        });
+
+        return view;
+    }
+
+    private void showAddDialog() {
+        Dialog dialog = new Dialog(getContext());
+        dialog.setContentView(R.layout.dialog_series);
+        dialog.setCancelable(false);
+
+        TextView titledialog = dialog.findViewById(R.id.tilte_dialog_Series);
+        EditText edtTenSeries = dialog.findViewById(R.id.editSeriesName);
+        AppCompatButton btnSubmit = dialog.findViewById(R.id.btnSumbit);
+
+        titledialog.setText("Series Add");
+        btnSubmit.setText("Add");
+
+
+        btnSubmit.setOnClickListener(v -> {
+            String tenSeries = edtTenSeries.getText().toString().trim();
+
+            if (TextUtils.isEmpty(tenSeries)) {
+                showToast("Vui lòng nhập tên sản phẩm");
+            } else {
+
+                LoaiSeries series = new LoaiSeries();
+                series.setMaLoaiSeri(dataList.size()+1);
+                series.setTenLoaiSeri(tenSeries);
+
+                dao.add(series);
+                dataList.add(series);
+
+                showToast("Đã Thêm Series");
+                dialog.dismiss();
+            }
+        });
+
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.setCancelable(true);
+        dialog.show();
+    }
+    private void showToast(String message) {
+        Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+}

@@ -15,6 +15,26 @@ public class DienThoai {
         this.moTa = moTa;
     }
 
+    public void setMaDT(int maDT) {
+        this.maDT = maDT;
+    }
+
+    public void setMaLoaiSeri(int maLoaiSeri) {
+        this.maLoaiSeri = maLoaiSeri;
+    }
+
+    public void setTenDT(String tenDT) {
+        this.tenDT = tenDT;
+    }
+
+    public void setGiaTien(double giaTien) {
+        this.giaTien = giaTien;
+    }
+
+    public void setMoTa(String moTa) {
+        this.moTa = moTa;
+    }
+
     public DienThoai() {
     }
 

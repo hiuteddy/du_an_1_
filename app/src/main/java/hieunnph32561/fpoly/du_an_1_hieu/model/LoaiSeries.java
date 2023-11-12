@@ -12,6 +12,14 @@ public class LoaiSeries {
         this.tenLoaiSeri = tenLoaiSeri;
     }
 
+    public void setMaLoaiSeri(int maLoaiSeri) {
+        this.maLoaiSeri = maLoaiSeri;
+    }
+
+    public void setTenLoaiSeri(String tenLoaiSeri) {
+        this.tenLoaiSeri = tenLoaiSeri;
+    }
+
     public int getMaLoaiSeri() {
         return maLoaiSeri;
     }

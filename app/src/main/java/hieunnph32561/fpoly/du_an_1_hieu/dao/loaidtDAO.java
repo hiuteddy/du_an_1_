@@ -9,19 +9,34 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 public class loaidtDAO {
     private DbHelper dBhelper;
-
+    SQLiteDatabase database;
     public loaidtDAO(Context context) {
         dBhelper = new DbHelper(context);
     }
+    public long add(LoaiSeries loaiSeries) {
+        ContentValues values = new ContentValues();
+        database = dBhelper.getReadableDatabase();
+        values.put("tenLoaiSeries",loaiSeries.getTenLoaiSeri());
 
+        return database.insert("LoaiSeriesDT", null, values);
+    }
+    public int update(LoaiSeries loaiSeries, int maSPOld) {
+        database = dBhelper.getReadableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("maLoaiSeries", loaiSeries.getMaLoaiSeri());
+        values.put("tenLoaiSeries", loaiSeries.getTenLoaiSeri());
+
+        return database.update("LoaiSeriesDT", values, "maLoaiSeries = ?", new String[]{String.valueOf(maSPOld)});
+    }
 
     public ArrayList<LoaiSeries> getALLSACH(String sql, String... selectionArgs) {
         ArrayList<LoaiSeries> list = new ArrayList<>();
-        SQLiteDatabase database = dBhelper.getReadableDatabase();
+        database = dBhelper.getReadableDatabase();
 
         Cursor cursor = database.rawQuery(sql, selectionArgs);
 

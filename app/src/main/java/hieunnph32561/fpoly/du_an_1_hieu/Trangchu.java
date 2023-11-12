@@ -20,6 +20,11 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentHoaDon;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentKhachHang;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentQuanLySp;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentSeries;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentTrangChu;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_gio_hang_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ds_dt;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_lich_su_hoa_don;
@@ -30,7 +35,7 @@ public class Trangchu extends AppCompatActivity {
     DrawerLayout drawerLayout;
 
     View headerLayout;
-
+    Toolbar toolbar;
     TextView textView;
 
     @Override
@@ -39,12 +44,12 @@ public class Trangchu extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
+        toolbar.setTitle("Trang chủ");
         NavigationView navigationView = findViewById(R.id.navigationview);
         drawerLayout = findViewById(R.id.drawerlayout);
 
         setSupportActionBar(toolbar);
-
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeAsUpIndicator(R.drawable.baseline_menu_24);
@@ -72,7 +77,7 @@ public class Trangchu extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_quanly).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_thongke).setVisible(true);
             navigationView.getMenu().findItem(R.id.sub_canhan).setVisible(true);
-            Fragment defaultFragment = new framgment_ds_dt(); // Thay thế QlPhieuMuonFragment bằng Fragment mặc định bạn muốn hiển thị
+            Fragment defaultFragment = new FragmentTrangChu(); // Thay thế QlPhieuMuonFragment bằng Fragment mặc định bạn muốn hiển thị
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout, defaultFragment)
                     .commit();
@@ -120,7 +125,26 @@ public class Trangchu extends AppCompatActivity {
                     Dialog dialog = builder.create();
                     dialog.show();
                 }
-
+                if(item.getItemId() == R.id.nav_Home){
+                    fragment = new FragmentTrangChu();
+                    toolbar.setTitle("Trang Chủ");
+                }
+                if(item.getItemId() == R.id.nav_donhang){
+                    fragment = new FragmentHoaDon();
+                    toolbar.setTitle("Đơn hàng");
+                }
+                if(item.getItemId() == R.id.nav_khachhang){
+                    fragment = new FragmentKhachHang();
+                    toolbar.setTitle("Khách Hàng");
+                }
+                if(item.getItemId() == R.id.nav_dienthoai){
+                    fragment = new FragmentQuanLySp();
+                    toolbar.setTitle("Quản Lý Sản Phẩm");
+                }
+                if(item.getItemId() == R.id.nav_loaiseries){
+                    fragment = new FragmentSeries();
+                    toolbar.setTitle("Loại Series");
+                }
 
                 if (fragment != null) {
                     getSupportFragmentManager().beginTransaction()
@@ -134,6 +158,9 @@ public class Trangchu extends AppCompatActivity {
                 return true;
             }
         });
+    }
+    public void settitleToolbar(String mess){
+        toolbar.setTitle(mess);
     }
 
     @Override
