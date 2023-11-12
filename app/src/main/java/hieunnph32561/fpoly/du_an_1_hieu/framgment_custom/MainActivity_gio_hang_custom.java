@@ -10,6 +10,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,25 +35,35 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     adapter_giohang adapter_giohang;
     private TextView txtTongSoLuong;
     private TextView txtTongGia;
+    private TextView txthoten, txtdiachi, txtsdt;
     private TextView dathang;
+    private String phuongThucVanChuyen;
 
     hoadonDAO hoadonDAO;
     chitietDAO chitietDAO;
     taikhoanDAO taikhoanDAO;
     ArrayList<GioHang> list = new ArrayList<>();
 
+    TaiKhoan taiKhoan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_gio_hang_custom);
+        RadioGroup radioGroup = findViewById(R.id.rdovc);
 
+        txthoten = findViewById(R.id.txthoten);
+        txtsdt = findViewById(R.id.txtsdt);
+        txtdiachi = findViewById(R.id.txtdiachi);
         rcvgh = findViewById(R.id.cartView);
         txtTongSoLuong = findViewById(R.id.totalFeeTxt);
         txtTongGia = findViewById(R.id.totalTxt);
         dathang = findViewById(R.id.txtdathang);
+
         hoadonDAO = new hoadonDAO(this);
-        chitietDAO=new chitietDAO(this);
-        taikhoanDAO=new taikhoanDAO(this);
+        chitietDAO = new chitietDAO(this);
+        taikhoanDAO = new taikhoanDAO(this);
+
         loaddata();
         updateTotalValues();
 
@@ -67,14 +78,43 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 onBackPressed();
             }
         });
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (checkedId == R.id.radioshipcode) {
+                    phuongThucVanChuyen = "Ship cod";
+                } else if (checkedId == R.id.radioonile) {
+                    phuongThucVanChuyen = "Thanh toán online";
+                }
+            }
+        });
         dathang.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(list.isEmpty()){
+                    Toast.makeText(MainActivity_gio_hang_custom.this, "Giỏ hàng trống bạn không thể đặt hàng", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if(radioGroup.getCheckedRadioButtonId()==-1){
+                    Toast.makeText(MainActivity_gio_hang_custom.this, "Vui lòng chọn phương thức giao hàng", Toast.LENGTH_SHORT).show();
+                    return;
+
+                }
                 showKhachHangInputDialog();
+                // radioGroup.se;
+
             }
         });
-    }
 
+        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String username = preferences.getString("username", "");
+        taiKhoan = taikhoanDAO.getID(username);
+        txthoten.setText("Họ Tên: " + taiKhoan.getHoten());
+        txtsdt.setText("Số Điện Thoại:" + taiKhoan.getSdt());
+        txtdiachi.setText("Địa Chỉ: " + taiKhoan.getDiachi());
+
+
+    }
 
     public void showKhachHangInputDialog() {
         // Lấy đối tượng khóa học tương ứng
@@ -88,10 +128,12 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
                 String username = preferences.getString("username", "");
                 TaiKhoan maKhachHang = taikhoanDAO.getID(username);
+                String phuongThuc = phuongThucVanChuyen;
+
 
                 HoaDon hoaDon = new HoaDon();
-                hoaDon.setMaKH(maKhachHang.getMaTk());
-                hoaDon.setDiaChi(maKhachHang.getDiachi());
+                hoaDon.setMaTk(maKhachHang.getMaTk());
+                hoaDon.setPhuongthuc(phuongThuc);
                 hoaDon.setTongTien((int) adapter_giohang.getTotalPrice());
                 hoaDon.setTrangThai(0);
                 hoaDon.setNgay(String.valueOf(new Date()));
@@ -107,7 +149,9 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                         long chiTietResult = chitietDAO.insert(chiTietSanPham);
                         if (chiTietResult > 0) {
                             Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
+
                         }
+
                     }
 
                     ghDAO.deleteAllGioHang();
