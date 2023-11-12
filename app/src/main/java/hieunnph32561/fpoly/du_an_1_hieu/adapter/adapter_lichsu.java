@@ -57,7 +57,9 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
 
 //        DienThoai dienThoai=dienthoaiDAO.getID(String.valueOf(chiTiet1.getMadt()));
 
-        TaiKhoan taiKhoan = taikhoanDAO.getIDma(String.valueOf(hoaDon.getMaKH()));
+
+        TaiKhoan taiKhoan = taikhoanDAO.getIDma(String.valueOf(hoaDon.getMaTk()));
+
         holder.txtmadon.setText("Mã hóa đơn: " + String.valueOf(hoaDon.getMaHD()));
         holder.txtngay.setText("Ngày đặt: " + String.valueOf(hoaDon.getNgay()));
         holder.txtdienthoai.setText("Số điện thoại: " + "" + taiKhoan.getSdt());
@@ -72,8 +74,12 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             holder.txttrangThai.setText("Đang giao");
         } else if (hoaDon.getTrangThai() == 3) {
             holder.txttrangThai.setText("Giao hàng thành công");
+        } else if (hoaDon.getTrangThai() == 4) {
+            holder.txttrangThai.setText("Đã hủy");
         }
         holder.txtdiaChi.setText("Địa chỉ: " + taiKhoan.getDiachi());
+        holder.txtphuongthuc.setText("Phương thức: " + hoaDon.getPhuongthuc());
+
 
         holder.btnchitiet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,8 +91,6 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
                 context.startActivity(intent);
             }
         });
-
-
         holder.btnhuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,13 +102,13 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         // Xóa khóa học khỏi cơ sở dữ liệu
-                        if (hoadonDAO.delete(hoaDon.getMaHD()) > 0) {
+                        if (hoadonDAO.update(hoaDon.getMaHD(), 4) > 0) {
                             Toast.makeText(context, "Hủy thành công", Toast.LENGTH_SHORT).show();
                             list.clear();
                             list.addAll(hoadonDAO.getAll());
                             notifyDataSetChanged(); // Cập nhật lại dữ liệu trên RecyclerView
                         } else {
-                            Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(context, "Hủy thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
@@ -123,7 +127,6 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
         });
     }
 
-
     @Override
     public int getItemCount() {
         return list.size();
@@ -131,7 +134,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
 
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
-        TextView txtmaKH, txttongTien, txtngay, txttrangThai, txtdiaChi, txtmadon, txtdienthoai;
+        TextView txtmaKH, txttongTien, txtngay, txttrangThai, txtdiaChi, txtmadon, txtdienthoai,txtphuongthuc;
         Button btnchitiet;
         Button btnchitiett, btnhuy;
 
@@ -145,6 +148,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             txtdiaChi = itemView.findViewById(R.id.txtdiachi);
             txttongTien = itemView.findViewById(R.id.tongTien);
             txtdienthoai = itemView.findViewById(R.id.txtdienthoai);
+            txtphuongthuc=itemView.findViewById(R.id.txtphuongthuc);
 
             btnchitiet = itemView.findViewById(R.id.btnchitiett);
             btnhuy = itemView.findViewById(R.id.btnxoa);

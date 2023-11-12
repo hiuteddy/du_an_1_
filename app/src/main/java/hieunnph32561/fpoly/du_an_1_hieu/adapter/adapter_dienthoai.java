@@ -69,7 +69,6 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
                     Intent intent = new Intent(context, MainActivity_chi_tiet_dt.class);
                     loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
                     String maLoaiSeries = String.valueOf(loaiSeries.getTenLoaiSeri());
-                    //intent.putExtra("maDT", dienThoai.getMaDT());
                     intent.putExtra("maDT", dienThoai.getMaDT());
                     intent.putExtra("tenDT", dienThoai.getTenDT());
                     intent.putExtra("maLoaiSeries", maLoaiSeries);
@@ -83,6 +82,11 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
             }
         });
 
+    }
+    public void updateData(ArrayList<DienThoai> newList) {
+        list.clear();
+        list.addAll(newList);
+        notifyDataSetChanged();
     }
 
     @Override
