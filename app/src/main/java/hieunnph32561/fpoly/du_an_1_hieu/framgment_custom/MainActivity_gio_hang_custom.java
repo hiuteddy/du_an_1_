@@ -25,6 +25,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
 public class MainActivity_gio_hang_custom extends AppCompatActivity {
@@ -86,7 +87,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 // Xóa khóa học khỏi cơ sở dữ liệu
                 SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
                 String username = preferences.getString("username", "");
-                hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan maKhachHang = taikhoanDAO.getID(username);
+                TaiKhoan maKhachHang = taikhoanDAO.getID(username);
 
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setMaKH(maKhachHang.getMaTk());

@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class framgment_taikhoan extends Fragment {
 
@@ -32,7 +33,7 @@ public class framgment_taikhoan extends Fragment {
     private ImageView btnChinhSuaThongTin;
 
     private taikhoanDAO dao;
-    private hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan user;
+    private TaiKhoan user;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
