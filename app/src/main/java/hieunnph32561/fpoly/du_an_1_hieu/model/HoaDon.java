@@ -2,19 +2,19 @@ package hieunnph32561.fpoly.du_an_1_hieu.model;
 
 public class HoaDon {
     private int maHD;
-    private int maKH;
+    private int maTk;
     private int tongTien;
     private String ngay;
     private int trangThai;
-    private String diaChi;
+    private String phuongthuc;
 
-    public HoaDon(int maHD, int maKH, int tongTien, String ngay, int trangThai, String diaChi) {
+    public HoaDon(int maHD, int maTk, int tongTien, String ngay, int trangThai, String phuongthuc) {
         this.maHD = maHD;
-        this.maKH = maKH;
+        this.maTk = maTk;
         this.tongTien = tongTien;
         this.ngay = ngay;
         this.trangThai = trangThai;
-        this.diaChi = diaChi;
+        this.phuongthuc = phuongthuc;
     }
 
     public HoaDon() {
@@ -28,14 +28,13 @@ public class HoaDon {
         this.maHD = maHD;
     }
 
-    public int getMaKH() {
-        return maKH;
+    public int getMaTk() {
+        return maTk;
     }
 
-    public void setMaKH(int maKH) {
-        this.maKH = maKH;
+    public void setMaTk(int maTk) {
+        this.maTk = maTk;
     }
-
 
     public int getTongTien() {
         return tongTien;
@@ -62,11 +61,11 @@ public class HoaDon {
     }
 
 
-    public String getDiaChi() {
-        return diaChi;
+    public String getPhuongthuc() {
+        return phuongthuc;
     }
 
-    public void setDiaChi(String diaChi) {
-        this.diaChi = diaChi;
+    public void setPhuongthuc(String phuongthuc) {
+        this.phuongthuc = phuongthuc;
     }
 }

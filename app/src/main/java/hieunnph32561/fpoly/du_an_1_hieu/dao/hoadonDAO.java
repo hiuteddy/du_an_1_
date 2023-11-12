@@ -30,11 +30,11 @@ public class hoadonDAO {
         while (cursor.moveToNext()) {
             @SuppressLint("Range") HoaDon s = new HoaDon(
                     cursor.getInt(cursor.getColumnIndex("maHD")),
-                    cursor.getInt(cursor.getColumnIndex("maKH")),
+                    cursor.getInt(cursor.getColumnIndex("maTk")),
                     (int) cursor.getDouble(cursor.getColumnIndex("tongTien")),
                     cursor.getString(cursor.getColumnIndex("ngay")),
                     cursor.getInt(cursor.getColumnIndex("trangThai")),
-                    cursor.getString(cursor.getColumnIndex("diaChi"))
+                    cursor.getString(cursor.getColumnIndex("phuongThuc"))
             );
             list.add(s);
         }
@@ -45,11 +45,11 @@ public class hoadonDAO {
     public long insert(HoaDon s) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put("maKH", s.getMaKH());
+        values.put("maTk", s.getMaTk());
         values.put("tongTien", s.getTongTien());
         values.put("ngay", s.getNgay());
         values.put("trangThai", s.getTrangThai());
-        values.put("diaChi", s.getDiaChi());
+        values.put("phuongThuc", s.getPhuongthuc());
 
         return database.insert("HoaDon", null, values);
     }
@@ -73,11 +73,7 @@ public class hoadonDAO {
         cursor.close();
         return maGioHang;
     }
-    public long delete(int mssp) {
-        SQLiteDatabase database = dbHelper.getWritableDatabase();
-        long check = database.delete("HoaDon", "maHD=?", new String[]{String.valueOf(mssp)});
-        return check; // Trả về số hàng bị xóa
-    }
+
     public HoaDon getID(String id) {
         String sql = "select * from HoaDon where maHD=?";
         ArrayList<HoaDon> list = getALLSACH(sql, id);
@@ -88,6 +84,13 @@ public class hoadonDAO {
             // Trả về một giá trị LoaiSach mặc định hoặc tạo một đối tượng mới tùy ý
             return new HoaDon();
         }
+    }
+
+    public long update(int maHD, int trangThai) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("trangThai", trangThai);
+        return database.update("HoaDon", values, "maHD=?", new String[]{String.valueOf(maHD)});
     }
     public List<ChiTiet> getChiTietByMaHoaDon(int maHoaDon) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();

@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,15 +25,19 @@ import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_dienthoai;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_loaidt;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
+import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 
 public class framgment_ds_dt extends Fragment {
     private SearchView searchView;
-    RecyclerView rcvdt;
+    RecyclerView rcvdt,rcvLoai;
     dienthoaiDAO dtDAO;
     adapter_dienthoai adapter_dienthoai;
+    TextView txtload;
 
     ArrayList<DienThoai> list = new ArrayList<>();
 
@@ -43,17 +48,51 @@ public class framgment_ds_dt extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.framgment_ds_dt, container, false);
         rcvdt = v.findViewById(R.id.rcdt);
+        rcvLoai=v.findViewById(R.id.recyclerView);
+        txtload=v.findViewById(R.id.txtclickds);
         loaddata();
+        txtload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loaddata();
+            }
+        });
         return v;
     }
 
-    public void loaddata(){
+    public void loaddata() {
         dtDAO = new dienthoaiDAO(getContext());
+        // Lấy danh sách loại sản phẩm
+        loaidtDAO loaiDAO = new loaidtDAO(getContext());
+        ArrayList<LoaiSeries> listLoai = loaiDAO.getAll();
+
+        // Tạo adapter cho danh sách loại sản phẩm hàng ngang
+        adapter_loaidt adapterLoai = new adapter_loaidt(getContext(), listLoai);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rcvLoai.setLayoutManager(layoutManager);
+        rcvLoai.setAdapter(adapterLoai);
+
+        // Thiết lập sự kiện click cho danh sách loại sản phẩm
+        adapterLoai.setOnItemClickListener(new adapter_loaidt.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                // Lấy loại sản phẩm được chọn
+                LoaiSeries loaiSeries = listLoai.get(position);
+
+                // Lấy danh sách sản phẩm tương ứng với loại sản phẩm được chọn
+                ArrayList<DienThoai> listSanPham = dtDAO.getDienThoaiByLoai(loaiSeries.getMaLoaiSeri());
+
+                // Cập nhật danh sách sản phẩm vào RecyclerView chính
+                adapter_dienthoai.updateData(listSanPham);
+            }
+        });
+
+        // Hiển thị danh sách sản phẩm ban đầu
         list = dtDAO.getAll();
         adapter_dienthoai = new adapter_dienthoai(getContext(), list);
-        rcvdt.setAdapter(adapter_dienthoai);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);
         rcvdt.setLayoutManager(gridLayoutManager);
+        rcvdt.setAdapter(adapter_dienthoai);
     }
 
 

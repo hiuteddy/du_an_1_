@@ -19,7 +19,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 public class framgment_lich_su_hoa_don extends Fragment {
     RecyclerView rcvdt;
     hoadonDAO chitietDAO;
-    hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_lichsu adapter_lichsu;
+    adapter_lichsu adapter_lichsu;
 
     ArrayList<HoaDon> list = new ArrayList<>();
 
