@@ -1,4 +1,4 @@
-package hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model;
+package hieunnph32561.fpoly.du_an_1_hieu.model;
 
 public class TaiKhoan {
     private int maTk;

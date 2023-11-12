@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
-import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
+
 
 public class taikhoanDAO {
     private DbHelper dbHelper;
@@ -19,14 +20,14 @@ public class taikhoanDAO {
         dbHelper = new DbHelper(context);
     }
 
-    public ArrayList<hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan> getALLTT(String sql, String... selectionArgs) {
-        ArrayList<hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan> list = new ArrayList<>();
+    public ArrayList<TaiKhoan> getALLTT(String sql, String... selectionArgs) {
+        ArrayList<TaiKhoan> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
 
         Cursor cursor = database.rawQuery(sql, selectionArgs);
 
         while (cursor.moveToNext()) {
-            @SuppressLint("Range") hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan tt = new hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan(
+            @SuppressLint("Range") TaiKhoan tt = new TaiKhoan(
                     cursor.getInt(cursor.getColumnIndex("maTk")),
                     cursor.getString(cursor.getColumnIndex("tenDN")),
                     cursor.getString(cursor.getColumnIndex("matKhau")),
@@ -44,7 +45,7 @@ public class taikhoanDAO {
 
     public int checkLogin(String id, String pass) {
         String sql = "select * from TaiKhoan where tenDN=? and matKhau=?";
-        List<hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan> list = getALLTT(sql, id, pass);
+        List<TaiKhoan> list = getALLTT(sql, id, pass);
         if (list.size() == 0) {
             return -1;
         } else {
@@ -52,27 +53,27 @@ public class taikhoanDAO {
         }
     }
 
-    public hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan getID(String id) {
+    public TaiKhoan getID(String id) {
         String sql = "select * from TaiKhoan where tenDN=?";
-        ArrayList<hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan> list = getALLTT(sql, id);
+        ArrayList<TaiKhoan> list = getALLTT(sql, id);
 
         if (!list.isEmpty()) {
             return list.get(0);
         } else {
             // Trả về một giá trị LoaiSach mặc định hoặc tạo một đối tượng mới tùy ý
-            return new hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan();
+            return new TaiKhoan();
         }
     }
 
-    public hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan getIDma(String id) {
+    public TaiKhoan getIDma(String id) {
         String sql = "select * from TaiKhoan where maTk=?";
-        ArrayList<hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan> list = getALLTT(sql, id);
+        ArrayList<TaiKhoan> list = getALLTT(sql, id);
 
         if (!list.isEmpty()) {
             return list.get(0);
         } else {
             // Trả về một giá trị LoaiSach mặc định hoặc tạo một đối tượng mới tùy ý
-            return new hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan();
+            return new TaiKhoan();
         }
     }
 
@@ -97,7 +98,7 @@ public class taikhoanDAO {
         return maKhachHang;
     }
 
-    public long insert(hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan s) {
+    public long insert(TaiKhoan s) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("tenDN", s.getTenDN());
@@ -108,7 +109,7 @@ public class taikhoanDAO {
         return database.insert("TaiKhoan", null, values); // Trả về ID của hàng được chèn
     }
 
-    public long update(hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.model.TaiKhoan user) {
+    public long update(TaiKhoan user) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         ContentValues values = new ContentValues();
 //        values.put("tenDN",user.getTenDN());
