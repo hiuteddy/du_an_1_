@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".framgent_admin.fragmentHoaDon.FragmentCXN">
+    tools:context=".framgent_admin.fragmentHoaDon.FragmentThanhCong">
 
     <ListView
-        android:id="@+id/lvCXN"
+        android:id="@+id/lvTC"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

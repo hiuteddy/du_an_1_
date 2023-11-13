@@ -25,7 +25,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 
-public class FragmentCXN extends Fragment {
+public class FragmentThanhCong extends Fragment {
 
     private  SearchView searchView;
     private ListView listViewCXN;
@@ -42,9 +42,9 @@ public class FragmentCXN extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cxn, container, false);
+        View view = inflater.inflate(R.layout.fragment_dxn, container, false);
 
-        listViewCXN = view.findViewById(R.id.lvCXN);
+        listViewCXN = view.findViewById(R.id.lvDXN);
         daoCT = new chitietDAO(getContext());
         daoHD = new hoadonDAO(getContext());
         chiTietList = new ArrayList<>();
@@ -53,7 +53,7 @@ public class FragmentCXN extends Fragment {
 
         for (ChiTiet x: chiTietList) {
             HoaDon don = daoHD.getID(String.valueOf(x.getMahd()));
-            if (don.getTrangThai()==0){
+            if (don.getTrangThai()==3){
                 listsetAdapter.add(x);
             }
         }

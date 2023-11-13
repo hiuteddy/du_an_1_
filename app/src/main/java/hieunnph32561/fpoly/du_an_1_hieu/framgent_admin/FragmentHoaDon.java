@@ -1,6 +1,6 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
 
-import android.content.Intent;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -15,40 +15,56 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentCXN;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentDXN;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentDangGiao;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentHuy;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentThanhCong;
 
-public class FragmentHoaDon extends Fragment {
+ public class FragmentHoaDon extends Fragment implements BottomNavigationView.OnNavigationItemSelectedListener {
     BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setHasOptionsMenu(true); // Cho phép Fragment có các menu riêng
+        setHasOptionsMenu(true);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_hoa_don, container, false);
         bottomNavigationView = view.findViewById(R.id.bottomNavigationProduct);
-        Intent intent = getActivity().getIntent();
-        Bundle bundle = intent.getExtras();
-        // Đoạn code sau đây chưa hoàn thiện, cần cung cấp đối tượng Fragment mặc định để thay thế cho defaultFragment
-        Fragment defaultFragment = new FragmentCXN();
-        getChildFragmentManager().beginTransaction()
-                .replace(R.id.frameHoaDon, defaultFragment)
-                .commit();
 
-        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
-            @Override
-            public void onNavigationItemReselected(@NonNull MenuItem item) {
-                if (item.getItemId() == R.id.chuaxacnhan) {
-                    FragmentCXN chuxacnhan = new FragmentCXN();
-                    chuxacnhan.setArguments(bundle);
-                    rePlaceFrag(chuxacnhan);
-                }
-            }
-        });
+        bottomNavigationView.setOnNavigationItemSelectedListener(this);
+        bottomNavigationView.setSelectedItemId(R.id.chuaxacnhan);
+
         return view;
     }
+
+     @Override
+     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+         Fragment fragment = null;
+         int itemId = item.getItemId();
+
+         if (itemId == R.id.chuaxacnhan) {
+             fragment = new FragmentCXN();
+         } else if (itemId == R.id.daxacnhan) {
+             fragment = new FragmentDXN();
+         } else if (itemId == R.id.danggiao) {
+             fragment = new FragmentDangGiao();
+         } else if (itemId == R.id.dagiao) {
+             fragment = new FragmentThanhCong();
+         } else if (itemId == R.id.dahuy) {
+             fragment = new FragmentHuy();
+         }
+
+         if (fragment != null) {
+             rePlaceFrag(fragment);
+             return true;
+         }
+
+         return false;
+     }
+
     private void rePlaceFrag(Fragment fragment) {
         FragmentManager fm = getChildFragmentManager();
         fm.beginTransaction().replace(R.id.frameHoaDon, fragment).commit();
