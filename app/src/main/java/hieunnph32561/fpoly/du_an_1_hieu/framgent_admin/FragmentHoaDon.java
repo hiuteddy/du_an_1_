@@ -1,65 +1,56 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentCXN;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentHoaDon#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class FragmentHoaDon extends Fragment {
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public FragmentHoaDon() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentHoaDon.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FragmentHoaDon newInstance(String param1, String param2) {
-        FragmentHoaDon fragment = new FragmentHoaDon();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
+    BottomNavigationView bottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        setHasOptionsMenu(true); // Cho phép Fragment có các menu riêng
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_hoa_don, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_hoa_don, container, false);
+        bottomNavigationView = view.findViewById(R.id.bottomNavigationProduct);
+        Intent intent = getActivity().getIntent();
+        Bundle bundle = intent.getExtras();
+        // Đoạn code sau đây chưa hoàn thiện, cần cung cấp đối tượng Fragment mặc định để thay thế cho defaultFragment
+        Fragment defaultFragment = new FragmentCXN();
+        getChildFragmentManager().beginTransaction()
+                .replace(R.id.frameHoaDon, defaultFragment)
+                .commit();
+
+        bottomNavigationView.setOnNavigationItemReselectedListener(new BottomNavigationView.OnNavigationItemReselectedListener() {
+            @Override
+            public void onNavigationItemReselected(@NonNull MenuItem item) {
+                if (item.getItemId() == R.id.chuaxacnhan) {
+                    FragmentCXN chuxacnhan = new FragmentCXN();
+                    chuxacnhan.setArguments(bundle);
+                    rePlaceFrag(chuxacnhan);
+                }
+            }
+        });
+        return view;
+    }
+    private void rePlaceFrag(Fragment fragment) {
+        FragmentManager fm = getChildFragmentManager();
+        fm.beginTransaction().replace(R.id.frameHoaDon, fragment).commit();
     }
 }
