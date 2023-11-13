@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.framgment_custom.MainActivity_gio_hang_custom">
+    tools:context=".framgment_custom.MainActivity_gio_hang_custom">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarr"
@@ -54,108 +54,133 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Shipping Method: "
+                android:textColor="#ff3d00"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rdovc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+                <RadioButton
+                    android:id="@+id/radioshipcode"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Ship Cod"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <RadioButton
+                    android:id="@+id/radioonile"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Thanh Toán Onile"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <!--            <LinearLayout-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="100dp"-->
+        <!--                android:layout_marginStart="16dp"-->
+        <!--                android:layout_marginTop="16dp"-->
+        <!--                android:layout_marginEnd="16dp"-->
+        <!--                android:layout_marginBottom="4dp"-->
+        <!--                android:orientation="vertical">-->
+
+        <!--           // </LinearLayout>-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="4dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Address:"
+                android:layout_marginBottom="4dp"
+                android:textColor="#ff3d00"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <!--                <ImageView-->
+            <!--                    android:id="@+id/imageView3"-->
+            <!--                    android:layout_width="34dp"-->
+            <!--                    android:layout_height="34dp"-->
+            <!--                    android:layout_marginEnd="24dp"-->
+            <!--                    android:layout_gravity="center"-->
+            <!--                    android:src="@drawable/baseline_edit_24" />-->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="4dp"
-                android:orientation="vertical">
+
+                android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Phương Thức: "
-                    android:layout_gravity="center"
-                    android:textColor="#ff3d00"
-                    android:textSize="20sp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Phone: "
+                    android:textColor="#373b54"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
-
-                <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/rdovc"
-                    android:layout_weight="1">
-
-                    <RadioButton
-                        android:id="@+id/radioshipcode"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:text="Ship Cod" />
-
-                    <RadioButton
-                        android:id="@+id/radioonile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        android:text="Thanh Toán Onile" />
-                </RadioGroup>
-
-            </LinearLayout>
-
-            <!--            <LinearLayout-->
-            <!--                android:layout_width="match_parent"-->
-            <!--                android:layout_height="100dp"-->
-            <!--                android:layout_marginStart="16dp"-->
-            <!--                android:layout_marginTop="16dp"-->
-            <!--                android:layout_marginEnd="16dp"-->
-            <!--                android:layout_marginBottom="4dp"-->
-            <!--                android:orientation="vertical">-->
-
-            <!--           // </LinearLayout>-->
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="410dp"
-                android:layout_height="140dp">
-
-                <ImageView
-                    android:id="@+id/imageView3"
-                    android:layout_width="34dp"
-                    android:layout_height="34dp"
-                    android:layout_marginEnd="24dp"
-                    android:src="@drawable/baseline_edit_24"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toEndOf="@+id/txtdiachi"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.622" />
-
-                <TextView
-                    android:id="@+id/textView10"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Địa Chỉ Nhận Hàng:"
-                    android:textColor="#ff3d00"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.574"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
 
                 <TextView
                     android:id="@+id/txthoten"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Họ Tên: "
                     android:textColor="#373b54"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.362" />
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="Địa Chỉ: "
+                    android:textColor="#373b54"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtdiachi"
@@ -181,25 +206,19 @@
                     android:layout_weight="1"
                     android:textColor="#373b54"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.655" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/txtsdt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="108dp"
-                    android:text="Phone"
                     android:textColor="#373b54"
                     android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                    android:textStyle="bold" />
+            </LinearLayout>
+        </LinearLayout>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
