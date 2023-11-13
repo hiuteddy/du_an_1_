@@ -109,9 +109,9 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
         String username = preferences.getString("username", "");
         taiKhoan = taikhoanDAO.getID(username);
-        txthoten.setText("Họ Tên: " + taiKhoan.getHoten());
-        txtsdt.setText("Số Điện Thoại:" + taiKhoan.getSdt());
-        txtdiachi.setText("Địa Chỉ: " + taiKhoan.getDiachi());
+        txthoten.setText("" + taiKhoan.getHoten());
+        txtsdt.setText("" + taiKhoan.getSdt());
+        txtdiachi.setText("" + taiKhoan.getDiachi());
 
 
     }
