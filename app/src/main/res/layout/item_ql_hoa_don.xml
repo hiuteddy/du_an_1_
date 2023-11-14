@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
+    android:background="@drawable/brg_item_dt"
     android:gravity="end"
     android:padding="10dp">
 

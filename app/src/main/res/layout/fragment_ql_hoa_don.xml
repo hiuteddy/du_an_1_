@@ -6,7 +6,7 @@
     tools:context=".framgent_admin.fragmentHoaDon.FragmentCXN">
 
     <ListView
-        android:id="@+id/lvCXN"
+        android:id="@+id/lvQuanLyHoaDon"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

@@ -42,9 +42,9 @@ public class FragmentHuy extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_dxn, container, false);
+        View view = inflater.inflate(R.layout.fragment_ql_hoa_don, container, false);
 
-        listViewCXN = view.findViewById(R.id.lvDXN);
+        listViewCXN = view.findViewById(R.id.lvQuanLyHoaDon);
         daoCT = new chitietDAO(getContext());
         daoHD = new hoadonDAO(getContext());
         chiTietList = new ArrayList<>();

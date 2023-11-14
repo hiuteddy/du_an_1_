@@ -74,7 +74,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
         ChiTiet chiTietItem = chiTietList.get(position);
         HoaDon hoaDon = daoHD.getID(String.valueOf(chiTietItem.getMahd()));
         DienThoai dienThoai = daoDT.getID(String.valueOf(chiTietItem.getMadt()));
-        TaiKhoan taiKhoan = daoTK.getID(String.valueOf(hoaDon.getMaTk()));
+        TaiKhoan taiKhoan = daoTK.getIDma(String.valueOf(hoaDon.getMaTk()));
 
         viewHolder.textViewMaHoaDon.setText("Mã Hóa Đơn: " + chiTietItem.getMahd());
         viewHolder.textViewNgayHoaDon.setText(hoaDon.getNgay());
