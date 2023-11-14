@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
+import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
@@ -118,5 +119,34 @@ public class taikhoanDAO {
         values.put("diachi", user.getDiachi());
         values.put("matkhau", user.getMatKhau());
         return database.update("TaiKhoan", values, "tenDN=?", new String[]{String.valueOf(user.getTenDN())});
+    }
+
+    public ArrayList<TaiKhoan> getDSDL() {
+        ArrayList<TaiKhoan> list = new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * from TaiKhoan Where matk != 1 ", null);
+        if (cursor.getCount() != 0) {
+            cursor.moveToFirst();
+            do {
+                //int maTk, String tenDN, String matKhau, String hoten, String sdt, String diachi
+                list.add(new TaiKhoan(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)));
+
+            } while (cursor.moveToNext());
+        }
+        return list;
+    }
+    public ArrayList<HoaDon> getDSHD(){
+        ArrayList<HoaDon> list1 = new ArrayList<>();
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        Cursor cursor = database.rawQuery("SELECT * FROM HoaDon",null);
+        if (cursor.getCount() != 0){
+            cursor.moveToFirst();
+            do {
+                //int maHD, int maTk, int tongTien, String ngay, int trangThai, String phuongthuc
+                list1.add(new HoaDon(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2), cursor.getString(3),
+                        cursor.getInt(4), cursor.getString(5)));
+            }while (cursor.moveToNext());
+        }
+        return list1;
     }
 }

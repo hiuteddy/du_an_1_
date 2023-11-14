@@ -1,5 +1,6 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,12 +11,17 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.util.ArrayList;
+
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.Trangchu;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class FragmentTrangChu extends Fragment {
 
     LinearLayout btnsp, btndt, btnhd, btnkh, btnbc, btnsr;
+    private Context context;
+    private ArrayList<TaiKhoan> list;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -68,6 +74,7 @@ public class FragmentTrangChu extends Fragment {
         btnkh.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Fragment fragment = new FragmentKhachHang();
                 loadOtherFragment(fragment);
                 setToolbarTitle("Quản Lý Khách Hàng");

@@ -1,6 +1,8 @@
 package hieunnph32561.fpoly.du_an_1_hieu.model;
 
-public class HoaDon {
+import java.io.Serializable;
+
+public class HoaDon implements Serializable {
     private int maHD;
     private int maTk;
     private int tongTien;

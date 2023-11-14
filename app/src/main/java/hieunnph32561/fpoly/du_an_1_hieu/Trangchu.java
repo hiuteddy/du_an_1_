@@ -29,7 +29,6 @@ import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_gio_hang_c
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ds_dt;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_lich_su_hoa_don;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_taikhoan;
-import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 
 public class Trangchu extends AppCompatActivity {
     DrawerLayout drawerLayout;

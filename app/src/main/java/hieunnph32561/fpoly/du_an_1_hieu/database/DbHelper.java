@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 15;
+    public static final int DB_VERSION = 30;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -86,12 +86,14 @@ public class DbHelper extends SQLiteOpenHelper {
 
         // Thêm dữ liệu mẫu vào bảng TaiKhoan
         db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,sdt,hoTen,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A', 123456789,'hanoi')");
-        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,sdt,hoTen,diaChi) VALUES (2, 'user', '123','Nguyễn Văn B', 987654321,'hcm')");
+        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,sdt,hoTen,diaChi) VALUES (2, 'user', '123',987654321,'Nguyễn Văn B' ,'hcm')");
+        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,sdt,hoTen,diaChi) VALUES (3, 'name', '234',987654321, 'Nguyễn Văn C','Nb')");
 
 
         // Thêm dữ liệu mẫu vào bảng HoaDon
-        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 5000, '2023-11-01', 1, '1')");
-        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (2, 7000, '2023-11-02', 1, '2')");
+        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 5000, '2023/11/01', 1, '1')");
+        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (2, 7000, '2023/11/02', 1, '2')");
+        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (3, 8000, '2023/11/03', 1, '1')");
 
         // Thêm dữ liệu mẫu vào bảng GioHang
         db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (1, 1000, 2)");
