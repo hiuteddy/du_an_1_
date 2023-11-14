@@ -1,10 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="#66C0C0C0"
     android:layout_height="match_parent"
     tools:context=".framgent_admin.FragmentHoaDon">
+    <FrameLayout
+        android:id="@+id/frameHoaDon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rlQLSP"
+        android:layout_marginBottom="50dp"
+        android:background="#33C0C0C0" />
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationProduct"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:paddingBottom="5dp"
+        android:background="@color/white"
+        app:itemTextColor="@color/black"
+        app:labelVisibilityMode="labeled"
+        app:menu="@menu/menu_xac_nhan_hoa_don"/>
 
-
-
-</FrameLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout >

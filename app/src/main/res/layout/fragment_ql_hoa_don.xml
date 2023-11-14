@@ -3,4 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".framgent_admin.FragmentKhachHang"/>
+    tools:context=".framgent_admin.fragmentHoaDon.FragmentCXN">
+
+    <ListView
+        android:id="@+id/lvQuanLyHoaDon"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

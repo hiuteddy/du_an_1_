@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="hieunnph32561.du_an_1_hieu_lam.du_an_1_hieu_lam.framgment_custom.MainActivity_gio_hang_custom">
+    tools:context=".framgment_custom.MainActivity_gio_hang_custom">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarr"
@@ -202,7 +202,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:text="Họ Tên: "
+                    android:text="Họ tên: "
                     android:layout_weight="1"
                     android:textColor="#373b54"
                     android:textSize="18sp"
