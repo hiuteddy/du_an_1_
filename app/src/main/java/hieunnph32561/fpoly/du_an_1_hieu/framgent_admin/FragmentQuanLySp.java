@@ -26,6 +26,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
@@ -35,6 +37,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
 public class FragmentQuanLySp extends Fragment {
@@ -42,9 +45,10 @@ public class FragmentQuanLySp extends Fragment {
     RecyclerView rcvqldt;
     FloatingActionButton btnAddSp;
     dienthoaiDAO dtDAO;
-    adapter_qlsp adapterql;
+
     private SpinnerTypeAdapter spinnerTypeAdapter;
     loaidtDAO loaidao;
+    adapter_qlsp adapter;
     private List<LoaiSeries> listLS;
 
     ArrayList<DienThoai> list = new ArrayList<>();
@@ -75,14 +79,14 @@ public class FragmentQuanLySp extends Fragment {
         loaidao = new loaidtDAO(getContext());
         listLS = loaidao.getAll();
         list = dtDAO.getAll();
-        adapterql = new adapter_qlsp(getContext(), list);
-        rcvqldt.setAdapter(adapterql);
+        adapter = new adapter_qlsp(getContext(), list);
+        rcvqldt.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rcvqldt.setLayoutManager(linearLayoutManager);
     }
 
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
-        inflater.inflate(R.menu.menu_search, menu);
+        inflater.inflate(R.menu.menu_sapxep, menu);
         SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchItem = menu.findItem(R.id.search);
         searchView = (SearchView) searchItem.getActionView();
@@ -97,11 +101,22 @@ public class FragmentQuanLySp extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //handleSearch(newText);
+                handleSearch(newText);
                 return true;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+    private void handleSearch(String query) {
+        List<DienThoai> listSearch = new ArrayList<>();
+        for (DienThoai dt : list) {
+            if (dt.getTenDT().toLowerCase().contains(query.toLowerCase())) {
+                listSearch.add(dt);
+            }
+        }
+        adapter = new adapter_qlsp( getActivity(), (ArrayList<DienThoai>) listSearch);
+        rcvqldt.setAdapter(adapter);
+
     }
 
     private void showAddDialog() {
@@ -144,7 +159,7 @@ public class FragmentQuanLySp extends Fragment {
 
                 dtDAO.add(newDienThoai);
                 list.add(newDienThoai);
-                adapterql.notifyDataSetChanged();
+                adapter.notifyDataSetChanged();
 
                 showToast("Đã Thêm Sản phẩm");
                 dialog.dismiss();
@@ -159,4 +174,41 @@ public class FragmentQuanLySp extends Fragment {
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+    //giảm dần
+    private void sortBooksByNameDescending() {
+        Collections.sort(list, new Comparator<DienThoai>() {
+            @Override
+            public int compare(DienThoai dienThoai, DienThoai t1) {
+                return Double.compare(t1.getGiaTien(), dienThoai.getGiaTien());
+            }
+        });
+
+        adapter.notifyDataSetChanged();
+    }
+    //tăng dần
+    private void sortBooksByNameAscending() {
+        Collections.sort(list, new Comparator<DienThoai>() {
+            @Override
+            public int compare(DienThoai dienThoai, DienThoai t1) {
+                return Double.compare(dienThoai.getGiaTien(), t1.getGiaTien());
+            }
+        });
+
+        adapter.notifyDataSetChanged();
+    }
+    //sap xep theo gia tien
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.asc){
+            sortBooksByNameAscending();
+            return true;
+        }else if(id == R.id.desc){
+            sortBooksByNameDescending();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 }

@@ -6,7 +6,9 @@
     android:orientation="vertical"
     tools:context=".framgent_admin.FragmentKhachHang">
 
+
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/rcckhachhang"/>

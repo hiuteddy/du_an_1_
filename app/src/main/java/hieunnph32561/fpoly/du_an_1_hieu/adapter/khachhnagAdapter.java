@@ -54,8 +54,8 @@ public class khachhnagAdapter extends RecyclerView.Adapter<khachhnagAdapter.khac
         //maTk, String tenDN, String matKhau, String hoten, String sdt, String diachi
         holder.txtmatk.setText("Ma TK: " + list.get(position).getMaTk());
         holder.txttenDN.setText("Ten dang nhap: " + list.get(position).getTenDN());
-        holder.txthoten.setText("SDT: " + list.get(position).getHoten());
-        holder.txtsdt.setText("Ho ten: " + list.get(position).getSdt());
+        holder.txthoten.setText("Ho ten: " + list.get(position).getHoten());
+        holder.txtsdt.setText("SDT: " + list.get(position).getSdt());
         holder.txtdiachi.setText("Dia chi: " + list.get(position).getDiachi());
         holder.txtmahd.setText("Ma HD: " + list1.get(position).getMaHD());
         holder.txttongtien.setText("Tong tien: " + list1.get(position).getTongTien());
