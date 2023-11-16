@@ -122,13 +122,13 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
 
         return convertView;
     }
-    @SuppressLint("SuspiciousIndentation")
     public void updateList() {
         chiTietList.clear();
         for (ChiTiet x: daoCT.getAll()) {
             HoaDon don = daoHD.getID(String.valueOf(x.getMahd()));
-            if (trangThai == don.getTrangThai())
-            chiTietList.add(x);
+            if (trangThai == don.getTrangThai()) {
+                chiTietList.add(x);
+            }
         }
         notifyDataSetChanged();
     }

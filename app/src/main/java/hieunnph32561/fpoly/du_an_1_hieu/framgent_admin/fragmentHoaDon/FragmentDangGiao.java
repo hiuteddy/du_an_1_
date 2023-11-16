@@ -28,7 +28,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 public class FragmentDangGiao extends Fragment {
 
     private  SearchView searchView;
-    private ListView listViewCXN;
+    private ListView listView;
     private adapterQLHoaDon adapter;
     private List<ChiTiet> chiTietList;
     chitietDAO daoCT;
@@ -44,7 +44,7 @@ public class FragmentDangGiao extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ql_hoa_don, container, false);
 
-        listViewCXN = view.findViewById(R.id.lvQuanLyHoaDon);
+        listView = view.findViewById(R.id.lvQuanLyHoaDon);
         daoCT = new chitietDAO(getContext());
         daoHD = new hoadonDAO(getContext());
         chiTietList = new ArrayList<>();
@@ -59,7 +59,7 @@ public class FragmentDangGiao extends Fragment {
         }
 
         adapter = new adapterQLHoaDon(getContext(), listsetAdapter);
-        listViewCXN.setAdapter(adapter);
+        listView.setAdapter(adapter);
 
         return view;
     }

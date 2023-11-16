@@ -28,7 +28,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 public class FragmentDXN extends Fragment {
 
     private  SearchView searchView;
-    private ListView listViewCXN;
+    private ListView listView;
     private adapterQLHoaDon adapter;
     private List<ChiTiet> chiTietList;
     chitietDAO daoCT;
@@ -44,22 +44,20 @@ public class FragmentDXN extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ql_hoa_don, container, false);
 
-        listViewCXN = view.findViewById(R.id.lvQuanLyHoaDon);
+        listView = view.findViewById(R.id.lvQuanLyHoaDon);
         daoCT = new chitietDAO(getContext());
         daoHD = new hoadonDAO(getContext());
         chiTietList = new ArrayList<>();
-        List<ChiTiet> listsetAdapter = new ArrayList<>();
-        chiTietList = daoCT.getAll();
 
-        for (ChiTiet x: chiTietList) {
-            HoaDon don = daoHD.getID(String.valueOf(x.getMahd()));
-            if (don.getTrangThai()==1){
-                listsetAdapter.add(x);
+        daoCT.getAll().forEach(chiTiet -> {
+            HoaDon don = daoHD.getID(String.valueOf(chiTiet.getMahd()));
+            if (don.getTrangThai() == 1) {
+                chiTietList.add(chiTiet);
             }
-        }
+        });
 
-        adapter = new adapterQLHoaDon(getContext(), listsetAdapter);
-        listViewCXN.setAdapter(adapter);
+        adapter = new adapterQLHoaDon(getContext(), chiTietList);
+        listView.setAdapter(adapter);
 
         return view;
     }

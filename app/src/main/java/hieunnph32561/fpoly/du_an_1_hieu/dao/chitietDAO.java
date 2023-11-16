@@ -50,6 +50,6 @@ public class chitietDAO {
     }
     public ArrayList<ChiTiet> getAll() {
         String sql = "SELECT * FROM ChiTietDonHang";
-        return (ArrayList<ChiTiet>) getALLct(sql); // Gọi getALLSACH với một truy vấn SQL đã được định nghĩa trước
+        return getALLct(sql); // Gọi getALLSACH với một truy vấn SQL đã được định nghĩa trước
     }
 }
