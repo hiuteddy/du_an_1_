@@ -33,7 +33,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     RecyclerView rcvgh;
     giohangDAO ghDAO;
     adapter_giohang adapter_giohang;
-    private TextView txtTongSoLuong;
+    private TextView txtTongSoLuong, txtphiship;
     private TextView txtTongGia;
     private TextView txthoten, txtdiachi, txtsdt;
     private TextView dathang;
@@ -45,11 +45,13 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     ArrayList<GioHang> list = new ArrayList<>();
     TaiKhoan taiKhoan;
     RadioGroup radioGroup;
+    Double shipperPrice = 0.0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_gio_hang_custom);
+
 
         radioGroup = findViewById(R.id.rdovc);
         txthoten = findViewById(R.id.txthoten);
@@ -59,19 +61,19 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         txtTongSoLuong = findViewById(R.id.totalFeeTxt);
         txtTongGia = findViewById(R.id.totalTxt);
         dathang = findViewById(R.id.txtdathang);
+        txtphiship = findViewById(R.id.deliveryTxt);
 
         hoadonDAO = new hoadonDAO(this);
         chitietDAO = new chitietDAO(this);
         taikhoanDAO = new taikhoanDAO(this);
+        //updateTotalValues();
 
         loaddata();
-        updateTotalValues();
 
         Toolbar toolbar = findViewById(R.id.toolbarr);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Thiết lập sự kiện click cho nút back
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,8 +85,15 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radioshipcode) {
                     phuongThucVanChuyen = "Ship cod";
+                    shipperPrice = 20.000;
+                    txtphiship.setText(""+ 20.000);
+                    updateTotalValues();
+
                 } else if (checkedId == R.id.radioonile) {
                     phuongThucVanChuyen = "Thanh toán online";
+                    shipperPrice = 0.0;
+                    updateTotalValues();
+
                 }
             }
         });
@@ -101,8 +110,6 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
 
                 }
                 showKhachHangInputDialog();
-                // radioGroup.se;
-
             }
         });
 
@@ -112,7 +119,6 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         txthoten.setText("" + taiKhoan.getHoten());
         txtsdt.setText("" + taiKhoan.getSdt());
         txtdiachi.setText("" + taiKhoan.getDiachi());
-
 
     }
 
@@ -192,7 +198,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
             totalQuantity += gioHang.getSoLuong();
             totalPrice += gioHang.getSoLuong() * gioHang.getGia();
         }
-
+        totalPrice += shipperPrice;
         txtTongSoLuong.setText(String.valueOf(totalQuantity));
         txtTongGia.setText(String.valueOf(totalPrice));
     }

@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.google.android.material.navigation.NavigationView;
 
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentBanChay;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentDoanhThu;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentHoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentKhachHang;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentQuanLySp;
@@ -71,8 +73,7 @@ public class Trangchu extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout, defaultFragment)
                     .commit();
-        }
-       else {
+        } else {
             navigationView.getMenu().findItem(R.id.nav_quanly).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_thongke).setVisible(true);
             navigationView.getMenu().findItem(R.id.sub_canhan).setVisible(true);
@@ -91,16 +92,17 @@ public class Trangchu extends AppCompatActivity {
                 if (item.getItemId() == R.id.sub_tt) {
                     fragment = new framgment_ds_dt();
                 }
-                if(item.getItemId() == R.id.sub_ls){
+                if (item.getItemId() == R.id.sub_ls) {
                     fragment = new framgment_lich_su_hoa_don();
 
                 }
-                if(item.getItemId() ==R.id.sub_taikhoan){
-                    fragment=new framgment_taikhoan();
+                if (item.getItemId() == R.id.sub_taikhoan) {
+                    fragment = new framgment_taikhoan();
                 }
-                if(item.getItemId() ==R.id.sub_giohang){
+                if (item.getItemId() == R.id.sub_giohang) {
                     startActivity(new Intent(Trangchu.this, MainActivity_gio_hang_custom.class));
                 }
+
 
                 if (item.getItemId() == R.id.sub_Logout) {
                     AlertDialog.Builder builder = new AlertDialog.Builder(Trangchu.this);
@@ -124,27 +126,35 @@ public class Trangchu extends AppCompatActivity {
                     Dialog dialog = builder.create();
                     dialog.show();
                 }
-                if(item.getItemId() == R.id.nav_Home){
+                if (item.getItemId() == R.id.nav_Home) {
                     fragment = new FragmentTrangChu();
                     toolbar.setTitle("Trang Chủ");
                 }
-                if(item.getItemId() == R.id.nav_donhang){
+                if (item.getItemId() == R.id.nav_donhang) {
                     fragment = new FragmentHoaDon();
                     toolbar.setTitle("Đơn hàng");
                 }
-                if(item.getItemId() == R.id.nav_khachhang){
+                if (item.getItemId() == R.id.nav_khachhang) {
                     fragment = new FragmentKhachHang();
                     toolbar.setTitle("Khách Hàng");
                 }
-                if(item.getItemId() == R.id.nav_dienthoai){
+                if (item.getItemId() == R.id.nav_dienthoai) {
                     fragment = new FragmentQuanLySp();
                     toolbar.setTitle("Quản Lý Sản Phẩm");
                 }
-                if(item.getItemId() == R.id.nav_loaiseries){
+                if (item.getItemId() == R.id.nav_loaiseries) {
                     fragment = new FragmentSeries();
                     toolbar.setTitle("Loại Series");
                 }
+                if (item.getItemId() == R.id.sub_Top) {
+                    fragment = new FragmentBanChay();
+                    toolbar.setTitle("Top 10");
 
+                }
+                if (item.getItemId() == R.id.sub_DoanhThu) {
+                    fragment = new FragmentDoanhThu();
+                    toolbar.setTitle("Doanh thu");
+                }
                 if (fragment != null) {
                     getSupportFragmentManager().beginTransaction()
                             .replace(R.id.framelayout, fragment)
@@ -158,7 +168,8 @@ public class Trangchu extends AppCompatActivity {
             }
         });
     }
-    public void settitleToolbar(String mess){
+
+    public void settitleToolbar(String mess) {
         toolbar.setTitle(mess);
     }
 

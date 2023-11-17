@@ -84,21 +84,36 @@
             android:textColor="@color/black"
             android:textSize="19sp" />
 
-        <Button
-            android:id="@+id/btnchitiett"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:backgroundTint="@color/black"
-            android:text="Xem chi tiết" />
-        <Button
-            android:id="@+id/btnxoa"
-            android:layout_width="120dp"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/black"
-            android:layout_marginTop="10dp"
-            android:layout_gravity="right"
-            android:text="Hủy" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnchitiett"
+                android:layout_width="125dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_cart_bgr"
+                android:backgroundTint="#673AB7"
+                android:text="Xác Nhận"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="end">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnxoa"
+                android:layout_width="125dp"
+                android:layout_marginTop="10dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_cart_bgr"
+                android:backgroundTint="#673AB7"
+                android:text="Hủy"
+                android:textColor="#FFFFFF"/>
+        </LinearLayout>
 
     </LinearLayout>
 

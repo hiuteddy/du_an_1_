@@ -5,6 +5,25 @@
     android:layout_height="match_parent"
     tools:context=".framgent_admin.FragmentBanChay">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:textStyle="bold"
+            android:textSize="30sp"
+            android:textColor="#FF0000"
+            android:text="Top Phone Oder" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcltop10"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </LinearLayout>
 
 </FrameLayout>

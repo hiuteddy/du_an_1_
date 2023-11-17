@@ -72,8 +72,10 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             holder.txttrangThai.setText("Đã xác nhân");
         } else if (hoaDon.getTrangThai() == 2) {
             holder.txttrangThai.setText("Đang giao");
+            holder.btnhuy.setVisibility(View.GONE);
         } else if (hoaDon.getTrangThai() == 3) {
             holder.txttrangThai.setText("Giao hàng thành công");
+            holder.btnhuy.setVisibility(View.GONE);
         } else if (hoaDon.getTrangThai() == 4) {
             holder.txttrangThai.setText("Đã hủy");
         }

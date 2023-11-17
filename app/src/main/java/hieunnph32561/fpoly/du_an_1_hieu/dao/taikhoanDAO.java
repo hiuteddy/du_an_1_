@@ -78,26 +78,26 @@ public class taikhoanDAO {
         }
     }
 
-    @SuppressLint("Range")
-    public int getMaKhachHangByUsername(String username) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        int maKhachHang = -1; // Giá trị không hợp lệ
-
-        String[] columns = {"maTk"};
-        String selection = "tenDN = ?";
-        String[] selectionArgs = {username};
-
-        Cursor cursor = db.query("TaiKhoan", columns, selection, selectionArgs, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            maKhachHang = cursor.getInt(cursor.getColumnIndex("maTk"));
-        }
-
-        cursor.close();
-        db.close();
-
-        return maKhachHang;
-    }
+//    @SuppressLint("Range")
+//    public int getMaKhachHangByUsername(String username) {
+//        SQLiteDatabase db = dbHelper.getReadableDatabase();
+//        int maKhachHang = -1; // Giá trị không hợp lệ
+//
+//        String[] columns = {"maTk"};
+//        String selection = "tenDN = ?";
+//        String[] selectionArgs = {username};
+//
+//        Cursor cursor = db.query("TaiKhoan", columns, selection, selectionArgs, null, null, null);
+//
+//        if (cursor.moveToFirst()) {
+//            maKhachHang = cursor.getInt(cursor.getColumnIndex("maTk"));
+//        }
+//
+//        cursor.close();
+//        db.close();
+//
+//        return maKhachHang;
+//    }
 
     public long insert(TaiKhoan s) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
@@ -121,32 +121,5 @@ public class taikhoanDAO {
         return database.update("TaiKhoan", values, "tenDN=?", new String[]{String.valueOf(user.getTenDN())});
     }
 
-    public ArrayList<TaiKhoan> getDSDL() {
-        ArrayList<TaiKhoan> list = new ArrayList<>();
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * from TaiKhoan Where matk != 1 ", null);
-        if (cursor.getCount() != 0) {
-            cursor.moveToFirst();
-            do {
-                //int maTk, String tenDN, String matKhau, String hoten, String sdt, String diachi
-                list.add(new TaiKhoan(cursor.getInt(0), cursor.getString(1), cursor.getString(2), cursor.getString(3), cursor.getString(4), cursor.getString(5)));
 
-            } while (cursor.moveToNext());
-        }
-        return list;
-    }
-    public ArrayList<HoaDon> getDSHD(){
-        ArrayList<HoaDon> list1 = new ArrayList<>();
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM HoaDon",null);
-        if (cursor.getCount() != 0){
-            cursor.moveToFirst();
-            do {
-                //int maHD, int maTk, int tongTien, String ngay, int trangThai, String phuongthuc
-                list1.add(new HoaDon(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2), cursor.getString(3),
-                        cursor.getInt(4), cursor.getString(5)));
-            }while (cursor.moveToNext());
-        }
-        return list1;
-    }
 }

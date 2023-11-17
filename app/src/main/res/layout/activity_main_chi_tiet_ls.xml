@@ -11,7 +11,7 @@
         android:id="@+id/toolbarrr"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#EA6F48"
+        android:background="#673AB7"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"

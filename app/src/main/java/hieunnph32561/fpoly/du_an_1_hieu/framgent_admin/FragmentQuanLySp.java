@@ -48,7 +48,7 @@ public class FragmentQuanLySp extends Fragment {
 
     private SpinnerTypeAdapter spinnerTypeAdapter;
     loaidtDAO loaidao;
-    adapter_qlsp adapter;
+  adapter_qlsp adapter;
     private List<LoaiSeries> listLS;
 
     ArrayList<DienThoai> list = new ArrayList<>();
@@ -101,23 +101,23 @@ public class FragmentQuanLySp extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                handleSearch(newText);
+            //    handleSearch(newText);
                 return true;
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
     }
-    private void handleSearch(String query) {
-        List<DienThoai> listSearch = new ArrayList<>();
-        for (DienThoai dt : list) {
-            if (dt.getTenDT().toLowerCase().contains(query.toLowerCase())) {
-                listSearch.add(dt);
-            }
-        }
-        adapter = new adapter_qlsp( getActivity(), (ArrayList<DienThoai>) listSearch);
-        rcvqldt.setAdapter(adapter);
-
-    }
+//    private void handleSearch(String query) {
+//        List<DienThoai> listSearch = new ArrayList<>();
+//        for (DienThoai dt : list) {
+//            if (dt.getTenDT().toLowerCase().contains(query.toLowerCase())) {
+//                listSearch.add(dt);
+//            }
+//        }
+//        adapter = new adapter_qlsp( getActivity(), (ArrayList<DienThoai>) listSearch);
+//        rcvqldt.setAdapter(adapter);
+//
+//    }
 
     private void showAddDialog() {
         Dialog dialog = new Dialog(getContext());
@@ -159,7 +159,7 @@ public class FragmentQuanLySp extends Fragment {
 
                 dtDAO.add(newDienThoai);
                 list.add(newDienThoai);
-                adapter.notifyDataSetChanged();
+               // adapter.notifyDataSetChanged();
 
                 showToast("Đã Thêm Sản phẩm");
                 dialog.dismiss();
@@ -175,40 +175,40 @@ public class FragmentQuanLySp extends Fragment {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
     //giảm dần
-    private void sortBooksByNameDescending() {
-        Collections.sort(list, new Comparator<DienThoai>() {
-            @Override
-            public int compare(DienThoai dienThoai, DienThoai t1) {
-                return Double.compare(t1.getGiaTien(), dienThoai.getGiaTien());
-            }
-        });
-
-        adapter.notifyDataSetChanged();
-    }
-    //tăng dần
-    private void sortBooksByNameAscending() {
-        Collections.sort(list, new Comparator<DienThoai>() {
-            @Override
-            public int compare(DienThoai dienThoai, DienThoai t1) {
-                return Double.compare(dienThoai.getGiaTien(), t1.getGiaTien());
-            }
-        });
-
-        adapter.notifyDataSetChanged();
-    }
-    //sap xep theo gia tien
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.asc){
-            sortBooksByNameAscending();
-            return true;
-        }else if(id == R.id.desc){
-            sortBooksByNameDescending();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    private void sortBooksByNameDescending() {
+//        Collections.sort(list, new Comparator<DienThoai>() {
+//            @Override
+//            public int compare(DienThoai dienThoai, DienThoai t1) {
+//                return Double.compare(t1.getGiaTien(), dienThoai.getGiaTien());
+//            }
+//        });
+//
+//        adapter.notifyDataSetChanged();
+//    }
+//    //tăng dần
+//    private void sortBooksByNameAscending() {
+//        Collections.sort(list, new Comparator<DienThoai>() {
+//            @Override
+//            public int compare(DienThoai dienThoai, DienThoai t1) {
+//                return Double.compare(dienThoai.getGiaTien(), t1.getGiaTien());
+//            }
+//        });
+//
+//        adapter.notifyDataSetChanged();
+//    }
+//    //sap xep theo gia tien
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.asc){
+//            sortBooksByNameAscending();
+//            return true;
+//        }else if(id == R.id.desc){
+//            sortBooksByNameDescending();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 
 
 }

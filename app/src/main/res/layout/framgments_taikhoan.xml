@@ -61,6 +61,7 @@
             android:id="@+id/tvHoTenNguoiDung"
             android:layout_width="0dp"
             android:layout_height="@dimen/item_height"
+            android:background="#C6B5E3"
             android:layout_weight="0.5"
             android:gravity="center"
             android:textColor="@color/black" />
@@ -87,6 +88,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/item_height"
             android:layout_weight="0.5"
+            android:background="#C6B5E3"
             android:gravity="center"
             android:textColor="@color/black" />
     </LinearLayout>
@@ -110,6 +112,8 @@
             android:id="@+id/tvDiacChiNguoiDung"
             android:layout_width="0dp"
             android:layout_height="@dimen/item_height"
+            android:background="#C6B5E3"
+
             android:layout_weight="0.5"
             android:gravity="center"
             android:textColor="@color/black" />
@@ -134,6 +138,8 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/item_height"
             android:layout_weight="0.5"
+            android:background="#C6B5E3"
+
             android:gravity="center"
             android:textColor="@color/black" />
     </LinearLayout>
@@ -157,17 +163,11 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/item_height"
             android:layout_weight="0.5"
+            android:background="#C6B5E3"
+
             android:gravity="center"
             android:textColor="@color/black" />
     </LinearLayout>
 
-    <!--    <Button-->
-    <!--        android:id="@+id/btndoimk"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_margin="@dimen/margin_default"-->
-    <!--        android:text="Đổi mật khẩu"-->
-    <!--        android:textColor="@color/black"-->
-    <!--        android:textSize="@dimen/text_size_medium" />-->
 
 </LinearLayout>
