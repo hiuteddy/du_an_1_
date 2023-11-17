@@ -95,8 +95,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/item_cart_bgr"
-                android:backgroundTint="#673AB7"
-                android:text="Xác Nhận"
+                android:backgroundTint="#7E59C1"
+                android:text="Chi tiết đơn"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
 
@@ -110,7 +110,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/item_cart_bgr"
-                android:backgroundTint="#673AB7"
+                android:backgroundTint="#8356D5"
                 android:text="Hủy"
                 android:textColor="#FFFFFF"/>
         </LinearLayout>
