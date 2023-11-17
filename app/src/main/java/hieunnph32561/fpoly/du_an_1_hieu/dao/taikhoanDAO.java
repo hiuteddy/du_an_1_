@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
-import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
@@ -121,10 +120,17 @@ public class taikhoanDAO {
         return database.update("TaiKhoan", values, "tenDN=?", new String[]{String.valueOf(user.getTenDN())});
     }
 
+    public boolean xoaKhachHang(int id){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        long row = database.delete("TaiKhoan","maTk=?", new String[]{String.valueOf(id)});
+        return (row >0);
+    }
+
+
     public ArrayList<TaiKhoan> getDSDL() {
         ArrayList<TaiKhoan> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * from TaiKhoan Where matk != 1 ", null);
+        Cursor cursor = database.rawQuery("SELECT * from TaiKhoan ", null);
         if (cursor.getCount() != 0) {
             cursor.moveToFirst();
             do {
@@ -135,18 +141,31 @@ public class taikhoanDAO {
         }
         return list;
     }
-    public ArrayList<HoaDon> getDSHD(){
-        ArrayList<HoaDon> list1 = new ArrayList<>();
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery("SELECT * FROM HoaDon",null);
-        if (cursor.getCount() != 0){
-            cursor.moveToFirst();
-            do {
-                //int maHD, int maTk, int tongTien, String ngay, int trangThai, String phuongthuc
-                list1.add(new HoaDon(cursor.getInt(0),cursor.getInt(1),cursor.getInt(2), cursor.getString(3),
-                        cursor.getInt(4), cursor.getString(5)));
-            }while (cursor.moveToNext());
+    public boolean themThanhVien(String tenDN, String mk,String sdt,String hoten,String diachi){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenDN",tenDN);
+        values.put("matKhau",mk);
+        values.put("sdt",sdt);
+        values.put("hoTen",hoten);
+        values.put("diaChi",diachi);
+        long check = database.insert("TaiKhoan",null,values);
+        if (check ==-1){
+            return false;
         }
-        return list1;
+        return true;
     }
+    public boolean updateKhachHang(TaiKhoan tk){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("tenDN",tk.getTenDN());
+        values.put("matKhau",tk.getMatKhau());
+        values.put("hoTen",tk.getHoten());
+        values.put("sdt",tk.getSdt());
+        values.put("diaChi",tk.getDiachi());
+        long row = database.update("TaiKhoan",values,"maTk=?",
+                new String[]{String.valueOf(tk.getMaTk())});
+        return row>0;
+    }
+
 }

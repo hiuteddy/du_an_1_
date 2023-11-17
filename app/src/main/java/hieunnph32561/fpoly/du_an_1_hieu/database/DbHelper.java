@@ -85,8 +85,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, tenDT, giaTien, moTa) VALUES (3, 3, 'Điện thoại 3', 3000, 'Mô tả 3')");
 
         // Thêm dữ liệu mẫu vào bảng TaiKhoan
-        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,sdt,hoTen,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A', 123456789,'hanoi')");
-        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,sdt,hoTen,diaChi) VALUES (2, 'user', '123','Nguyễn Văn B', 987654321,'hcm')");
+        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A',123456789 ,'hanoi')");
+        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (2, 'user', '123','Nguyễn Văn B', 987654321,'hcm')");
 
 
         // Thêm dữ liệu mẫu vào bảng HoaDon

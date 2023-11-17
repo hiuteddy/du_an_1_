@@ -9,7 +9,7 @@ public class TaiKhoan {
     private String diachi;
 
 
-    public TaiKhoan(int maTk, String tenDN, String matKhau, String hoten, String sdt, String diachi) {
+    public TaiKhoan(int maTk, String tenDN, String matKhau,String hoten ,String sdt , String diachi) {
         this.maTk = maTk;
         this.tenDN = tenDN;
         this.matKhau = matKhau;
