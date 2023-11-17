@@ -44,7 +44,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
     }
 
     static class ViewHolder {
-        TextView textViewMaHoaDon,textViewNgayHoaDon,textViewTenDT,textViewSoLuong,textViewDonGia,textViewTongTien,textViewNguoiNhan,textViewDiaChiNhan;
+        TextView textViewMaHoaDon,textViewNgayHoaDon,textViewTenDT,textViewSoLuong,textViewDonGia,textViewTongTien,textViewNguoiNhan,textViewDiaChiNhan,textViewSdt;
         Button btnxn;
         Button btnHuy;
     }
@@ -64,6 +64,9 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
             viewHolder.textViewTongTien = convertView.findViewById(R.id.hdTongTien);
             viewHolder.textViewNguoiNhan = convertView.findViewById(R.id.tvNguoiNhan);
             viewHolder.textViewDiaChiNhan = convertView.findViewById(R.id.tvDiachiNhan);
+            viewHolder.textViewSdt = convertView.findViewById(R.id.tvsdt);
+
+
             viewHolder.btnxn = convertView.findViewById(R.id.btnXN);
             viewHolder.btnHuy = convertView.findViewById(R.id.btnHuyDon);
             convertView.setTag(viewHolder);
@@ -84,6 +87,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
         viewHolder.textViewTongTien.setText("Tổng Tiền: " + chiTietItem.getGiatien() + " VNĐ");
         viewHolder.textViewNguoiNhan.setText("Người Nhận: " + taiKhoan.getHoten());
         viewHolder.textViewDiaChiNhan.setText("Địa Chỉ: " + taiKhoan.getDiachi());
+        viewHolder.textViewSdt.setText("Số điện thoại: " + taiKhoan.getSdt());
 
         trangThai = hoaDon.getTrangThai();
         if (trangThai == 0) {

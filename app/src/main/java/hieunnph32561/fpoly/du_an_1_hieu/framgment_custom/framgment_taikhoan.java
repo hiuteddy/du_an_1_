@@ -29,7 +29,6 @@ public class framgment_taikhoan extends Fragment {
     private TextView tvHoTenNguoiDung;
     private TextView tvPhoneNguoiDung;
     private TextView tvDiacChiNguoiDung, tvmk, tvuser;
-    private Button btnDoiMatKhau;
     private ImageView btnChinhSuaThongTin;
 
     private taikhoanDAO dao;
@@ -53,7 +52,6 @@ public class framgment_taikhoan extends Fragment {
         tvuser = v.findViewById(R.id.tvusernd);
 
 
-        // btnDoiMatKhau = v.findViewById(R.id.btndoimk);
         btnChinhSuaThongTin = v.findViewById(R.id.imvcs);
 
         dao = new taikhoanDAO(context);
@@ -66,15 +64,7 @@ public class framgment_taikhoan extends Fragment {
         tvmk.setText(user.getMatKhau());
         tvuser.setText(user.getTenDN());
 
-        // Xử lý sự kiện khi nhấn nút Đổi mật khẩu
-//        btnDoiMatKhau.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // Mở activity ThayDoiMatKhauActivity
-//            }
-//        });
 
-        // Xử lý sự kiện khi nhấn nút Chỉnh sửa thông tin
         btnChinhSuaThongTin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -89,18 +79,18 @@ public class framgment_taikhoan extends Fragment {
         LayoutInflater inflater = LayoutInflater.from(context);
         View dialogView = inflater.inflate(R.layout.dialog_update, null);
 
+        TextView etUser = dialogView.findViewById(R.id.edtuser);
         EditText etHoTen = dialogView.findViewById(R.id.ethoten);
         EditText etPhone = dialogView.findViewById(R.id.etPhone);
         EditText etDiaChi = dialogView.findViewById(R.id.etDiaChi);
-        EditText edmk = dialogView.findViewById(R.id.etMk);
-
+        EditText edmk = dialogView.findViewById(R.id.edtMk);
 
         // Đặt thông tin hiện tại lên dialog
+        etUser.setText("User name: "+ user.getTenDN());
         etHoTen.setText(user.getHoten());
         etPhone.setText(user.getSdt());
         etDiaChi.setText(user.getDiachi());
         edmk.setText(user.getMatKhau());
-
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setView(dialogView)
@@ -112,15 +102,12 @@ public class framgment_taikhoan extends Fragment {
                         String diaChi = etDiaChi.getText().toString().trim();
                         String mk = edmk.getText().toString().trim();
 
-
                         // Kiểm tra dữ liệu nhập vào
                         if (hoTen.isEmpty() || phone.isEmpty() || diaChi.isEmpty()) {
                             Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin", Toast.LENGTH_SHORT).show();
                             return;
                         }
 
-                        // Cập nhật thông tin tài khoản
-                        //   user.getTenDN();
                         user.setHoten(hoTen);
                         user.setSdt(phone);
                         user.setDiachi(diaChi);

@@ -88,7 +88,6 @@
                     android:background="#E44310"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@+id/textView7"
-
                     app:layout_constraintStart_toStartOf="@+id/textView7"
                     app:layout_constraintTop_toBottomOf="@+id/textView7">
 
@@ -135,28 +134,39 @@
                 app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
 
             <ImageView
-                android:id="@+id/imgxuong"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/baseline_arrow_upward_24"
+                android:id="@+id/imglist"
+                android:layout_width="56dp"
+                android:layout_height="26dp"
+                android:src="@drawable/baseline_filter_list_24"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.917"
+                app:layout_constraintHorizontal_bias="0.935"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/txtclickds"
                 app:layout_constraintVertical_bias="0.0" />
+
+
+            <ImageView
+                android:id="@+id/imgxuong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="176dp"
+                android:src="@drawable/baseline_arrow_upward_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.94"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imglen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="176dp"
                 android:src="@drawable/baseline_arrow_downward_24"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.829"
+                app:layout_constraintHorizontal_bias="0.857"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/txtclickds"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/rcdt"
@@ -181,41 +191,3 @@
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <!--<LinearLayout-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent">-->
-
-    <!--<TextView-->
-    <!--    android:id="@+id/textView"-->
-    <!--    android:layout_width="wrap_content"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:layout_marginLeft="50dp"-->
-    <!--    android:layout_marginTop="20dp"-->
-    <!--    android:text="Danh Sách Iphone "-->
-    <!--    android:textColor="#000000"-->
-    <!--    android:textSize="19sp"-->
-    <!--    android:textStyle="bold" />-->
-
-    <!--<ImageView-->
-    <!--    android:id="@+id/imageView3"-->
-    <!--    android:layout_marginTop="20dp"-->
-    <!--    android:layout_marginLeft="170dp"-->
-    <!--    android:layout_width="wrap_content"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:src="@drawable/baseline_arrow_upward_24" />-->
-
-    <!--<ImageView-->
-    <!--    android:id="@+id/imageView4"-->
-    <!--    android:layout_marginTop="20dp"-->
-    <!--    android:layout_marginLeft="10dp"-->
-    <!--    android:layout_width="wrap_content"-->
-    <!--    android:layout_height="wrap_content"-->
-    <!--    android:src="@drawable/baseline_arrow_downward_24" />-->
-    <!--</LinearLayout>-->
-
-    <!--<androidx.recyclerview.widget.RecyclerView-->
-    <!--android:background="@drawable/bgr_doimk"-->
-    <!--android:layout_marginTop="50dp"-->
-    <!--android:id="@+id/rcdt"-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="match_parent" />-->

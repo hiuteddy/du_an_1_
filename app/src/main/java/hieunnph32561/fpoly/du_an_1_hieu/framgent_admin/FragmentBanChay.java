@@ -13,11 +13,24 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_top10;
+import hieunnph32561.fpoly.du_an_1_hieu.model.Top;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.thongkeDAO;
+
 
 
 public class FragmentBanChay extends Fragment {
+    private List<Top> list=new ArrayList<>();
+    private RecyclerView recyclerView;
+    private adapter_top10 adapterTop10;
+    private thongkeDAO thongkeDAO;
     private SearchView searchView;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -28,7 +41,12 @@ public class FragmentBanChay extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ban_chay, container, false);
-
+        thongkeDAO=new thongkeDAO(getContext());
+        list=thongkeDAO.getTop();
+        recyclerView=view.findViewById(R.id.rcltop10);
+        adapterTop10=new adapter_top10(getContext(), (ArrayList<Top>) list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapterTop10);
         return view;
     }
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {

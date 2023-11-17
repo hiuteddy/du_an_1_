@@ -20,13 +20,11 @@ public class framgment_lich_su_hoa_don extends Fragment {
     RecyclerView rcvdt;
     hoadonDAO chitietDAO;
     adapter_lichsu adapter_lichsu;
-
     ArrayList<HoaDon> list = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.framgment_lich_su, container, false);
         rcvdt = v.findViewById(R.id.rclls);
         loaddata();

@@ -121,19 +121,5 @@ public class hoadonDAO {
         cursor.close();
         return chiTietList;
     }
-    @SuppressLint("Range")
-    public int getDoanhThu(String tuNgay, String denNgay) {
-        String sqlDoanhThu = "SELECT SUM(tongTien) as tongdoanhThu FROM HoaDon WHERE ngay BETWEEN ? AND ?";
-        list = new ArrayList<Integer>();
-        int tongDoanhThu = 0;
-        SQLiteDatabase database = dbHelper.getReadableDatabase();
-        Cursor cursor = database.rawQuery(sqlDoanhThu, new String[]{tuNgay, denNgay});
 
-        if (cursor.moveToFirst()) {
-            tongDoanhThu = cursor.getInt(cursor.getColumnIndex("tongdoanhThu"));
-        }
-        cursor.close();
-
-        return tongDoanhThu;
-    }
 }

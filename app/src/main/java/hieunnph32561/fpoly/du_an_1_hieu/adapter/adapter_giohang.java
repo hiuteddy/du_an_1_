@@ -41,8 +41,7 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
         this.list = list;
         this.dao = new giohangDAO(context);
         daoo = new dienthoaiDAO(context);
-        loaidtDAO=new loaidtDAO(context);
-// Khởi tạo đối tượng dao
+        loaidtDAO = new loaidtDAO(context);
     }
 
     @NonNull
@@ -57,14 +56,12 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
         GioHang gioHang = list.get(position);
 
         dienThoai = daoo.getID(String.valueOf(gioHang.getMadt()));
-         loaiSeries = loaidtDAO.getID(String.valueOf(gioHang.getMadt()));
-
-
+        loaiSeries = loaidtDAO.getID(String.valueOf(gioHang.getMadt()));
 
         holder.tenDt.setText("" + dienThoai.getTenDT());
         holder.soluong.setText("" + gioHang.getSoLuong());
         holder.giaDt.setText("" + gioHang.getGia());
-        holder.tongtien.setText("" + gioHang.getSoLuong() * gioHang.getGia());
+        holder.tongtien.setText("" + gioHang.getSoLuong() * gioHang.getGia() + 20000);
         updateTotalPrice(holder, gioHang);
         holder.soluong.setText(String.valueOf(gioHang.getSoLuong()));
         updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
@@ -129,8 +126,6 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
             }
         });
 
-//        updateTotalPrice(holder```java
-//                , gioHang);
     }
 
     @Override
@@ -163,13 +158,13 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
         mActivity.updateTotalValues();
     }
 
-    public int getTotalQuantity() {
-        int totalQuantity = 0;
-        for (GioHang gioHang : list) {
-            totalQuantity += gioHang.getSoLuong();
-        }
-        return totalQuantity;
-    }
+//    public int getTotalQuantity() {
+//        int totalQuantity = 0;
+//        for (GioHang gioHang : list) {
+//            totalQuantity += gioHang.getSoLuong();
+//        }
+//        return totalQuantity;
+//    }
 
     public double getTotalPrice() {
         double totalPrice = 0.0;
