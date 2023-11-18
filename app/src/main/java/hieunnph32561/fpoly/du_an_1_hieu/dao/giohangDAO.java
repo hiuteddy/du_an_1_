@@ -79,19 +79,5 @@ public class giohangDAO {
         return (ArrayList<GioHang>) getALLGIOHANG(sql); // Gọi getALLSACH với một truy vấn SQL đã được định nghĩa trước
     }
 
-    @SuppressLint("Range")
-    public int getMaGioHangSauXoa() {
-        SQLiteDatabase db = this.dbHelper.getReadableDatabase();
-        String sql = "SELECT MAX(maGh) FROM GioHang";
 
-        Cursor cursor = db.rawQuery(sql, null);
-        int maGioHang = 0; // Giá trị mặc định hoặc xử lý tùy ý khi không có kết quả
-
-        if (cursor.moveToFirst()) {
-            maGioHang = cursor.getInt(0);
-        }
-
-        cursor.close();
-        return maGioHang;
-    }
 }

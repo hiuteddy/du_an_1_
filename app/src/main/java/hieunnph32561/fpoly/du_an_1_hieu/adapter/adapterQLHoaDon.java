@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
@@ -32,6 +33,8 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
     private chitietDAO daoCT;
     taikhoanDAO daoTK;
     int trangThai;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
 
     public adapterQLHoaDon(Context context, List<ChiTiet> chiTietList) {
         super(context, R.layout.item_ql_hoa_don, chiTietList);
@@ -80,7 +83,8 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
         TaiKhoan taiKhoan = daoTK.getIDma(String.valueOf(hoaDon.getMaTk()));
 
         viewHolder.textViewMaHoaDon.setText("Mã Hóa Đơn: " + chiTietItem.getMahd());
-        viewHolder.textViewNgayHoaDon.setText(hoaDon.getNgay());
+        viewHolder.textViewNgayHoaDon.setText(sdf.format(hoaDon.getNgay()));
+       // holder.txtngay.setText("Ngày đặt: " + String.valueOf(sdf.format(hoaDon.getNgay())));
         viewHolder.textViewTenDT.setText(dienThoai.getTenDT());
         viewHolder.textViewSoLuong.setText("Số Lượng: " + chiTietItem.getSoluong());
         viewHolder.textViewDonGia.setText("Đơn Giá: " + dienThoai.getGiaTien() + " VNĐ");
@@ -96,8 +100,10 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
             viewHolder.btnxn.setText("Giao Hàng");
         } else if (trangThai == 2) {
             viewHolder.btnxn.setText("Hoàn Thành");
+            viewHolder.btnHuy.setVisibility(View.GONE);
         } else if (trangThai == 3) {
             viewHolder.btnxn.setVisibility(View.GONE);
+            viewHolder.btnHuy.setVisibility(View.GONE);
         } else if (trangThai == 4) {
             viewHolder.btnxn.setText("Khôi Phục");
             viewHolder.btnHuy.setVisibility(View.GONE);

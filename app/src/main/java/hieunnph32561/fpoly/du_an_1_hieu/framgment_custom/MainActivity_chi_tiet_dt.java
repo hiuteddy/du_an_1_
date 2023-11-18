@@ -19,8 +19,6 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
     private int quantity = 1;
     private double totalPrice = 0.0;
 
-    giohangDAO dao;
-    GioHang gioHang;
 
 
     @Override
@@ -93,7 +91,6 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         btngio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //  int maGh = gioHang.getMaGh();
                 GioHang gioHang = new GioHang(maDt, giaTien, quantity);
                 giohangDAO dao = new giohangDAO(getApplicationContext());
 

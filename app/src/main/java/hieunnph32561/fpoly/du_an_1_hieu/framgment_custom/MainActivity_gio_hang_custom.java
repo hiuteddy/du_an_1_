@@ -46,6 +46,9 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     TaiKhoan taiKhoan;
     RadioGroup radioGroup;
     Double shipperPrice = 0.0;
+    long millis = System.currentTimeMillis();
+    java.sql.Date date = new java.sql.Date(millis);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +95,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 } else if (checkedId == R.id.radioonile) {
                     phuongThucVanChuyen = "Thanh toán online";
                     shipperPrice = 0.0;
+                    txtphiship.setText(""+ 0.0);
                     updateTotalValues();
 
                 }
@@ -142,7 +146,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 hoaDon.setPhuongthuc(phuongThuc);
                 hoaDon.setTongTien((int) adapter_giohang.getTotalPrice());
                 hoaDon.setTrangThai(0);
-                hoaDon.setNgay(String.valueOf(new Date()));
+                hoaDon.setNgay((java.sql.Date.valueOf(String.valueOf(date))));
 
                 long result = hoadonDAO.insert(hoaDon);
 

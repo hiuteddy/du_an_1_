@@ -6,7 +6,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
@@ -16,7 +19,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 
 public class hoadonDAO {
     private DbHelper dbHelper;
-    ArrayList<Integer> list;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
     public hoadonDAO(Context context) {
         dbHelper = new DbHelper(context);
@@ -29,15 +32,22 @@ public class hoadonDAO {
         Cursor cursor = database.rawQuery(sql, selectionArgs);
 
         while (cursor.moveToNext()) {
-            @SuppressLint("Range") HoaDon s = new HoaDon(
-                    cursor.getInt(cursor.getColumnIndex("maHD")),
-                    cursor.getInt(cursor.getColumnIndex("maTk")),
-                    (int) cursor.getDouble(cursor.getColumnIndex("tongTien")),
-                    cursor.getString(cursor.getColumnIndex("ngay")),
-                    cursor.getInt(cursor.getColumnIndex("trangThai")),
-                    cursor.getString(cursor.getColumnIndex("phuongThuc"))
-            );
-            list.add(s);
+            try {
+                @SuppressLint("Range") Date ngay = sdf.parse(cursor.getString(cursor.getColumnIndex("ngay")));
+
+
+                @SuppressLint("Range") HoaDon s = new HoaDon(
+                        cursor.getInt(cursor.getColumnIndex("maHD")),
+                        cursor.getInt(cursor.getColumnIndex("maTk")),
+                        (int) cursor.getDouble(cursor.getColumnIndex("tongTien")),
+                        ngay,
+                        cursor.getInt(cursor.getColumnIndex("trangThai")),
+                        cursor.getString(cursor.getColumnIndex("phuongThuc"))
+                );
+                list.add(s);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
         }
         cursor.close();
         return list;
@@ -48,7 +58,7 @@ public class hoadonDAO {
         ContentValues values = new ContentValues();
         values.put("maTk", s.getMaTk());
         values.put("tongTien", s.getTongTien());
-        values.put("ngay", s.getNgay());
+        values.put("ngay",  sdf.format(s.getNgay()));
         values.put("trangThai", s.getTrangThai());
         values.put("phuongThuc", s.getPhuongthuc());
 
@@ -59,6 +69,7 @@ public class hoadonDAO {
         String sql = "SELECT * FROM HoaDon";
         return getALLSACH(sql);
     }
+
     @SuppressLint("Range")
     public int getMaHoaDonMoiNhat() {
         SQLiteDatabase db = this.dbHelper.getReadableDatabase();
@@ -93,6 +104,7 @@ public class hoadonDAO {
         values.put("trangThai", trangThai);
         return database.update("HoaDon", values, "maHD=?", new String[]{String.valueOf(maHD)});
     }
+
     public List<ChiTiet> getChiTietByMaHoaDon(int maHoaDon) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         List<ChiTiet> chiTietList = new ArrayList<>();
@@ -113,7 +125,7 @@ public class hoadonDAO {
                 @SuppressLint("Range") Double giatien = cursor.getDouble(cursor.getColumnIndex("giaTien"));
 
                 // Thêm đối tượng ChiTiet vào danh sách
-                ChiTiet chiTiet = new ChiTiet(maChiTiet, mahd, madt,soLuong,giatien);
+                ChiTiet chiTiet = new ChiTiet(maChiTiet, mahd, madt, soLuong, giatien);
                 chiTietList.add(chiTiet);
             } while (cursor.moveToNext());
         }

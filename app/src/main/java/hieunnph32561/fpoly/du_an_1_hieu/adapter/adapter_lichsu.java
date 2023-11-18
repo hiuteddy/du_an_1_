@@ -14,6 +14,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
@@ -33,6 +34,8 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     hoadonDAO hoadonDAO;
     dienthoaiDAO dienthoaiDAO;
     taikhoanDAO taikhoanDAO;
+    private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
 
 
     public adapter_lichsu(Context context, ArrayList<HoaDon> list) {
@@ -55,29 +58,29 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     public void onBindViewHolder(@NonNull adapter_lichsu.ViewHodelsanpham holder, int position) {
         HoaDon hoaDon = list.get(position);
 
-//        DienThoai dienThoai=dienthoaiDAO.getID(String.valueOf(chiTiet1.getMadt()));
 
 
         TaiKhoan taiKhoan = taikhoanDAO.getIDma(String.valueOf(hoaDon.getMaTk()));
 
         holder.txtmadon.setText("Mã hóa đơn: " + String.valueOf(hoaDon.getMaHD()));
-        holder.txtngay.setText("Ngày đặt: " + String.valueOf(hoaDon.getNgay()));
+        holder.txtngay.setText("Ngày đặt: " + String.valueOf(sdf.format(hoaDon.getNgay())));
         holder.txtdienthoai.setText("Số điện thoại: " + "" + taiKhoan.getSdt());
         holder.txtmaKH.setText("Tên khách hàng: " + "" + taiKhoan.getHoten());
         holder.txttongTien.setText("Tổng tiền: " + hoaDon.getTongTien());
         holder.txttrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
         if (hoaDon.getTrangThai() == 0) {
-            holder.txttrangThai.setText("Chờ xác nhân");
+            holder.txttrangThai.setText("Trạng thái: Chờ xác nhân");
         } else if (hoaDon.getTrangThai() == 1) {
-            holder.txttrangThai.setText("Đã xác nhân");
+            holder.txttrangThai.setText("Trạng thái: Đã xác nhân");
         } else if (hoaDon.getTrangThai() == 2) {
-            holder.txttrangThai.setText("Đang giao");
+            holder.txttrangThai.setText("Trạng thái: Đang giao");
             holder.btnhuy.setVisibility(View.GONE);
         } else if (hoaDon.getTrangThai() == 3) {
-            holder.txttrangThai.setText("Giao hàng thành công");
+            holder.txttrangThai.setText("Trạng thái: Giao hàng thành công");
             holder.btnhuy.setVisibility(View.GONE);
         } else if (hoaDon.getTrangThai() == 4) {
-            holder.txttrangThai.setText("Đã hủy");
+            holder.txttrangThai.setText("Trạng thái: Đã hủy");
+            holder.btnhuy.setVisibility(View.GONE);
         }
         holder.txtdiaChi.setText("Địa chỉ: " + taiKhoan.getDiachi());
         holder.txtphuongthuc.setText("Phương thức: " + hoaDon.getPhuongthuc());

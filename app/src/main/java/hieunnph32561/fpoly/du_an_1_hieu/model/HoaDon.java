@@ -1,16 +1,17 @@
 package hieunnph32561.fpoly.du_an_1_hieu.model;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class HoaDon implements Serializable {
     private int maHD;
     private int maTk;
     private int tongTien;
-    private String ngay;
+    private Date ngay;
     private int trangThai;
     private String phuongthuc;
 
-    public HoaDon(int maHD, int maTk, int tongTien, String ngay, int trangThai, String phuongthuc) {
+    public HoaDon(int maHD, int maTk, int tongTien, Date ngay, int trangThai, String phuongthuc) {
         this.maHD = maHD;
         this.maTk = maTk;
         this.tongTien = tongTien;
@@ -46,11 +47,11 @@ public class HoaDon implements Serializable {
         this.tongTien = tongTien;
     }
 
-    public String getNgay() {
+    public Date getNgay() {
         return ngay;
     }
 
-    public void setNgay(String ngay) {
+    public void setNgay(Date ngay) {
         this.ngay = ngay;
     }
 
