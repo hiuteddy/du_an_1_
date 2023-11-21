@@ -6,12 +6,12 @@ import java.util.Date;
 public class HoaDon implements Serializable {
     private int maHD;
     private int maTk;
-    private int tongTien;
+    private Double tongTien;
     private Date ngay;
     private int trangThai;
     private String phuongthuc;
 
-    public HoaDon(int maHD, int maTk, int tongTien, Date ngay, int trangThai, String phuongthuc) {
+    public HoaDon(int maHD, int maTk, Double tongTien, Date ngay, int trangThai, String phuongthuc) {
         this.maHD = maHD;
         this.maTk = maTk;
         this.tongTien = tongTien;
@@ -39,11 +39,11 @@ public class HoaDon implements Serializable {
         this.maTk = maTk;
     }
 
-    public int getTongTien() {
+    public Double getTongTien() {
         return tongTien;
     }
 
-    public void setTongTien(int tongTien) {
+    public void setTongTien(Double tongTien) {
         this.tongTien = tongTien;
     }
 

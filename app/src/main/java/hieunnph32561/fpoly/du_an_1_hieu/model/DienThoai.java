@@ -6,13 +6,23 @@ public class DienThoai {
     private String tenDT;
     private double giaTien;
     private String moTa;
+    private int soLuong;
 
-    public DienThoai(int maDT, int maLoaiSeri, String tenDT, double giaTien, String moTa) {
+    public DienThoai(int maDT, int maLoaiSeri, String tenDT, double giaTien, String moTa,int soLuong) {
         this.maDT = maDT;
         this.maLoaiSeri = maLoaiSeri;
         this.tenDT = tenDT;
         this.giaTien = giaTien;
         this.moTa = moTa;
+        this.soLuong=soLuong;
+    }
+
+    public int getSoLuong() {
+        return soLuong;
+    }
+
+    public void setSoLuong(int soLuong) {
+        this.soLuong = soLuong;
     }
 
     public void setMaDT(int maDT) {

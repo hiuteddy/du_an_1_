@@ -1,25 +1,27 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
-import java.util.Date;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_giohang;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.giohangDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
@@ -42,12 +44,16 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     hoadonDAO hoadonDAO;
     chitietDAO chitietDAO;
     taikhoanDAO taikhoanDAO;
+    dienthoaiDAO dienthoaiDAO;
     ArrayList<GioHang> list = new ArrayList<>();
     TaiKhoan taiKhoan;
     RadioGroup radioGroup;
     Double shipperPrice = 0.0;
     long millis = System.currentTimeMillis();
     java.sql.Date date = new java.sql.Date(millis);
+
+    ImageView imggio;
+    Button btnstar;
 
 
     @Override
@@ -65,14 +71,24 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         txtTongGia = findViewById(R.id.totalTxt);
         dathang = findViewById(R.id.txtdathang);
         txtphiship = findViewById(R.id.deliveryTxt);
+        imggio = findViewById(R.id.gio);
+        btnstar = findViewById(R.id.chu);
 
         hoadonDAO = new hoadonDAO(this);
         chitietDAO = new chitietDAO(this);
         taikhoanDAO = new taikhoanDAO(this);
-        //updateTotalValues();
+        dienthoaiDAO = new dienthoaiDAO(this);
 
+        updateTotalValues();
         loaddata();
-
+        if (list.isEmpty()) {
+            imggio.setVisibility(View.VISIBLE);
+            btnstar.setVisibility(View.VISIBLE);
+        }
+        if (!list.isEmpty()) {
+            imggio.setVisibility(View.GONE);
+            btnstar.setVisibility(View.GONE);
+        }
         Toolbar toolbar = findViewById(R.id.toolbarr);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -83,19 +99,25 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 onBackPressed();
             }
         });
+//        btnstar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                onBackPressed();
+//            }
+//        });
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radioshipcode) {
                     phuongThucVanChuyen = "Ship cod";
                     shipperPrice = 20.000;
-                    txtphiship.setText(""+ 20.000);
+                    txtphiship.setText("" + 20.000);
                     updateTotalValues();
 
                 } else if (checkedId == R.id.radioonile) {
                     phuongThucVanChuyen = "Thanh toán online";
                     shipperPrice = 0.0;
-                    txtphiship.setText(""+ 0.0);
+                    txtphiship.setText("" + 0.0);
                     updateTotalValues();
 
                 }
@@ -108,6 +130,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                     Toast.makeText(MainActivity_gio_hang_custom.this, "Giỏ hàng trống bạn không thể đặt hàng", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 if (radioGroup.getCheckedRadioButtonId() == -1) {
                     Toast.makeText(MainActivity_gio_hang_custom.this, "Vui lòng chọn phương thức giao hàng", Toast.LENGTH_SHORT).show();
                     return;
@@ -144,7 +167,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 HoaDon hoaDon = new HoaDon();
                 hoaDon.setMaTk(maKhachHang.getMaTk());
                 hoaDon.setPhuongthuc(phuongThuc);
-                hoaDon.setTongTien((int) adapter_giohang.getTotalPrice());
+                hoaDon.setTongTien((double) adapter_giohang.getTotalPrice());
                 hoaDon.setTrangThai(0);
                 hoaDon.setNgay((java.sql.Date.valueOf(String.valueOf(date))));
 
@@ -160,6 +183,8 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                         if (chiTietResult > 0) {
                             Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                             radioGroup.clearCheck();
+                            int soLuong = chiTietSanPham.getSoluong();
+                            dienthoaiDAO.updateSoLuong(gioHang.getMadt(), soLuong);
                         }
                     }
                     ghDAO.deleteAllGioHang();

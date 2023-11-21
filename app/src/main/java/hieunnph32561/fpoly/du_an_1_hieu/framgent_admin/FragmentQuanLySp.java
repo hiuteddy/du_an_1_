@@ -26,8 +26,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
@@ -37,7 +35,6 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
-import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
 public class FragmentQuanLySp extends Fragment {
@@ -48,7 +45,7 @@ public class FragmentQuanLySp extends Fragment {
 
     private SpinnerTypeAdapter spinnerTypeAdapter;
     loaidtDAO loaidao;
-  adapter_qlsp adapter;
+    adapter_qlsp adapter;
     private List<LoaiSeries> listLS;
 
     ArrayList<DienThoai> list = new ArrayList<>();
@@ -101,7 +98,7 @@ public class FragmentQuanLySp extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-            //    handleSearch(newText);
+                //    handleSearch(newText);
                 return true;
             }
         });
@@ -128,6 +125,7 @@ public class FragmentQuanLySp extends Fragment {
         TextView titledialog = dialog.findViewById(R.id.tilte_dialog_load);
         EditText edtTenSP = dialog.findViewById(R.id.editqlName);
         EditText edtGia = dialog.findViewById(R.id.editqlPrice);
+        EditText edtsl = dialog.findViewById(R.id.editsoluong);
         EditText edtMota = dialog.findViewById(R.id.editqlDescribe);
         Spinner editqlSeries = dialog.findViewById(R.id.editqlSeries);
         AppCompatButton btnSubmit = dialog.findViewById(R.id.btnSumbit);
@@ -142,6 +140,7 @@ public class FragmentQuanLySp extends Fragment {
             String tenSP = edtTenSP.getText().toString().trim();
             String giaStr = edtGia.getText().toString().trim();
             String mota = edtMota.getText().toString().trim();
+            int sl= Integer.parseInt(edtsl.getText().toString().trim());
 
             if (TextUtils.isEmpty(tenSP)) {
                 showToast("Vui lòng nhập tên sản phẩm");
@@ -152,6 +151,7 @@ public class FragmentQuanLySp extends Fragment {
                 newDienThoai.setTenDT(tenSP);
                 newDienThoai.setGiaTien(gia);
                 newDienThoai.setMoTa(mota);
+                newDienThoai.setSoLuong(sl);
 
                 // Gán mã loại seri từ Spinner vào đối tượng điện thoại
                 LoaiSeries selectedType = (LoaiSeries) editqlSeries.getSelectedItem();
@@ -159,7 +159,7 @@ public class FragmentQuanLySp extends Fragment {
 
                 dtDAO.add(newDienThoai);
                 list.add(newDienThoai);
-               // adapter.notifyDataSetChanged();
+                 adapter.notifyDataSetChanged();
 
                 showToast("Đã Thêm Sản phẩm");
                 dialog.dismiss();

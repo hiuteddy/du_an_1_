@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 52;
+    public static final int DB_VERSION = 54;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -26,7 +26,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 " maLoaiSeries INTEGER," +
                 " tenDT TEXT, " +
                 "giaTien DOUBLE, " +
-                "moTa TEXT, FOREIGN KEY (maLoaiSeries) REFERENCES LoaiSeriesDT(maLoaiSeries))";
+                "moTa TEXT," +
+                "soLuong INTEGER, FOREIGN KEY (maLoaiSeries) REFERENCES LoaiSeriesDT(maLoaiSeries))";
 
 
         String createTaiKhoanTable = "CREATE TABLE TaiKhoan " +
@@ -48,7 +49,7 @@ public class DbHelper extends SQLiteOpenHelper {
         String createHoaDonTable = "CREATE TABLE HoaDon " +
                 "(maHD INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "maTk INTEGER, " +
-                "tongTien INTEGER, " +
+                "tongTien DOUBLE, " +
                 "ngay DATE, " +
                 "trangThai INTEGER, " +
                 "phuongThuc TEXT, " +
@@ -80,9 +81,9 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO LoaiSeriesDT (maLoaiSeries, tenLoaiSeries) VALUES (3, 'Series 13')");
 
         // Thêm dữ liệu mẫu vào bảng DienThoai
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, tenDT, giaTien, moTa) VALUES (1, 1, 'Điện thoại 1', 1000, 'Mô tả 1')");
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, tenDT, giaTien, moTa) VALUES (2, 2, 'Điện thoại 2', 2000, 'Mô tả 2')");
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, tenDT, giaTien, moTa) VALUES (3, 3, 'Điện thoại 3', 3000, 'Mô tả 3')");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, tenDT, giaTien, moTa,soLuong) VALUES (1, 1, 'Iphone 15 Pro', 1000, 'Mô tả 1',3)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, tenDT, giaTien, moTa,soLuong) VALUES (2, 2, 'Iphone 15 ', 2000, 'Mô tả 2',4)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, tenDT, giaTien, moTa,soLuong) VALUES (3, 3, 'Iphone 15 Pro Max', 3000, 'Mô tả 3',5)");
 
         // Thêm dữ liệu mẫu vào bảng TaiKhoan
         db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A',123456789 ,'hanoi')");

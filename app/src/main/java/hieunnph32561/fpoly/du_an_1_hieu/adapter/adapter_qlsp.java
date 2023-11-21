@@ -57,6 +57,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         holder.tenDt.setText(dienThoai.getTenDT());
         holder.loaiDt.setText(loaiSeries.getTenLoaiSeri());
         holder.giaDt.setText(String.format("%s VNĐ", dienThoai.getGiaTien()));
+        holder.soluong.setText(""+dienThoai.getSoLuong());
 
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +76,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
     }
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
-        TextView tenDt, giaDt, loaiDt;
+        TextView tenDt, giaDt, loaiDt,soluong;
         ImageView delete;
 
         public ViewHodelsanpham(@NonNull View itemView) {
@@ -84,6 +85,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
             giaDt = itemView.findViewById(R.id.txtqlgia);
             loaiDt = itemView.findViewById(R.id.txtqlloai);
             delete = itemView.findViewById(R.id.btnxoa);
+            soluong=itemView.findViewById(R.id.txtqlsl);
         }
     }
 
@@ -97,12 +99,14 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         EditText edtTenSP = dialog.findViewById(R.id.editqlName);
         EditText edtGia = dialog.findViewById(R.id.editqlPrice);
         EditText edtMota = dialog.findViewById(R.id.editqlDescribe);
+        EditText edtsl=dialog.findViewById(R.id.editsoluong);
         Spinner editqlSeries = dialog.findViewById(R.id.editqlSeries);
         AppCompatButton btnSubmit = dialog.findViewById(R.id.btnSumbit);
 
         edtTenSP.setText(dienThoai.getTenDT());
         edtGia.setText(String.valueOf(dienThoai.getGiaTien()));
         edtMota.setText(dienThoai.getMoTa());
+        edtsl.setText(""+dienThoai.getSoLuong());
         titledialog.setText("Product Repair");
         btnSubmit.setText("Repair");
 
@@ -127,6 +131,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
             String tenSP = edtTenSP.getText().toString().trim();
             String giaStr = edtGia.getText().toString().trim();
             String mota = edtMota.getText().toString().trim();
+            int sl= Integer.parseInt(edtsl.getText().toString().trim());
 
             if (TextUtils.isEmpty(tenSP)) {
                 showToast("Vui lòng nhập tên sản phẩm");
@@ -136,6 +141,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
                 dienThoai.setTenDT(tenSP);
                 dienThoai.setGiaTien(gia);
                 dienThoai.setMoTa(mota);
+                dienThoai.setSoLuong(sl);
 
                 // Gán mã loại seri từ Spinner vào đối tượng điện thoại
                 LoaiSeries selectedType = (LoaiSeries) editqlSeries.getSelectedItem();

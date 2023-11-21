@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
-import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 public class dienthoaiDAO {
     private DbHelper dbHelper;
@@ -27,6 +26,8 @@ public class dienthoaiDAO {
         values.put("tenDT", dienThoai.getTenDT());
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
+        values.put("soLuong", dienThoai.getSoLuong());
+
 
         return database.insert("DienThoai", null, values);
     }
@@ -38,6 +39,8 @@ public class dienthoaiDAO {
         values.put("tenDT", dienThoai.getTenDT());
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
+        values.put("soLuong", dienThoai.getSoLuong());
+
 
         return database.update("DienThoai", values, "maDT = ?", new String[]{String.valueOf(maSPOld)});
     }
@@ -53,7 +56,8 @@ public class dienthoaiDAO {
                     cursor.getInt(cursor.getColumnIndex("maLoaiSeries")),
                     cursor.getString(cursor.getColumnIndex("tenDT")),
                     cursor.getDouble(cursor.getColumnIndex("giaTien")),
-                    cursor.getString(cursor.getColumnIndex("moTa"))
+                    cursor.getString(cursor.getColumnIndex("moTa")),
+                    cursor.getInt(cursor.getColumnIndex("soLuong"))
             );
             list.add(s);
         }
@@ -79,5 +83,15 @@ public class dienthoaiDAO {
     public ArrayList<DienThoai> getDienThoaiByLoai(int maLoaiSeries) {
         String sql = "SELECT * FROM DienThoai WHERE maLoaiSeries = ?";
         return getALLSACH(sql, String.valueOf(maLoaiSeries));
+    }
+    public void updateSoLuong(int maDT, int soLuongGiam) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        // Truy vấn và cập nhật số lượng trong bảng DienThoai
+        String sqlUpdate = "UPDATE DienThoai SET soLuong = soLuong - ? WHERE maDT = ?";
+        Object[] args = {soLuongGiam, maDT};
+        db.execSQL(sqlUpdate, args);
+
+        db.close();
     }
 }

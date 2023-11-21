@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_chi_tiet_dt;
-import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_gio_hang_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
@@ -69,6 +67,7 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
                     Intent intent = new Intent(context, MainActivity_chi_tiet_dt.class);
                     loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
                     String maLoaiSeries = String.valueOf(loaiSeries.getTenLoaiSeri());
+                    intent.putExtra("soLuong", dienThoai.getSoLuong());
                     intent.putExtra("maDT", dienThoai.getMaDT());
                     intent.putExtra("tenDT", dienThoai.getTenDT());
                     intent.putExtra("maLoaiSeries", maLoaiSeries);

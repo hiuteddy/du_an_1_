@@ -39,12 +39,40 @@
                 android:id="@+id/textView12"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="My Cart"
                 android:layout_marginTop="10dp"
+                android:text="My Cart"
                 android:textAlignment="center"
                 android:textColor="#ff3d00"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/gio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="200dp"
+                    android:visibility="gone"
+                    android:src="@drawable/cart" />
+
+                <Button
+                    android:id="@+id/chu"
+                    android:layout_gravity="center"
+                    android:layout_margin="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Start shopping"
+                    android:textColor="#000000"
+                    android:textSize="20sp"
+                    android:visibility="gone"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/cartView"
@@ -54,171 +82,175 @@
 
             </androidx.recyclerview.widget.RecyclerView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#5E23C8" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Shipping Method: "
-                android:textColor="#ff3d00"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <RadioGroup
-                android:id="@+id/rdovc"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1">
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
 
-                <RadioButton
-                    android:id="@+id/radioshipcode"
+                <TextView
+                    android:id="@+id/textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="Shipping Method: "
+                    android:textColor="#ff3d00"
+                    android:textSize="23sp"
+                    android:textStyle="bold" />
+
+                <RadioGroup
+                    android:id="@+id/rdovc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Ship Cod"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:layout_weight="1">
+
+                    <RadioButton
+                        android:id="@+id/radioshipcode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Ship Cod"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <RadioButton
+                        android:id="@+id/radioonile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Thanh Toán Onile"
+                        android:textColor="@color/black"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </RadioGroup>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="#7232E4" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="4dp"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="4dp"
+                    android:text="Address:"
+                    android:textColor="#ff3d00"
+                    android:textSize="23sp"
                     android:textStyle="bold" />
 
-                <RadioButton
-                    android:id="@+id/radioonile"
+                <!--                <ImageView-->
+                <!--                    android:id="@+id/imageView3"-->
+                <!--                    android:layout_width="34dp"-->
+                <!--                    android:layout_height="34dp"-->
+                <!--                    android:layout_marginEnd="24dp"-->
+                <!--                    android:layout_gravity="center"-->
+                <!--                    android:src="@drawable/baseline_edit_24" />-->
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Thanh Toán Onile"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </RadioGroup>
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal">
 
-        </LinearLayout>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Phone: "
+                        android:textColor="#373b54"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-        <!--            <LinearLayout-->
-        <!--                android:layout_width="match_parent"-->
-        <!--                android:layout_height="100dp"-->
-        <!--                android:layout_marginStart="16dp"-->
-        <!--                android:layout_marginTop="16dp"-->
-        <!--                android:layout_marginEnd="16dp"-->
-        <!--                android:layout_marginBottom="4dp"-->
-        <!--                android:orientation="vertical">-->
+                    <TextView
+                        android:id="@+id/txthoten"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#373b54"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
-        <!--           // </LinearLayout>-->
+                </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="4dp"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="Address:"
-                android:layout_marginBottom="4dp"
-                android:textColor="#ff3d00"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <!--                <ImageView-->
-            <!--                    android:id="@+id/imageView3"-->
-            <!--                    android:layout_width="34dp"-->
-            <!--                    android:layout_height="34dp"-->
-            <!--                    android:layout_marginEnd="24dp"-->
-            <!--                    android:layout_gravity="center"-->
-            <!--                    android:src="@drawable/baseline_edit_24" />-->
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_weight="1"
-                    android:text="Phone: "
-                    android:textColor="#373b54"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:layout_marginBottom="4dp"
+                    android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/txthoten"
-                    android:layout_width="wrap_content"
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Địa Chỉ: "
+                        android:textColor="#373b54"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtdiachi"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#373b54"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:textColor="#373b54"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1"
+                        android:text="Họ tên: "
+                        android:textColor="#373b54"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/txtsdt"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textColor="#373b54"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+            <View
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Địa Chỉ: "
-                    android:textColor="#373b54"
-                    android:layout_weight="1"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtdiachi"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:textColor="#373b54"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:text="Họ tên: "
-                    android:layout_weight="1"
-                    android:textColor="#373b54"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtsdt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:textColor="#373b54"
-                    android:textSize="18sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-        </LinearLayout>
-
+                android:layout_height="2dp"
+                android:layout_marginTop="20dp"
+                android:background="#5E1CD3" />
 
             <LinearLayout
                 android:layout_width="match_parent"

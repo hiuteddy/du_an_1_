@@ -39,7 +39,7 @@ public class hoadonDAO {
                 @SuppressLint("Range") HoaDon s = new HoaDon(
                         cursor.getInt(cursor.getColumnIndex("maHD")),
                         cursor.getInt(cursor.getColumnIndex("maTk")),
-                        (int) cursor.getDouble(cursor.getColumnIndex("tongTien")),
+                        (double) cursor.getDouble(cursor.getColumnIndex("tongTien")),
                         ngay,
                         cursor.getInt(cursor.getColumnIndex("trangThai")),
                         cursor.getString(cursor.getColumnIndex("phuongThuc"))

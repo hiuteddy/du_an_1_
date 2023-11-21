@@ -102,12 +102,17 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
             @Override
             public void onClick(View v) {
                 int soLuong = gioHang.getSoLuong();
-                soLuong++;
-                gioHang.setSoLuong(soLuong);
-                holder.soluong.setText(String.valueOf(soLuong));
-                updateTotalPrice(holder, gioHang);
-                notifyDataSetChanged();
-                updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
+                dienThoai = daoo.getID(String.valueOf(gioHang.getMadt()));
+                if (soLuong < dienThoai.getSoLuong()) {
+                    soLuong++;
+                    gioHang.setSoLuong(soLuong);
+                    holder.soluong.setText(String.valueOf(soLuong));
+                    updateTotalPrice(holder, gioHang);
+                    notifyDataSetChanged();
+                    updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
+                } else {
+                    Toast.makeText(context, "Số lượng sản phẩm vượt quá số lượng có sẵn trong kho", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

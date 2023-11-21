@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -86,7 +85,7 @@ public class framgment_taikhoan extends Fragment {
         EditText edmk = dialogView.findViewById(R.id.edtMk);
 
         // Đặt thông tin hiện tại lên dialog
-        etUser.setText("User name: "+ user.getTenDN());
+        etUser.setText("User: "+ user.getTenDN());
         etHoTen.setText(user.getHoten());
         etPhone.setText(user.getSdt());
         etDiaChi.setText(user.getDiachi());
