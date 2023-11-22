@@ -27,10 +27,12 @@ import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentKhachHang;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentQuanLySp;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentSeries;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentTrangChu;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.lienHe;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_gio_hang_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ds_dt;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_lich_su_hoa_don;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_taikhoan;
+import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.hotrokhachhang;
 
 public class Trangchu extends AppCompatActivity {
     DrawerLayout drawerLayout;
@@ -101,6 +103,9 @@ public class Trangchu extends AppCompatActivity {
                 }
                 if (item.getItemId() == R.id.sub_giohang) {
                     startActivity(new Intent(Trangchu.this, MainActivity_gio_hang_custom.class));
+                }if (item.getItemId() == R.id.nav_lienhe) {
+                    startActivity(new Intent(Trangchu.this, lienHe.class));
+
                 }
 
 
@@ -150,6 +155,9 @@ public class Trangchu extends AppCompatActivity {
                     fragment = new FragmentBanChay();
                     toolbar.setTitle("Top 10");
 
+                }
+                if (item.getItemId() == R.id.sub_hotro) {
+                    startActivity(new Intent(Trangchu.this, hotrokhachhang.class));
                 }
                 if (item.getItemId() == R.id.sub_DoanhThu) {
                     fragment = new FragmentDoanhThu();
