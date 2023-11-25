@@ -17,7 +17,6 @@ import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.Trangchu;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.MapsActivity;
-import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.lienHe;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class hotrokhachhang extends AppCompatActivity {
@@ -42,8 +41,8 @@ public class hotrokhachhang extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        SharedPreferences preferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-        String data = preferences.getString("key", "");
+        SharedPreferences preferences = getSharedPreferences("PHONE", MODE_PRIVATE);
+        String data = preferences.getString("call", "");
         txtcall.setText(data);
         txtcall.setOnClickListener(new View.OnClickListener() {
             @Override

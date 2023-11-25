@@ -71,9 +71,7 @@ public class taikhoanDAO {
         while (cursor.moveToNext()) {
             result += cursor.getString(0) + "\n";
         }
-
         cursor.close();
-
         return result;
     }
 

@@ -35,7 +35,7 @@
                     />
                 <item
                     android:id="@+id/nav_lienhe"
-                    android:icon="@drawable/baseline_shopping_cart_checkout_24"
+                    android:icon="@drawable/hotro"
                     android:title="Hỗ trợ khách hàng"
                     />
             </menu>
@@ -82,8 +82,8 @@
                    />
                 <item
                     android:id="@+id/sub_hotro"
-                    android:icon="@drawable/baseline_shopping_cart_24"
-                    android:title="Hỗ trợ khách hàng"
+                    android:icon="@drawable/hotro"
+                    android:title="Chăm sóc khách hàng"
                     />
             </menu>
         </item>

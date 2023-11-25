@@ -7,6 +7,8 @@
         android:required="false" />
 
     <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <application
         android:allowBackup="true"
@@ -32,13 +34,13 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="YOUR_API_KEY" />
+            android:value="AIzaSyDRCS740HVSJZ-WL37hiOLTbP8GIextfXc" />
 
 
         <activity
             android:name=".framgent_admin.MapsActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_maps"/>
         <activity
             android:name=".framgment_custom.hotrokhachhang"
             android:exported="false" />
