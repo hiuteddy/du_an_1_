@@ -1,8 +1,7 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
-
 import android.app.Dialog;
-import android.app.SearchManager;
-import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -12,13 +11,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,11 +38,13 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 
 public class FragmentQuanLySp extends Fragment {
+    private static final int PICK_IMAGE_REQUEST = 1;
     private SearchView searchView;
     RecyclerView rcvqldt;
     FloatingActionButton btnAddSp;
     dienthoaiDAO dtDAO;
-
+    Uri imageUri;
+    Dialog dialog;
     private SpinnerTypeAdapter spinnerTypeAdapter;
     loaidtDAO loaidao;
     adapter_qlsp adapter;
@@ -61,12 +63,7 @@ public class FragmentQuanLySp extends Fragment {
         View view = inflater.inflate(R.layout.fragment_quan_ly_sp, container, false);
         rcvqldt = view.findViewById(R.id.rcvqldt);
         btnAddSp = view.findViewById(R.id.floatBtnAdd);
-        btnAddSp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showAddDialog();
-            }
-        });
+        btnAddSp.setOnClickListener(v -> showAddDialog());
         LoadData();
         return view;
     }
@@ -84,85 +81,53 @@ public class FragmentQuanLySp extends Fragment {
 
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_sapxep, menu);
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        MenuItem searchItem = menu.findItem(R.id.search);
-        searchView = (SearchView) searchItem.getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getActivity().getComponentName()));
-        searchView.setMaxWidth(Integer.MAX_VALUE);
-
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                //    handleSearch(newText);
-                return true;
-            }
-        });
-        super.onCreateOptionsMenu(menu, inflater);
+        // Rest of your onCreateOptionsMenu code
     }
-//    private void handleSearch(String query) {
-//        List<DienThoai> listSearch = new ArrayList<>();
-//        for (DienThoai dt : list) {
-//            if (dt.getTenDT().toLowerCase().contains(query.toLowerCase())) {
-//                listSearch.add(dt);
-//            }
-//        }
-//        adapter = new adapter_qlsp( getActivity(), (ArrayList<DienThoai>) listSearch);
-//        rcvqldt.setAdapter(adapter);
-//
-//    }
 
     private void showAddDialog() {
-        Dialog dialog = new Dialog(getContext());
+        dialog = new Dialog(getContext());
         dialog.setContentView(R.layout.dialog_load_dt);
         dialog.setCancelable(false);
         dtDAO = new dienthoaiDAO(getContext());
 
         TextView titledialog = dialog.findViewById(R.id.tilte_dialog_load);
         EditText edtTenSP = dialog.findViewById(R.id.editqlName);
+        Spinner spnLoaiSP = dialog.findViewById(R.id.editqlSeries);
+        ImageView imgHinhSP = dialog.findViewById(R.id.anhDT);
         EditText edtGia = dialog.findViewById(R.id.editqlPrice);
-        EditText edtsl = dialog.findViewById(R.id.editsoluong);
-        EditText edtMota = dialog.findViewById(R.id.editqlDescribe);
-        Spinner editqlSeries = dialog.findViewById(R.id.editqlSeries);
-        AppCompatButton btnSubmit = dialog.findViewById(R.id.btnSumbit);
+        EditText edtMoTa = dialog.findViewById(R.id.editqlDescribe);
+        EditText edtSoLuong = dialog.findViewById(R.id.editsoluong);
+        AppCompatButton btnAdd = dialog.findViewById(R.id.btnSumbit);
 
-        titledialog.setText("Product Add");
-        btnSubmit.setText("Add");
+        titledialog.setText("Add Product");
 
         spinnerTypeAdapter = new SpinnerTypeAdapter(getContext(), listLS);
-        editqlSeries.setAdapter(spinnerTypeAdapter);
+        spnLoaiSP.setAdapter(spinnerTypeAdapter);
 
-        btnSubmit.setOnClickListener(v -> {
+        imgHinhSP.setOnClickListener(v -> openImageChooser());
+
+        btnAdd.setText("Add");
+        btnAdd.setOnClickListener(v -> {
             String tenSP = edtTenSP.getText().toString().trim();
-            String giaStr = edtGia.getText().toString().trim();
-            String mota = edtMota.getText().toString().trim();
-            int sl= Integer.parseInt(edtsl.getText().toString().trim());
-
-            if (TextUtils.isEmpty(tenSP)) {
-                showToast("Vui lòng nhập tên sản phẩm");
+            LoaiSeries loaiSP = (LoaiSeries) spnLoaiSP.getSelectedItem();
+            DienThoai dienThoai = new DienThoai();
+            if (TextUtils.isEmpty(tenSP) || loaiSP == null || imageUri == null || TextUtils.isEmpty(edtGia.getText().toString())) {
+                showToast("Vui lòng nhập đầy đủ thông tin");
             } else {
-                Double gia = Double.parseDouble(giaStr);
-
-                DienThoai newDienThoai = new DienThoai();
-                newDienThoai.setTenDT(tenSP);
-                newDienThoai.setGiaTien(gia);
-                newDienThoai.setMoTa(mota);
-                newDienThoai.setSoLuong(sl);
-
-                // Gán mã loại seri từ Spinner vào đối tượng điện thoại
-                LoaiSeries selectedType = (LoaiSeries) editqlSeries.getSelectedItem();
-                newDienThoai.setMaLoaiSeri(selectedType.getMaLoaiSeri());
-
-                dtDAO.add(newDienThoai);
-                list.add(newDienThoai);
-                 adapter.notifyDataSetChanged();
-
-                showToast("Đã Thêm Sản phẩm");
-                dialog.dismiss();
+                try {
+                    dienThoai.setMaLoaiSeri(loaiSP.getMaLoaiSeri());
+                    dienThoai.setGiaTien(Double.parseDouble(edtGia.getText().toString().trim()));
+                    dienThoai.setMoTa(edtMoTa.getText().toString().trim());
+                    dienThoai.setAnhDT(imageUri.toString());
+                    dienThoai.setTenDT(tenSP);
+                    dienThoai.setSoLuong(Integer.parseInt(edtSoLuong.getText().toString().trim()));
+                    dtDAO.add(dienThoai);
+                    showToast("Thêm sản phẩm thành công");
+                    dialog.dismiss();
+                    LoadData();
+                } catch (NumberFormatException e) {
+                    showToast("Lỗi định dạng số, vui lòng kiểm tra lại giá và số lượng");
+                }
             }
         });
 
@@ -171,44 +136,22 @@ public class FragmentQuanLySp extends Fragment {
         dialog.show();
     }
 
+    private void openImageChooser() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(Intent.createChooser(intent, "Chọn ảnh"), PICK_IMAGE_REQUEST);
+    }
+
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
-    //giảm dần
-//    private void sortBooksByNameDescending() {
-//        Collections.sort(list, new Comparator<DienThoai>() {
-//            @Override
-//            public int compare(DienThoai dienThoai, DienThoai t1) {
-//                return Double.compare(t1.getGiaTien(), dienThoai.getGiaTien());
-//            }
-//        });
-//
-//        adapter.notifyDataSetChanged();
-//    }
-//    //tăng dần
-//    private void sortBooksByNameAscending() {
-//        Collections.sort(list, new Comparator<DienThoai>() {
-//            @Override
-//            public int compare(DienThoai dienThoai, DienThoai t1) {
-//                return Double.compare(dienThoai.getGiaTien(), t1.getGiaTien());
-//            }
-//        });
-//
-//        adapter.notifyDataSetChanged();
-//    }
-//    //sap xep theo gia tien
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == R.id.asc){
-//            sortBooksByNameAscending();
-//            return true;
-//        }else if(id == R.id.desc){
-//            sortBooksByNameDescending();
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 
-
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == getActivity().RESULT_OK && data != null && data.getData() != null) {
+            imageUri = data.getData();
+        }
+    }
 }
