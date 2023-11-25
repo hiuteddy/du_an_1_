@@ -52,11 +52,9 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
         // Lấy thông tin loại series từ bảng LoaiSeries dựa trên khóa ngoại maLoaiSeries
         loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
 
-     //   holder.maDt.setText("" + dienThoai.getMaDT());
         holder.tenDt.setText("" + dienThoai.getTenDT());
         holder.loaiDt.setText(loaiSeries.getTenLoaiSeri()); // Lấy tên loại series từ đối tượng LoaiSeries
         holder.giaDt.setText("" + dienThoai.getGiaTien());
-       // holder.chiTiet.setText("" + dienThoai.getMoTa());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,14 +65,13 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
                     Intent intent = new Intent(context, MainActivity_chi_tiet_dt.class);
                     loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
                     String maLoaiSeries = String.valueOf(loaiSeries.getTenLoaiSeri());
-                    intent.putExtra("soLuong", dienThoai.getSoLuong());
+//                    intent.putExtra("soLuong", dienThoai.getSoLuong());
                     intent.putExtra("maDT", dienThoai.getMaDT());
                     intent.putExtra("tenDT", dienThoai.getTenDT());
                     intent.putExtra("maLoaiSeries", maLoaiSeries);
                     intent.putExtra("giaTien", dienThoai.getGiaTien());
                     intent.putExtra("moTa", dienThoai.getMoTa());
 
-                    // Đính kèm các dữ liệu khác cần thiết
 
                     context.startActivity(intent);
                 }

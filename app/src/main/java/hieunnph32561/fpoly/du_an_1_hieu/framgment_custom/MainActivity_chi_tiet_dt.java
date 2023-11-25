@@ -11,19 +11,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.giohangDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 
 
 public class MainActivity_chi_tiet_dt extends AppCompatActivity {
-    private int quantity = 0;
+    private int quantity = 1;
     private double totalPrice = 0.0;
 
+    DienThoai dienThoai;
+    dienthoaiDAO dao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chi_tiet_dt);
+        dao=new dienthoaiDAO(getApplicationContext());
 
 
         TextView btngio = findViewById(R.id.addgiohang);
@@ -33,26 +38,27 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        int soLuong = intent.getIntExtra("soLuong", 0);
         int maDt = intent.getIntExtra("maDT", 0);
         String ten = intent.getStringExtra("tenDT");
         String maLoaiSeries = intent.getStringExtra("maLoaiSeries");
         Double giaTien = (double) intent.getDoubleExtra("giaTien", 0);
         String moTa = intent.getStringExtra("moTa");
 
-// Hiển thị dữ liệu lên các TextView tương ứng
         TextView tvName = findViewById(R.id.tvTendt);
         TextView tvloaidt = findViewById(R.id.tvLoaisr);
         TextView tvgia = findViewById(R.id.tvGiadt);
         TextView tvmota = findViewById(R.id.tvChitiet);
         TextView tvsoluong = findViewById(R.id.tvsoluong);
 
+        dienThoai = dao.getID(String.valueOf(maDt));
+
 
         tvName.setText("Title: " + ten);
         tvloaidt.setText("Series: " + maLoaiSeries);
         tvgia.setText("$: " + giaTien + " đ");
         tvmota.setText("Chi tiết: " + moTa);
-        tvsoluong.setText("" + soLuong);
+        tvsoluong.setText("" + dienThoai.getSoLuong());
+
 
         Toolbar toolbar = findViewById(R.id.toolbarr);
         setSupportActionBar(toolbar);
@@ -69,7 +75,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         btnPlus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quantity < soLuong) {
+                if (quantity < dienThoai.getSoLuong()) {
                     quantity++; // Tăng số lượng lên 1 đơn vị
                     totalPrice += giaTien; // Tăng tổng giá tiền theo giá của mỗi sản phẩm
                     tvQuantity.setText(String.valueOf(quantity));
@@ -82,7 +88,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         btnMinus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (quantity > 0) {
+                if (quantity > 1) {
                     quantity--; // Giảm số lượng đi 1 đơn vị
                     totalPrice -= giaTien; // Giảm tổng giá tiền theo giá của mỗi sản phẩm
                     tvQuantity.setText(String.valueOf(quantity)); // Hiển thị số lượng mới
@@ -94,12 +100,9 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
             public void onClick(View v) {
                 GioHang gioHang = new GioHang(maDt, giaTien, quantity);
                 giohangDAO dao = new giohangDAO(getApplicationContext());
-                if (soLuong == 0) {
-                    Toast.makeText(MainActivity_chi_tiet_dt.this, "Không the đặt hàng số lượng trong kho không đủ", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                if (quantity == 0) {
-                    Toast.makeText(MainActivity_chi_tiet_dt.this, "Vui tăng số sản phẩm", Toast.LENGTH_SHORT).show();
+
+                if (quantity > dienThoai.getSoLuong()) {
+                   Toast.makeText(MainActivity_chi_tiet_dt.this, "Không the đặt hàng số lượng trong kho không đủ", Toast.LENGTH_SHORT).show();
                     return;
                 }
 

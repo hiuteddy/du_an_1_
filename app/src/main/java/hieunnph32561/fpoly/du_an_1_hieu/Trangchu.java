@@ -1,14 +1,5 @@
 package hieunnph32561.fpoly.du_an_1_hieu;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.view.GravityCompat;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.Fragment;
-
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -17,6 +8,15 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.navigation.NavigationView;
 
@@ -66,18 +66,20 @@ public class Trangchu extends AppCompatActivity {
         String user = intent.getStringExtra("user");
         textView.setText("" + user + "!");
 
-        if (user != null && user.equalsIgnoreCase("user")) {
-            navigationView.getMenu().findItem(R.id.sub_muahang).setVisible(true);
-            navigationView.getMenu().findItem(R.id.sub_canhan).setVisible(true);
-            Fragment defaultFragment = new framgment_ds_dt(); // Thay thế QlPhieuMuonFragment bằng Fragment mặc định bạn muốn hiển thị
-            getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.framelayout, defaultFragment)
-                    .commit();
-        } else {
+        if (user != null && user.equalsIgnoreCase("admin")) {
             navigationView.getMenu().findItem(R.id.nav_quanly).setVisible(true);
             navigationView.getMenu().findItem(R.id.nav_thongke).setVisible(true);
             navigationView.getMenu().findItem(R.id.sub_canhan).setVisible(true);
             Fragment defaultFragment = new FragmentTrangChu(); // Thay thế QlPhieuMuonFragment bằng Fragment mặc định bạn muốn hiển thị
+            getSupportFragmentManager().beginTransaction()
+                    .replace(R.id.framelayout, defaultFragment)
+                    .commit();
+
+        }
+        else  {
+            navigationView.getMenu().findItem(R.id.sub_muahang).setVisible(true);
+            navigationView.getMenu().findItem(R.id.sub_canhan).setVisible(true);
+            Fragment defaultFragment = new framgment_ds_dt(); // Thay thế QlPhieuMuonFragment bằng Fragment mặc định bạn muốn hiển thị
             getSupportFragmentManager().beginTransaction()
                     .replace(R.id.framelayout, defaultFragment)
                     .commit();

@@ -141,7 +141,7 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
         TextView txtmaKH, txttongTien, txtngay, txttrangThai, txtdiaChi, txtmadon, txtdienthoai,txtphuongthuc;
         Button btnchitiet;
-        Button btnchitiett, btnhuy;
+        Button  btnhuy;
 
 
         public ViewHodelsanpham(@NonNull View itemView) {

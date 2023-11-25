@@ -14,7 +14,6 @@ import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
-import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 
 public class hoadonDAO {
@@ -68,6 +67,11 @@ public class hoadonDAO {
     public ArrayList<HoaDon> getAll() {
         String sql = "SELECT * FROM HoaDon";
         return getALLSACH(sql);
+    }
+    public ArrayList<HoaDon> getAllByMaKhachHang(int maKhachHang) {
+        String sql = "SELECT * FROM HoaDon WHERE maTk = ?";
+        String[] selectionArgs = { String.valueOf(maKhachHang) };
+        return getALLSACH(sql, selectionArgs);
     }
 
     @SuppressLint("Range")

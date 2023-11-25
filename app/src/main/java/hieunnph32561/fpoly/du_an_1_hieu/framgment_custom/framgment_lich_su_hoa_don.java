@@ -1,5 +1,7 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +16,14 @@ import java.util.ArrayList;
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_lichsu;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class framgment_lich_su_hoa_don extends Fragment {
     RecyclerView rcvdt;
     hoadonDAO chitietDAO;
+    taikhoanDAO taikhoanDAO;
     adapter_lichsu adapter_lichsu;
     ArrayList<HoaDon> list = new ArrayList<>();
 
@@ -27,14 +32,20 @@ public class framgment_lich_su_hoa_don extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.framgment_lich_su, container, false);
         rcvdt = v.findViewById(R.id.rclls);
+        taikhoanDAO = new taikhoanDAO(getContext());
         loaddata();
         return v;
 
+
     }
 
+
     public void loaddata() {
+        SharedPreferences preferences = getActivity().getSharedPreferences("USER_DATA", Context.MODE_PRIVATE);
+        String username = preferences.getString("username", "");
+        TaiKhoan taiKhoan = taikhoanDAO.getID(username);
         chitietDAO = new hoadonDAO(getContext());
-        list = chitietDAO.getAll();
+        list = chitietDAO.getAllByMaKhachHang(taiKhoan.getMaTk());
         adapter_lichsu = new adapter_lichsu(getContext(), list) {
         };
         rcvdt.setAdapter(adapter_lichsu);
