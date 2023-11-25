@@ -21,7 +21,6 @@ public class dienthoaiDAO {
     public long add(DienThoai dienThoai) {
         ContentValues values = new ContentValues();
         database = dbHelper.getReadableDatabase();
-        values.put("maDT", dienThoai.getMaDT());
         values.put("maLoaiSeries", dienThoai.getMaLoaiSeri());
         values.put("imageUrl",dienThoai.getAnhDT());
         values.put("tenDT", dienThoai.getTenDT());
@@ -56,7 +55,7 @@ public class dienthoaiDAO {
             @SuppressLint("Range") DienThoai s = new DienThoai(
                     cursor.getInt(cursor.getColumnIndex("maDT")),
                     cursor.getInt(cursor.getColumnIndex("maLoaiSeries")),
-                    cursor.getString(cursor.getColumnIndex("imageUrl")),
+                    cursor.getBlob(cursor.getColumnIndex("imageUrl")),
                     cursor.getString(cursor.getColumnIndex("tenDT")),
                     cursor.getDouble(cursor.getColumnIndex("giaTien")),
                     cursor.getString(cursor.getColumnIndex("moTa")),

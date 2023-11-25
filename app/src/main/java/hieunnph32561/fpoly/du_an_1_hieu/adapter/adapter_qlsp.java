@@ -1,12 +1,11 @@
 package hieunnph32561.fpoly.du_an_1_hieu.adapter;
 
-import static android.app.Activity.RESULT_OK;
-
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +18,10 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.squareup.picasso.Picasso;
-
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,8 +32,9 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsanpham> {
-    private static final int PICK_IMAGE_REQUEST = 1;
-    private OnImageSelectedListener onImageSelectedListener;
+    private Fragment fragment;
+    public static ImageView anhDT;
+    public static int REQUEST_CODE_ADD = 111;
     private Context context;
     private ArrayList<DienThoai> list;
     DienThoai dienThoai;
@@ -43,9 +43,10 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
     private List<LoaiSeries> listLS;
     private SpinnerTypeAdapter spinnerTypeAdapter;
 
-    public adapter_qlsp(Context context, ArrayList<DienThoai> list) {
+    public adapter_qlsp(Context context, ArrayList<DienThoai> list,Fragment fragment) {
         this.context = context;
         this.list = list;
+        this.fragment = fragment;
         dao = new dienthoaiDAO(context);
         daoo = new loaidtDAO(context);
         listLS = daoo.getAll();
@@ -68,16 +69,16 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         holder.loaiDt.setText(loaiSeries.getTenLoaiSeri());
         holder.giaDt.setText(String.format("%s VNĐ", dienThoai.getGiaTien()));
         holder.soluong.setText(""+dienThoai.getSoLuong());
-        if (dienThoai.getAnhDT() != null && !dienThoai.getAnhDT().isEmpty()) {
-            Picasso.get().load(dienThoai.getAnhDT())
-                    .error(R.drawable.baseline_phone_iphone_24)
-                    .into(holder.imgqldt);
-        } else {
-            Picasso.get().load(R.drawable.baseline_phone_iphone_24)
-                    .error(R.drawable.baseline_phone_iphone_24)
-                    .into(holder.imgqldt);
-        }
 
+        Bitmap bitmap;
+        byte[] hinhanhDT = dienThoai.getAnhDT();
+        if (hinhanhDT != null && hinhanhDT.length > 0) {
+            bitmap = BitmapFactory.decodeByteArray(hinhanhDT, 0, hinhanhDT.length);
+            holder.imgqldt.setImageBitmap(bitmap);
+        } else {
+            bitmap = null;
+            holder.imgqldt.setImageResource(R.drawable.baseline_phone_iphone_24);
+        }
         holder.delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -86,7 +87,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         });
 
         // Xử lý sự kiện khi item RecyclerView được click
-        holder.itemView.setOnClickListener(v -> showEditDialog(position));
+        holder.itemView.setOnClickListener(v -> showEditDialog(position, bitmap));
     }
 
     @Override
@@ -109,7 +110,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         }
     }
 
-    private void showEditDialog(int index) {
+    private void showEditDialog(int index, Bitmap bitmap) {
         Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.dialog_load_dt);
         dialog.setCancelable(false);
@@ -126,39 +127,25 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         Spinner editqlSeries = dialog.findViewById(R.id.editqlSeries);
         AppCompatButton btnSubmit = dialog.findViewById(R.id.btnSumbit);
 
-        ImageView anhDT = dialog.findViewById(R.id.anhDT);
+        anhDT= dialog.findViewById(R.id.anhDT);
+        if (bitmap!=null) {
+            anhDT.setImageBitmap(bitmap);
+        }else {
+            anhDT.setImageResource(R.drawable.baseline_phone_iphone_24);
+        }
 
         edtTenSP.setText(dienThoai.getTenDT());
         edtGia.setText(String.valueOf(dienThoai.getGiaTien()));
         edtMota.setText(dienThoai.getMoTa());
         edtsl.setText(String.valueOf(dienThoai.getSoLuong()));
-        if (dienThoai.getAnhDT() != null && !dienThoai.getAnhDT().isEmpty()) {
-            Picasso.get().load(dienThoai.getAnhDT()).into(anhDT);
-        } else {
-            Picasso.get().load(R.drawable.baseline_phone_iphone_24)
-                    .error(R.drawable.baseline_phone_iphone_24)
-                    .into(anhDT);
-        }
+
 
         spinnerTypeAdapter = new SpinnerTypeAdapter(context, listLS);
         editqlSeries.setAdapter(spinnerTypeAdapter);
         editqlSeries.setSelection(getSpinnerPosition(dienThoai.getMaLoaiSeri()));
 
         anhDT.setOnClickListener(v -> {
-            Intent intent = new Intent();
-            intent.setType("image/*");
-            intent.setAction(Intent.ACTION_GET_CONTENT);
-            ((Activity) context).startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE_REQUEST);
-        });
-
-        onImageSelectedListener = imageUri -> {
-            Picasso.get().load(imageUri).into(anhDT);
-            dienThoai.setAnhDT(imageUri.toString());
-        };
-
-        setOnImageSelectedListener(imageUri -> {
-            Picasso.get().load(imageUri).into(anhDT);
-            dienThoai.setAnhDT(imageUri.toString());
+            openImageChooser();
         });
 
         btnSubmit.setText("Repair");
@@ -167,6 +154,13 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
             String gia = edtGia.getText().toString().trim();
             String mota = edtMota.getText().toString().trim();
             String soluong = edtsl.getText().toString().trim();
+
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) anhDT.getDrawable();
+            Bitmap bitmapEdit = bitmapDrawable.getBitmap();
+            ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
+            bitmapEdit.compress(Bitmap.CompressFormat.PNG, 100,byteArray);
+            byte [] bytesAnh = byteArray.toByteArray();
+
             int selectedSeriesPosition = editqlSeries.getSelectedItemPosition();
 
             if (TextUtils.isEmpty(tenSP) || TextUtils.isEmpty(gia) || TextUtils.isEmpty(mota) || TextUtils.isEmpty(soluong)) {
@@ -177,6 +171,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
                 dienThoai.setMoTa(mota);
                 dienThoai.setSoLuong(Integer.parseInt(soluong));
                 dienThoai.setMaLoaiSeri(listLS.get(selectedSeriesPosition).getMaLoaiSeri());
+                dienThoai.setAnhDT(bytesAnh);
 
                 dao.update(dienThoai, dienThoai.getMaDT());
                 list.set(index, dienThoai);
@@ -199,21 +194,11 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         }
         return 0;
     }
+    private void openImageChooser() {
+        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
+        intent.setType("image/*");
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+        fragment.startActivityForResult(Intent.createChooser(intent, "Chọn ảnh"), REQUEST_CODE_ADD);
 
-    public void onActivityResult(int requestCode, int resultCode, Intent data, ImageView anhDT) {
-        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri filePath = data.getData();
-            onImageSelectedListener.onImageSelected(filePath);
-            dienThoai.setAnhDT(String.valueOf(filePath));
-            Picasso.get().load(filePath).into(anhDT);
-        }
-    }
-
-    public void setOnImageSelectedListener(OnImageSelectedListener listener) {
-        this.onImageSelectedListener = listener;
-    }
-
-    public interface OnImageSelectedListener {
-        void onImageSelected(Uri imageUri);
     }
 }

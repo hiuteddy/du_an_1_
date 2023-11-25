@@ -1,17 +1,17 @@
 package hieunnph32561.fpoly.du_an_1_hieu.model;
 
-import android.net.Uri;
+import android.graphics.Bitmap;
 
 public class DienThoai {
     private int maDT;
     private int maLoaiSeri;
-    private String anhDT;
+    private byte[] anhDT;
     private String tenDT;
     private double giaTien;
     private String moTa;
     private int soLuong;
 
-    public DienThoai(int maDT, int maLoaiSeri,String anhDT, String tenDT, double giaTien, String moTa,int soLuong) {
+    public DienThoai(int maDT, int maLoaiSeri,byte[] anhDT, String tenDT, double giaTien, String moTa,int soLuong) {
         this.maDT = maDT;
         this.maLoaiSeri = maLoaiSeri;
         this.anhDT = anhDT;
@@ -21,11 +21,11 @@ public class DienThoai {
         this.soLuong=soLuong;
     }
 
-    public String getAnhDT() {
+    public byte[] getAnhDT() {
         return anhDT;
     }
 
-    public void setAnhDT(String anhDT) {
+    public void setAnhDT(byte[] anhDT) {
         this.anhDT = anhDT;
     }
 
