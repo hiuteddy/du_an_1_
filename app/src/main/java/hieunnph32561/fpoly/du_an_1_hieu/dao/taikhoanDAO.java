@@ -64,6 +64,25 @@ public class taikhoanDAO {
             return new TaiKhoan();
         }
     }
+    public String getSDT() {
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+        String result = "";
+        Cursor cursor = database.rawQuery("SELECT sdt FROM TaiKhoan where maTk = 1", null);
+        while (cursor.moveToNext()) {
+            result += cursor.getString(0) + "\n";
+        }
+        cursor.close();
+        return result;
+    }
+
+//    public void updateSdt(String newData, int id) {
+//        ContentValues values = new ContentValues();
+//        values.put("sdt", newData);
+//
+//        SQLiteDatabase db = dbHelper.getWritableDatabase();
+//        db.update("TaiKhoan", values, "maTk=?", new String[]{String.valueOf(id)});
+//        db.close();
+//    }
 
     public TaiKhoan getIDma(String id) {
         String sql = "select * from TaiKhoan where maTk=?";
