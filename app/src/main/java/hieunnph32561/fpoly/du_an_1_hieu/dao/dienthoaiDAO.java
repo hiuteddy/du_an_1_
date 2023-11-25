@@ -23,6 +23,7 @@ public class dienthoaiDAO {
         database = dbHelper.getReadableDatabase();
         values.put("maDT", dienThoai.getMaDT());
         values.put("maLoaiSeries", dienThoai.getMaLoaiSeri());
+        values.put("imageUrl",dienThoai.getAnhDT());
         values.put("tenDT", dienThoai.getTenDT());
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
@@ -36,11 +37,11 @@ public class dienthoaiDAO {
         ContentValues values = new ContentValues();
         values.put("maDT", dienThoai.getMaDT());
         values.put("maLoaiSeries", dienThoai.getMaLoaiSeri());
+        values.put("imageUrl",dienThoai.getAnhDT());
         values.put("tenDT", dienThoai.getTenDT());
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
         values.put("soLuong", dienThoai.getSoLuong());
-
 
         return database.update("DienThoai", values, "maDT = ?", new String[]{String.valueOf(maSPOld)});
     }
@@ -49,11 +50,13 @@ public class dienthoaiDAO {
         ArrayList<DienThoai> list = new ArrayList<>();
         database = dbHelper.getReadableDatabase();
         Cursor cursor = database.rawQuery(sql, selectionArgs);
+        //maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong
 
         while (cursor.moveToNext()) {
             @SuppressLint("Range") DienThoai s = new DienThoai(
                     cursor.getInt(cursor.getColumnIndex("maDT")),
                     cursor.getInt(cursor.getColumnIndex("maLoaiSeries")),
+                    cursor.getString(cursor.getColumnIndex("imageUrl")),
                     cursor.getString(cursor.getColumnIndex("tenDT")),
                     cursor.getDouble(cursor.getColumnIndex("giaTien")),
                     cursor.getString(cursor.getColumnIndex("moTa")),
