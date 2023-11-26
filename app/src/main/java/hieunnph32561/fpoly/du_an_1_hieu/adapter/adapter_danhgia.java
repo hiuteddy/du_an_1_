@@ -41,8 +41,6 @@ public class adapter_danhgia extends RecyclerView.Adapter<adapter_danhgia.ViewHo
         holder.tvten.setText("" + danhGia.getMaTk());
         holder.tvsp.setText("" + danhGia.getMaDt());
         holder.tvngay.setText("Ngày đặt: " + String.valueOf(sdf.format(danhGia.getThoigian())));
-
-        // holder.tvngay.setText((CharSequence) danhGia.getThoigian());
         holder.tvdiem.setRating(Float.parseFloat("" + danhGia.getDiem()));
         holder.tvnhanxet.setText(danhGia.getNhanxet());
 

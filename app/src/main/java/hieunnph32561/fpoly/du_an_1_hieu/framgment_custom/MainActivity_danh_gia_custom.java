@@ -14,9 +14,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import java.util.Date;
-
 import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.Trangchu;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.danhgiaDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DanhGia;
@@ -31,7 +30,8 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
     private Button buttonSubmit;
     danhgiaDAO danhgiaDAO;
     taikhoanDAO taikhoanDAO;
-
+    long millis = System.currentTimeMillis();
+    java.sql.Date date = new java.sql.Date(millis);
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +75,14 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
                 danhGia.setMaTk(maKhachHang.getMaTk());
                 danhGia.setDiem((int) rating);
                 danhGia.setNhanxet(comment);
-                danhGia.setThoigian(new Date());
+                danhGia.setThoigian((java.sql.Date.valueOf(String.valueOf(date))));
 
                 long insertedId = danhgiaDAO.insert(danhGia);
 
                 if (insertedId != -1) {
                     Toast.makeText(MainActivity_danh_gia_custom.this, "Thêm đánh giá thành công", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(MainActivity_danh_gia_custom.this, Trangchu.class));
+
                 } else {
                     Toast.makeText(MainActivity_danh_gia_custom.this, "Thêm đánh giá thất bại", Toast.LENGTH_SHORT).show();
                 }

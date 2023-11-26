@@ -78,7 +78,7 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MainActivity_danh_gia_custom.class);
-                intent.putExtra("productId", chiTiet.getMact()); // Truyền mã sản phẩm
+                intent.putExtra("productId", chiTiet.getMadt()); // Truyền mã sản phẩm
                 context.startActivity(intent);
             }
         });

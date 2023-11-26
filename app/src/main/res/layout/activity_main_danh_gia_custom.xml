@@ -74,13 +74,13 @@
         android:inputType="textMultiLine"
         android:maxLines="3" />
 
-    <!-- Thời gian đánh giá -->
-    <TextView
-        android:id="@+id/textDateTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:text="Thời gian: 2023-11-24" />
+<!--    &lt;!&ndash; Thời gian đánh giá &ndash;&gt;-->
+<!--    <TextView-->
+<!--        android:id="@+id/textDateTime"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:padding="8dp"-->
+<!--        android:text="Thời gian: 2023-11-24" />-->
 
     <!-- Nút Gửi đánh giá -->
     <Button
