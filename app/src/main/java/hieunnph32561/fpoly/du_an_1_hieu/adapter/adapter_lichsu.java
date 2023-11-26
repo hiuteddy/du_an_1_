@@ -90,7 +90,6 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             @Override
             public void onClick(View v) {
                 Toast.makeText(context, "Bạn đã chọn hóa đơn: " + hoaDon.getMaHD(), Toast.LENGTH_SHORT).show();
-//                // Chuyển sang Activity ProductDetailActivity
                 Intent intent = new Intent(context, MainActivity_chi_tiet_ls.class);
                 intent.putExtra("productId", hoaDon.getMaHD()); // Truyền mã sản phẩm
                 context.startActivity(intent);
@@ -99,14 +98,12 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
         holder.btnhuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Lấy đối tượng khóa học tương ứng
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Xác nhận hủy");
                 builder.setMessage("Bạn có chắc chắn muốn hủy sản phẩm này?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Xóa khóa học khỏi cơ sở dữ liệu
                         if (hoadonDAO.update(hoaDon.getMaHD(), 4) > 0) {
                             Toast.makeText(context, "Hủy thành công", Toast.LENGTH_SHORT).show();
                             list.clear();
@@ -120,11 +117,9 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        // Hủy thao tác xóa
                         dialog.dismiss();
                     }
                 });
-                // Hiển thị hộp thoại xác nhận xóa
                 AlertDialog dialog = builder.create();
                 dialog.show();
 
@@ -154,7 +149,6 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             txttongTien = itemView.findViewById(R.id.tongTien);
             txtdienthoai = itemView.findViewById(R.id.txtdienthoai);
             txtphuongthuc=itemView.findViewById(R.id.txtphuongthuc);
-
             btnchitiet = itemView.findViewById(R.id.btnchitiett);
             btnhuy = itemView.findViewById(R.id.btnxoa);
 

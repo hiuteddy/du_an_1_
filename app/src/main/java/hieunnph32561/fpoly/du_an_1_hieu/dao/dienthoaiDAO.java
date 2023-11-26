@@ -69,7 +69,7 @@ public class dienthoaiDAO {
 
     public ArrayList<DienThoai> getAll() {
         String sql = "SELECT * FROM DienThoai";
-        return (ArrayList<DienThoai>) getALLSACH(sql); // Gọi getALLSACH với một truy vấn SQL đã được định nghĩa trước
+        return (ArrayList<DienThoai>) getALLSACH(sql);
     }
     public DienThoai getID(String id) {
         String sql = "select * from DienThoai where maDT=?";
@@ -78,7 +78,6 @@ public class dienthoaiDAO {
         if (!list.isEmpty()) {
             return list.get(0);
         } else {
-            // Trả về một giá trị LoaiSach mặc định hoặc tạo một đối tượng mới tùy ý
             return new DienThoai();
         }
     }
@@ -95,5 +94,22 @@ public class dienthoaiDAO {
         db.execSQL(sqlUpdate, args);
 
         db.close();
+    }
+    @SuppressLint("Range")
+    public byte[] getAnhByMaDT(int maDT) {
+        byte[] anh = null;
+        SQLiteDatabase database = dbHelper.getReadableDatabase();
+
+        String sql = "SELECT imageUrl FROM DienThoai WHERE maDT = ?";
+        String[] selectionArgs = {String.valueOf(maDT)};
+
+        Cursor cursor = database.rawQuery(sql, selectionArgs);
+
+        if (cursor.moveToFirst()) {
+            anh = cursor.getBlob(cursor.getColumnIndex("imageUrl"));
+        }
+
+        cursor.close();
+        return anh;
     }
 }

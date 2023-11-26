@@ -3,6 +3,8 @@ package hieunnph32561.fpoly.du_an_1_hieu.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,10 +64,51 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
         holder.soluong.setText("" + gioHang.getSoLuong());
         holder.giaDt.setText("" + gioHang.getGia());
         holder.tongtien.setText("" + gioHang.getSoLuong() * gioHang.getGia() + 20000);
-        updateTotalPrice(holder, gioHang);
         holder.soluong.setText(String.valueOf(gioHang.getSoLuong()));
-        updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
 
+        //update giá từng sản phẩm
+        updateTotalPrice(holder, gioHang);
+        //update giá tổng đơn hàng
+        updateTotalValues();
+
+        byte[] anhData = daoo.getAnhByMaDT(dienThoai.getMaDT());
+        if (anhData != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(anhData, 0, anhData.length);
+            holder.anh.setImageBitmap(bitmap);
+        } else {
+            holder.anh.setImageResource(R.drawable.iphone15);
+        }
+        holder.imgcong.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int soLuong = gioHang.getSoLuong();
+                dienThoai = daoo.getID(String.valueOf(gioHang.getMadt()));
+                if (soLuong < dienThoai.getSoLuong()) {
+                    soLuong++;
+                    gioHang.setSoLuong(soLuong);
+                    holder.soluong.setText(String.valueOf(soLuong));
+                    updateTotalPrice(holder, gioHang);
+                    notifyDataSetChanged();
+                    updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
+                } else {
+                    Toast.makeText(context, "Số lượng sản phẩm vượt quá số lượng có sẵn trong kho", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        holder.imgtru.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int soLuong = gioHang.getSoLuong();
+                if (soLuong > 1) {
+                    soLuong--;
+                    gioHang.setSoLuong(soLuong);
+                    holder.soluong.setText(String.valueOf(soLuong));
+                    updateTotalPrice(holder, gioHang);
+                    notifyDataSetChanged(); // Cập nhật lại giao diện sau khi thay đổi số lượng
+                    updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
+                }
+            }
+        });
         holder.txtdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,7 +122,7 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
                             Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                             list.clear();
                             list.addAll(dao.getAll());
-                            notifyDataSetChanged(); // Thông báo cập nhật dữ liệu
+                            notifyDataSetChanged();
                             updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
                         } else {
                             Toast.makeText(context, "Xóa thất bại", Toast.LENGTH_SHORT).show();
@@ -98,38 +141,6 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
             }
         });
 
-        holder.imgcong.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int soLuong = gioHang.getSoLuong();
-                dienThoai = daoo.getID(String.valueOf(gioHang.getMadt()));
-                if (soLuong < dienThoai.getSoLuong()) {
-                    soLuong++;
-                    gioHang.setSoLuong(soLuong);
-                    holder.soluong.setText(String.valueOf(soLuong));
-                    updateTotalPrice(holder, gioHang);
-                    notifyDataSetChanged();
-                    updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
-                } else {
-                    Toast.makeText(context, "Số lượng sản phẩm vượt quá số lượng có sẵn trong kho", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
-
-        holder.imgtru.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                int soLuong = gioHang.getSoLuong();
-                if (soLuong > 1) {
-                    soLuong--;
-                    gioHang.setSoLuong(soLuong);
-                    holder.soluong.setText(String.valueOf(soLuong));
-                    updateTotalPrice(holder, gioHang);
-                    notifyDataSetChanged(); // Cập nhật lại giao diện sau khi thay đổi số lượng
-                    updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
-                }
-            }
-        });
 
     }
 
@@ -140,7 +151,7 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
         TextView tenDt, giaDt, soluong, tongtien;
-        ImageView txtdelete, imgtru, imgcong;
+        ImageView txtdelete, imgtru, imgcong, anh;
 
         public ViewHodelsanpham(@NonNull View itemView) {
             super(itemView);
@@ -151,6 +162,7 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
             txtdelete = itemView.findViewById(R.id.imgdelete);
             imgtru = itemView.findViewById(R.id.minusCartBtn);
             imgcong = itemView.findViewById(R.id.plusCartBtn);
+            anh = itemView.findViewById(R.id.picCart);
         }
     }
 
@@ -162,14 +174,6 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
     private void updateTotalValues() {
         mActivity.updateTotalValues();
     }
-
-//    public int getTotalQuantity() {
-//        int totalQuantity = 0;
-//        for (GioHang gioHang : list) {
-//            totalQuantity += gioHang.getSoLuong();
-//        }
-//        return totalQuantity;
-//    }
 
     public double getTotalPrice() {
         double totalPrice = 0.0;

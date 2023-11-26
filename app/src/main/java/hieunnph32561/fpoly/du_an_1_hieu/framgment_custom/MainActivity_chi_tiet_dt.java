@@ -1,6 +1,8 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -9,10 +11,17 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_danhgia;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.danhgiaDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.giohangDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DanhGia;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 
@@ -23,13 +32,20 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
 
     DienThoai dienThoai;
     dienthoaiDAO dao;
+    RecyclerView rcldg;
+    danhgiaDAO danhgiaDAO;
+    adapter_danhgia adapter_dg;
+    ArrayList<DanhGia> list = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_chi_tiet_dt);
-        dao=new dienthoaiDAO(getApplicationContext());
 
+        rcldg = findViewById(R.id.rcldanhgia);
+        dao = new dienthoaiDAO(getApplicationContext());
+        danhgiaDAO = new danhgiaDAO(this);
+        loaddata();
 
         TextView btngio = findViewById(R.id.addgiohang);
         TextView tvQuantity = findViewById(R.id.tvQuantity);
@@ -38,6 +54,16 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
 
 
         Intent intent = getIntent();
+
+        byte[] hinhanhDT = getIntent().getByteArrayExtra("bitmapImage");
+        if (hinhanhDT != null && hinhanhDT.length > 0) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(hinhanhDT, 0, hinhanhDT.length);
+            ImageView anh = findViewById(R.id.imageView);
+            anh.setImageBitmap(bitmap);
+        } else {
+            ImageView anh = findViewById(R.id.imageView);
+            anh.setImageResource(R.drawable.baseline_phone_iphone_24);
+        }
         int maDt = intent.getIntExtra("maDT", 0);
         String ten = intent.getStringExtra("tenDT");
         String maLoaiSeries = intent.getStringExtra("maLoaiSeries");
@@ -49,7 +75,6 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         TextView tvgia = findViewById(R.id.tvGiadt);
         TextView tvmota = findViewById(R.id.tvChitiet);
         TextView tvsoluong = findViewById(R.id.tvsoluong);
-
         dienThoai = dao.getID(String.valueOf(maDt));
 
 
@@ -102,7 +127,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
                 giohangDAO dao = new giohangDAO(getApplicationContext());
 
                 if (quantity > dienThoai.getSoLuong()) {
-                   Toast.makeText(MainActivity_chi_tiet_dt.this, "Không the đặt hàng số lượng trong kho không đủ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity_chi_tiet_dt.this, "Không the đặt hàng số lượng trong kho không đủ", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -110,6 +135,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
                     Toast.makeText(MainActivity_chi_tiet_dt.this, "Tên đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
                 } else {
                     if (dao.insert(gioHang) > 0) {
+                        startActivity(new Intent(MainActivity_chi_tiet_dt.this, MainActivity_gio_hang_custom.class));
                         Toast.makeText(MainActivity_chi_tiet_dt.this, "Thêm thành công vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity_chi_tiet_dt.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
@@ -120,5 +146,15 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         });
     }
 
+    public void loaddata() {
+        Intent intent = getIntent();
+        int maDt = intent.getIntExtra("maDT", 0);
+        danhgiaDAO = new danhgiaDAO(getApplicationContext());
+        list = danhgiaDAO.getBymatk(maDt);
+        adapter_dg = new adapter_danhgia(getApplicationContext(), list);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        rcldg.setLayoutManager(layoutManager);
+        rcldg.setAdapter(adapter_dg);
+    }
 
 }

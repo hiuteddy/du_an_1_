@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
-import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 
 public class giohangDAO {
@@ -54,7 +53,7 @@ public class giohangDAO {
     public long delete(int mgh) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         long check = database.delete("GioHang", "maDT=?", new String[]{String.valueOf(mgh)});
-        return check; // Trả về số hàng bị xóa
+        return check;
     }
 
     public boolean checkExistence(int tenDT) {
@@ -76,7 +75,7 @@ public class giohangDAO {
 
     public ArrayList<GioHang> getAll() {
         String sql = "SELECT * FROM GioHang";
-        return (ArrayList<GioHang>) getALLGIOHANG(sql); // Gọi getALLSACH với một truy vấn SQL đã được định nghĩa trước
+        return (ArrayList<GioHang>) getALLGIOHANG(sql);
     }
 
 

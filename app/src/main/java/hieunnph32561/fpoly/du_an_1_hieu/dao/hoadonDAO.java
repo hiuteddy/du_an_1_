@@ -80,8 +80,7 @@ public class hoadonDAO {
         String sql = "SELECT MAX(maHd) FROM HoaDon";
 
         Cursor cursor = db.rawQuery(sql, null);
-        int maGioHang = 0; // Giá trị mặc định hoặc xử lý tùy ý khi không có kết quả
-
+        int maGioHang = 0;
         if (cursor.moveToFirst()) {
             maGioHang = cursor.getInt(0);
         }
@@ -97,7 +96,6 @@ public class hoadonDAO {
         if (!list.isEmpty()) {
             return list.get(0);
         } else {
-            // Trả về một giá trị LoaiSach mặc định hoặc tạo một đối tượng mới tùy ý
             return new HoaDon();
         }
     }
@@ -121,7 +119,6 @@ public class hoadonDAO {
 
         if (cursor.moveToFirst()) {
             do {
-                // Tạo đối tượng ChiTiet từ dữ liệu trong Cursor
                 @SuppressLint("Range") int maChiTiet = cursor.getInt(cursor.getColumnIndex("maCTDH"));
                 @SuppressLint("Range") int mahd = cursor.getInt(cursor.getColumnIndex("maHD"));
                 @SuppressLint("Range") int madt = cursor.getInt(cursor.getColumnIndex("maDT"));

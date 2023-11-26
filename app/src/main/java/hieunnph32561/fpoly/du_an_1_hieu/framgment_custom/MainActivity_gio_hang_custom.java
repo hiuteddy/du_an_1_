@@ -3,6 +3,7 @@ package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.Trangchu;
 import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_giohang;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
@@ -96,6 +98,12 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
             }
         });
 
+        btnstar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity_gio_hang_custom.this, Trangchu.class));
+            }
+        });
 
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -137,8 +145,6 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         txthoten.setText("" + taiKhoan.getHoten());
         txtsdt.setText("" + taiKhoan.getSdt());
         txtdiachi.setText("" + taiKhoan.getDiachi());
-
-
     }
 
     public void showKhachHangInputDialog() {
@@ -172,6 +178,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                         ChiTiet chiTietSanPham = new ChiTiet(0, maHoaDon, gioHang.getMadt(), gioHang.getSoLuong(), gioHang.getGia());
                         long chiTietResult = chitietDAO.insert(chiTietSanPham);
                         if (chiTietResult > 0) {
+                            startActivity(new Intent(MainActivity_gio_hang_custom.this, Trangchu.class));
                             Toast.makeText(MainActivity_gio_hang_custom.this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
                             radioGroup.clearCheck();
                             int soLuong = chiTietSanPham.getSoluong();
@@ -232,10 +239,8 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
 
     @SuppressLint("MissingPermission")
     private void showNotification() {
-        // Tạo RemoteViews cho giao diện thông báo và giao diện thông báo lớn
         RemoteViews notificationBigLayout = new RemoteViews(getPackageName(), R.layout.linner_notification);
 
-// Cấu hình giao diện thông báo lớn
         notificationBigLayout.setImageViewResource(R.id.notification_icon, R.drawable.baseline_circle_notifications_24);
         notificationBigLayout.setTextViewText(R.id.notification_title, "Đặt hàng thành công");
         notificationBigLayout.setTextViewText(R.id.notification_message, "Đơn hàng của bạn đã được đặt thành công");
@@ -243,14 +248,12 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         notificationBigLayout.setViewPadding(R.id.notification_title, 0, 0, 0, 0);  // Padding trái và phải của TextView tiêu đề
         notificationBigLayout.setViewPadding(R.id.notification_message, 0, 0, 0, 0);  // Padding trái và phải của TextView thông điệp
 
-// Tạo thông báo
         NotificationCompat.Builder builder = new NotificationCompat.Builder(MainActivity_gio_hang_custom.this, "CHANNEL_ID")
                 .setSmallIcon(R.drawable.baseline_circle_notifications_24)
                 .setStyle(new NotificationCompat.DecoratedCustomViewStyle())
                 .setCustomBigContentView(notificationBigLayout)
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-// Hiển thị thông báo
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(MainActivity_gio_hang_custom.this);
         notificationManager.notify(1, builder.build());
     }
@@ -291,7 +294,6 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                                 taiKhoan.setDiachi(diaChi);
                                 taikhoanDAO.update(taiKhoan);
 
-                                // Cập nhật thông tin trên giao diện
                                 txthoten.setText(hoTen);
                                 txtsdt.setText(phone);
                                 txtdiachi.setText(diaChi);

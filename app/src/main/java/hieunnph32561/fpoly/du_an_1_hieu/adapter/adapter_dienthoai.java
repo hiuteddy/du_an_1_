@@ -2,6 +2,8 @@ package hieunnph32561.fpoly.du_an_1_hieu.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,12 +24,10 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.ViewHodelsanpham> {
     Context context;
-    ArrayList<DienThoai> list;
     dienthoaiDAO dao;
     loaidtDAO daoo;
+    ArrayList<DienThoai> list;
     LoaiSeries loaiSeries;
-    ArrayList<LoaiSeries> listLS = new ArrayList<>();
-
 
 
     public adapter_dienthoai(Context context, ArrayList<DienThoai> list) {
@@ -49,12 +49,22 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
     public void onBindViewHolder(@NonNull ViewHodelsanpham holder, int position) {
         DienThoai dienThoai = list.get(position);
 
-        // Lấy thông tin loại series từ bảng LoaiSeries dựa trên khóa ngoại maLoaiSeries
         loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
 
         holder.tenDt.setText("" + dienThoai.getTenDT());
-        holder.loaiDt.setText(loaiSeries.getTenLoaiSeri()); // Lấy tên loại series từ đối tượng LoaiSeries
+        holder.loaiDt.setText(loaiSeries.getTenLoaiSeri());
         holder.giaDt.setText("" + dienThoai.getGiaTien());
+
+        //lấy ảnh
+        Bitmap bitmap;
+        byte[] hinhanhDT = dienThoai.getAnhDT();
+        if (hinhanhDT != null && hinhanhDT.length > 0) {
+            bitmap = BitmapFactory.decodeByteArray(hinhanhDT, 0, hinhanhDT.length);
+            holder.anhdt.setImageBitmap(bitmap);
+        } else {
+            holder.anhdt.setImageResource(R.drawable.baseline_phone_iphone_24);
+        }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,14 +75,12 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
                     Intent intent = new Intent(context, MainActivity_chi_tiet_dt.class);
                     loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
                     String maLoaiSeries = String.valueOf(loaiSeries.getTenLoaiSeri());
-//                    intent.putExtra("soLuong", dienThoai.getSoLuong());
+                    intent.putExtra("bitmapImage", hinhanhDT);
                     intent.putExtra("maDT", dienThoai.getMaDT());
                     intent.putExtra("tenDT", dienThoai.getTenDT());
                     intent.putExtra("maLoaiSeries", maLoaiSeries);
                     intent.putExtra("giaTien", dienThoai.getGiaTien());
                     intent.putExtra("moTa", dienThoai.getMoTa());
-
-
                     context.startActivity(intent);
                 }
             }
@@ -92,15 +100,15 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
         TextView  tenDt, giaDt, loaiDt, chiTiet;
-        ImageView txtdelete;
+        ImageView anhdt;
 
         public ViewHodelsanpham(@NonNull View itemView) {
             super(itemView);
-           // maDt = itemView.findViewById(R.id.txtmasach);
             tenDt = itemView.findViewById(R.id.txttendt);
             giaDt = itemView.findViewById(R.id.txtgia);
             loaiDt = itemView.findViewById(R.id.txtloaisr);
             chiTiet = itemView.findViewById(R.id.txtchitiet);
+            anhdt = itemView.findViewById(R.id.imganh);
         }
     }
 }

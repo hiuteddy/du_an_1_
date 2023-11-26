@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -64,8 +65,8 @@ public class Trangchu extends AppCompatActivity {
 
         headerLayout = navigationView.getHeaderView(0);
         textView = headerLayout.findViewById(R.id.textViewEmail);
-        Intent intent = getIntent();
-        String user = intent.getStringExtra("user");
+        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String user = preferences.getString("username", "");
         textView.setText("" + user + "!");
 
         if (user != null && user.equalsIgnoreCase("admin")) {
@@ -77,8 +78,7 @@ public class Trangchu extends AppCompatActivity {
                     .replace(R.id.framelayout, defaultFragment)
                     .commit();
 
-        }
-        else  {
+        } else {
             navigationView.getMenu().findItem(R.id.sub_muahang).setVisible(true);
             navigationView.getMenu().findItem(R.id.sub_canhan).setVisible(true);
             Fragment defaultFragment = new framgment_ds_dt(); // Thay thế QlPhieuMuonFragment bằng Fragment mặc định bạn muốn hiển thị
@@ -161,6 +161,11 @@ public class Trangchu extends AppCompatActivity {
                 if (item.getItemId() == R.id.sub_DoanhThu) {
                     fragment = new FragmentDoanhThu();
                     toolbar.setTitle("Doanh thu");
+                }
+                if (item.getItemId() == R.id.nav_lienhe) {
+                    toolbar.setTitle("Hỗ trợ");
+                    Intent intent = new Intent(Trangchu.this, hotrokhachhang.class);
+                    startActivity(intent);
                 }
                 if (fragment != null) {
                     getSupportFragmentManager().beginTransaction()

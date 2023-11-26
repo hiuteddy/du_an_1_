@@ -1,5 +1,7 @@
 package hieunnph32561.fpoly.du_an_1_hieu.model;
 
+import java.util.Date;
+
 public class ChiTiet {
     private int mact;
     private int mahd;
@@ -65,4 +67,73 @@ public class ChiTiet {
 //                "giaTien DOUBLE, " +
 //                "FOREIGN KEY (maHD) REFERENCES HoaDon(maHD), " +
 //                "FOREIGN KEY (maDT) REFERENCES DienThoai(maDT))";
+
+    public static class DanhGia {
+        private int maDg;
+        private int maDt;
+        private int maTk;
+        private int diem;
+        private Date thoigian;
+        private String nhanxet;
+
+        public DanhGia(int maDg, int maDt, int maTk, int diem, Date thoigian, String nhanxet) {
+            this.maDg = maDg;
+            this.maDt = maDt;
+            this.maTk = maTk;
+            this.diem = diem;
+            this.thoigian = thoigian;
+            this.nhanxet = nhanxet;
+        }
+
+        public DanhGia() {
+        }
+
+        public Date getThoigian() {
+            return thoigian;
+        }
+
+        public void setThoigian(Date thoigian) {
+            this.thoigian = thoigian;
+        }
+
+        public int getMaDt() {
+            return maDt;
+        }
+
+        public void setMaDt(int maDt) {
+            this.maDt = maDt;
+        }
+
+        public int getMaTk() {
+            return maTk;
+        }
+
+        public void setMaTk(int maTk) {
+            this.maTk = maTk;
+        }
+
+        public int getDiem() {
+            return diem;
+        }
+
+        public void setDiem(int diem) {
+            this.diem = diem;
+        }
+
+        public String getNhanxet() {
+            return nhanxet;
+        }
+
+        public void setNhanxet(String nhanxet) {
+            this.nhanxet = nhanxet;
+        }
+
+        public int getMaDg() {
+            return maDg;
+        }
+
+        public void setMaDg(int maDg) {
+            this.maDg = maDg;
+        }
+    }
 }

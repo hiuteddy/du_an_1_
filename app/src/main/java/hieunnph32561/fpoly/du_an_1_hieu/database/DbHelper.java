@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 56;
+    public static final int DB_VERSION = 58;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -30,7 +30,6 @@ public class DbHelper extends SQLiteOpenHelper {
                 "moTa TEXT," +
                 "soLuong INTEGER, FOREIGN KEY (maLoaiSeries) REFERENCES LoaiSeriesDT(maLoaiSeries))";
 
-
         String createTaiKhoanTable = "CREATE TABLE TaiKhoan " +
                 "(maTk INTEGER PRIMARY KEY AUTOINCREMENT," +
                 " tenDN TEXT , " +
@@ -38,6 +37,15 @@ public class DbHelper extends SQLiteOpenHelper {
                 "hoTen TEXT," +
                 "sdt TEXT," +
                 "diaChi TEXT)";
+        String createRatingTable = "CREATE TABLE DanhGia " +
+                "(maDG INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                "maDT INTEGER, " +
+                "maTk INTEGER, " +
+                "diem INTEGER, " +
+                "nhanXet TEXT," +
+                "ngay DATE, " +
+                "FOREIGN KEY (maDT) REFERENCES DienThoai(maDT), " +
+                "FOREIGN KEY (maTk) REFERENCES TaiKhoan(maTk))";
 
 
         String createGioHangTable = "CREATE TABLE GioHang" +
@@ -72,6 +80,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createHoaDonTable);
         db.execSQL(createGioHangTable);
         db.execSQL(createChiTietDonHangTable);
+        db.execSQL(createRatingTable);
 
 
         // Tạo các bảng
@@ -82,13 +91,17 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO LoaiSeriesDT (maLoaiSeries, tenLoaiSeries) VALUES (3, 'Series 13')");
 
         // Thêm dữ liệu mẫu vào bảng DienThoai
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (1, 1, ?, 'Iphone 15 Pro', 1000, 'Mô tả 1',3)");
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (2, 2, ?, 'Iphone 15 ', 2000, 'Mô tả 2',4)");
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (3, 3, ?, 'Iphone 15 Pro Max', 3000, 'Mô tả 3',5)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (1, 1, '', 'Iphone 15 Pro', 1000, 'Mô tả 1',3)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (2, 2, '', 'Iphone 15 ', 2000, 'Mô tả 2',4)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (3, 3, '', 'Iphone 15 Pro Max', 3000, 'Mô tả 3',5)");
 
         // Thêm dữ liệu mẫu vào bảng TaiKhoan
         db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A',123456789 ,'hanoi')");
         db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (2, 'user', '123','Nguyễn Văn B', 987654321,'hcm')");
+
+        db.execSQL("INSERT INTO DanhGia (maDT, maTk, diem,nhanXet,ngay) VALUES (1, 1, 5, 'Sản phẩm rất tuyệt vời!','2023-2-4')");
+        db.execSQL("INSERT INTO DanhGia (maDT, maTk, diem, nhanXet, ngay) VALUES (2, 1, 4, 'Có chút vấn đề về pin', '2023-01-02')");
+        db.execSQL("INSERT INTO DanhGia (maDT, maTk, diem,nhanXet,ngay) VALUES (1, 2, 3, 'Không đáng giá hơn giá tiền',2-1-2023)");
 
 
         // Thêm dữ liệu mẫu vào bảng HoaDon
@@ -114,8 +127,6 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL("drop table if exists HoaDon");
             db.execSQL("drop table if exists GioHang");
             db.execSQL("drop table if exists ChiTietDonHang");
-
-
             onCreate(db);
         }
     }

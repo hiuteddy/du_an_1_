@@ -9,9 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
-import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
-import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 
 public class chitietDAO {
     private DbHelper dbHelper;
@@ -29,6 +27,7 @@ public class chitietDAO {
         values.put("giaTien", chiTietSanPham.getGiatien());
         return db.insert("ChiTietDonHang", null, values);
     }
+
     public ArrayList<ChiTiet> getALLct(String sql, String... selectionArgs) {
         ArrayList<ChiTiet> list = new ArrayList<>();
         SQLiteDatabase database = dbHelper.getReadableDatabase();
@@ -45,11 +44,12 @@ public class chitietDAO {
             );
             list.add(s);
         }
-        cursor.close(); // Đóng con trỏ khi hoàn thành công việc
+        cursor.close();
         return list; //
     }
+
     public ArrayList<ChiTiet> getAll() {
         String sql = "SELECT * FROM ChiTietDonHang";
-        return getALLct(sql); // Gọi getALLSACH với một truy vấn SQL đã được định nghĩa trước
+        return getALLct(sql);
     }
 }

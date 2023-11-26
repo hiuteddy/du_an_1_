@@ -1,7 +1,5 @@
 package hieunnph32561.fpoly.du_an_1_hieu;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +9,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 
@@ -50,9 +50,8 @@ public class Dangnhap extends AppCompatActivity {
                         Toast.makeText(Dangnhap.this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
                         checkRememberUser(edUsername, strPass, checkBox.isChecked());
                         Intent intent = new Intent(Dangnhap.this, Trangchu.class);
-                        intent.putExtra("user", edUsername);
                         startActivity(intent);
-                        finish();
+                      //  finish();
                         SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
                         editor.putString("username", edUsername); // Lưu tên đăng nhập vào SharedPreferences
@@ -65,11 +64,6 @@ public class Dangnhap extends AppCompatActivity {
             }
         });
 
-//        // Lưu mã user khi đăng nhập
-//        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
-//        SharedPreferences.Editor editor = preferences.edit();
-//        editor.putString("userId", edtuser.getText().toString()); // Sử dụng key là "userId" thay vì "tenDN"
-//        editor.apply();
 
 
         txtload.setOnClickListener(new View.OnClickListener() {

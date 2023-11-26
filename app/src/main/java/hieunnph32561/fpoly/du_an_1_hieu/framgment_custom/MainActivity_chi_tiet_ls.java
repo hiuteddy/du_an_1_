@@ -1,14 +1,14 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
@@ -18,11 +18,11 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 
 public class MainActivity_chi_tiet_ls extends AppCompatActivity {
-    hoadonDAO hoadonDAO;
+
     adapter_chitietls adapterChitietls;
     RecyclerView rclctls;
     ArrayList<ChiTiet> list = new ArrayList<>();
-
+    hoadonDAO hoadonDAO;
 
 
     @SuppressLint("MissingInflatedId")
@@ -36,7 +36,6 @@ public class MainActivity_chi_tiet_ls extends AppCompatActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        // Thiết lập sự kiện click cho nút back
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +47,7 @@ public class MainActivity_chi_tiet_ls extends AppCompatActivity {
 
     public void loaddata() {
         Intent intent = getIntent();
-        int tenDT = intent.getIntExtra("productId",0);
+        int tenDT = intent.getIntExtra("productId", 0);
         hoadonDAO = new hoadonDAO(this);
         list = (ArrayList<ChiTiet>) hoadonDAO.getChiTietByMaHoaDon(Integer.parseInt(String.valueOf(tenDT)));
         adapterChitietls = new adapter_chitietls(this, list);
