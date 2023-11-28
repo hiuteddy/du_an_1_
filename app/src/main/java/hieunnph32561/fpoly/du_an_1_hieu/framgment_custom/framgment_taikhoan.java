@@ -51,11 +51,15 @@ public class framgment_taikhoan extends Fragment {
         tvmk = v.findViewById(R.id.tvmk);
         tvuser = v.findViewById(R.id.tvusernd);
 
-
         btnChinhSuaThongTin = v.findViewById(R.id.imvcs);
 
         dao = new taikhoanDAO(context);
-        user = dao.getID(username);
+
+        if (username.equals("admin")){
+            user = dao.getAD(username);
+        }else {
+            user = dao.getID(username);
+        }
 
         // Đặt thông tin người dùng lên giao diện
         tvHoTenNguoiDung.setText(user.getHoten());
@@ -116,7 +120,11 @@ public class framgment_taikhoan extends Fragment {
                         user.setSdt(phone);
                         user.setDiachi(diaChi);
                         user.setMatKhau(mk);
-                        dao.update(user);
+                        if (user.getTenDN().equals("admin")) {
+                            dao.updateAD(user);
+                        } else {
+                            dao.update(user);
+                        }
 
                         // Cập nhật thông tin trên giao diện
                         tvHoTenNguoiDung.setText(hoTen);

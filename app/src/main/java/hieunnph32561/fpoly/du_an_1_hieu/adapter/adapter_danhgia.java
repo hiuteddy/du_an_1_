@@ -68,7 +68,7 @@ public class adapter_danhgia extends RecyclerView.Adapter<adapter_danhgia.ViewHo
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView tvten, tvsp, tvngay, tvnhanxet;
+        TextView tvten, tvsp, tvngay, tvnhanxet,textProductNamet;
         RatingBar tvdiem;
         ImageView imageProduct;
         public ViewHolder(@NonNull View itemView) {

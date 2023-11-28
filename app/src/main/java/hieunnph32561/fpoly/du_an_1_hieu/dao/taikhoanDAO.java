@@ -36,7 +36,6 @@ public class taikhoanDAO {
                     cursor.getString(cursor.getColumnIndex("diaChi"))
 
             );
-
             list.add(tt);
         }
         cursor.close(); // Đóng con trỏ khi hoàn thành công việc
@@ -45,14 +44,26 @@ public class taikhoanDAO {
 
     public int checkLogin(String id, String pass) {
         String sql = "select * from TaiKhoan where tenDN=? and matKhau=?";
+        String sqlAD = "select * from Admin where tenDN=? and matKhau=?";
         List<TaiKhoan> list = getALLTT(sql, id, pass);
+        list.addAll(getALLTT(sqlAD, id, pass));
         if (list.size() == 0) {
             return -1;
         } else {
             return 1;
         }
     }
+    public TaiKhoan getAD(String id) {
+        String sql = "select * from Admin where tenDN=?";
+        ArrayList<TaiKhoan> list = getALLTT(sql, id);
 
+        if (!list.isEmpty()) {
+            return list.get(0);
+        } else {
+            // Trả về một giá trị LoaiSach mặc định hoặc tạo một đối tượng mới tùy ý
+            return new TaiKhoan();
+        }
+    }
     public TaiKhoan getID(String id) {
         String sql = "select * from TaiKhoan where tenDN=?";
         ArrayList<TaiKhoan> list = getALLTT(sql, id);
@@ -118,6 +129,16 @@ public class taikhoanDAO {
         values.put("diachi", user.getDiachi());
         values.put("matkhau", user.getMatKhau());
         return database.update("TaiKhoan", values, "tenDN=?", new String[]{String.valueOf(user.getTenDN())});
+    }
+    public void updateAD(TaiKhoan user) {
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+//        values.put("tenDN",user.getTenDN());
+        values.put("hoten", user.getHoten());
+        values.put("sdt", user.getSdt());
+        values.put("diachi", user.getDiachi());
+        values.put("matkhau", user.getMatKhau());
+        database.update("Admin", values, "tenDN=?", new String[]{String.valueOf(user.getTenDN())});
     }
 
     public boolean xoaKhachHang(int id){

@@ -138,7 +138,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
             public void onClick(View v) {
                 GioHang gioHang = new GioHang(maDt, giaTien, quantity);
                 giohangDAO dao = new giohangDAO(getApplicationContext());
-                Intent intent1 = new Intent(MainActivity_chi_tiet_dt.this, MainActivity_gio_hang_custom.class);
+                Intent intent = new Intent(MainActivity_chi_tiet_dt.this, MainActivity_gio_hang_custom.class);
                 if (quantity > dienThoai.getSoLuong()) {
                     Toast.makeText(MainActivity_chi_tiet_dt.this, "Không the đặt hàng số lượng trong kho không đủ", Toast.LENGTH_SHORT).show();
                     return;
@@ -146,7 +146,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
 
                 if (dao.checkExistence(maDt)) {
                     Toast.makeText(MainActivity_chi_tiet_dt.this, "Tên đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
-//                    (startActivityintent);
+                    startActivity(intent);
                 } else {
                     if (dao.insert(gioHang) > 0) {
                         startActivity(intent);

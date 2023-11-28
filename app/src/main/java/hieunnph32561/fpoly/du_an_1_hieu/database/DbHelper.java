@@ -37,6 +37,13 @@ public class DbHelper extends SQLiteOpenHelper {
                 "hoTen TEXT," +
                 "sdt TEXT," +
                 "diaChi TEXT)";
+        String createAdminTable = "CREATE TABLE Admin " +
+                "(maTk INTEGER PRIMARY KEY AUTOINCREMENT," +
+                " tenDN TEXT , " +
+                "matKhau TEXT," +
+                "hoTen TEXT," +
+                "sdt TEXT," +
+                "diaChi TEXT)";
         String createRatingTable = "CREATE TABLE DanhGia " +
                 "(maDG INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "maDT INTEGER, " +
@@ -81,6 +88,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(createGioHangTable);
         db.execSQL(createChiTietDonHangTable);
         db.execSQL(createRatingTable);
+        db.execSQL(createAdminTable);
 
 
         // Tạo các bảng
@@ -96,17 +104,17 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (3, 3, '', 'Iphone 15 Pro Max', 3000, 'Mô tả 3',5)");
 
         // Thêm dữ liệu mẫu vào bảng TaiKhoan
-        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A',123456789 ,'hanoi')");
-        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (2, 'user', '123','Nguyễn Văn B', 987654321,'hcm')");
+        db.execSQL("INSERT INTO Admin (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A',123456789 ,'hanoi')");
+        db.execSQL("INSERT INTO TaiKhoan (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (1, 'user', '123','Nguyễn Văn B', 987654321,'hcm')");
 
         db.execSQL("INSERT INTO DanhGia (maDT, maTk, diem,nhanXet,ngay) VALUES (1, 1, 5, 'Sản phẩm rất tuyệt vời!','2023-2-4')");
         db.execSQL("INSERT INTO DanhGia (maDT, maTk, diem, nhanXet, ngay) VALUES (2, 1, 4, 'Có chút vấn đề về pin', '2023-01-02')");
-        db.execSQL("INSERT INTO DanhGia (maDT, maTk, diem,nhanXet,ngay) VALUES (1, 2, 3, 'Không đáng giá hơn giá tiền',2-1-2023)");
+        db.execSQL("INSERT INTO DanhGia (maDT, maTk, diem,nhanXet,ngay) VALUES (1, 1, 3, 'Không đáng giá hơn giá tiền',2-1-2023)");
 
 
         // Thêm dữ liệu mẫu vào bảng HoaDon
         db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 5000, '2023-11-01', 1, '1')");
-        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (2, 7000, '2023-11-02', 1, '2')");
+        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 7000, '2023-11-02', 1, '2')");
 
         // Thêm dữ liệu mẫu vào bảng GioHang
         db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (1, 1000, 2)");
@@ -127,6 +135,7 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL("drop table if exists HoaDon");
             db.execSQL("drop table if exists GioHang");
             db.execSQL("drop table if exists ChiTietDonHang");
+            db.execSQL("drop table if exists Admin");
             onCreate(db);
         }
     }

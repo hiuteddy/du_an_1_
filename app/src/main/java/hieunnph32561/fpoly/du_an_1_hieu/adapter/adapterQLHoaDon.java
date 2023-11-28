@@ -2,11 +2,14 @@ package hieunnph32561.fpoly.du_an_1_hieu.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -50,8 +53,9 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
 
     static class ViewHolder {
         TextView textViewMaHoaDon,textViewNgayHoaDon,textViewTenDT,textViewSoLuong,textViewDonGia,textViewTongTien,textViewNguoiNhan,textViewDiaChiNhan,textViewSdt;
-        Button btnxn;
-        Button btnHuy;
+        Button btnxn, btnHuy;
+        ImageView imgHoaDon;
+
     }
 
     @NonNull
@@ -70,7 +74,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
             viewHolder.textViewNguoiNhan = convertView.findViewById(R.id.tvNguoiNhan);
             viewHolder.textViewDiaChiNhan = convertView.findViewById(R.id.tvDiachiNhan);
             viewHolder.textViewSdt = convertView.findViewById(R.id.tvsdt);
-
+            viewHolder.imgHoaDon = convertView.findViewById(R.id.imgHoaDon);
 
             viewHolder.btnxn = convertView.findViewById(R.id.btnXN);
             viewHolder.btnHuy = convertView.findViewById(R.id.btnHuyDon);
@@ -84,13 +88,23 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
         DienThoai dienThoai = daoDT.getID(String.valueOf(chiTietItem.getMadt()));
         TaiKhoan taiKhoan = daoTK.getIDma(String.valueOf(hoaDon.getMaTk()));
 
+        Bitmap bitmap;
+        byte[] hinhanhDT = dienThoai.getAnhDT();
+        if (hinhanhDT != null && hinhanhDT.length > 0) {
+            bitmap = BitmapFactory.decodeByteArray(hinhanhDT, 0, hinhanhDT.length);
+            viewHolder.imgHoaDon.setImageBitmap(bitmap);
+        } else {
+            bitmap = null;
+            viewHolder.imgHoaDon.setImageResource(R.drawable.baseline_phone_iphone_24);
+        }
+
         viewHolder.textViewMaHoaDon.setText("Mã Hóa Đơn: " + chiTietItem.getMahd());
         viewHolder.textViewNgayHoaDon.setText(sdf.format(hoaDon.getNgay()));
        // holder.txtngay.setText("Ngày đặt: " + String.valueOf(sdf.format(hoaDon.getNgay())));
         viewHolder.textViewTenDT.setText(dienThoai.getTenDT());
         viewHolder.textViewSoLuong.setText("Số Lượng: " + chiTietItem.getSoluong());
-        viewHolder.textViewDonGia.setText(String.format("Giá Tiền: %,.0f VNĐ", dienThoai.getGiaTien()) );
-        viewHolder.textViewTongTien.setText("Tổng Tiền: " + chiTietItem.getGiatien() + " VNĐ");
+        viewHolder.textViewDonGia.setText(String.format("Giá Tiền: %,.0f VNĐ", chiTietItem.getGiatien()) );
+        viewHolder.textViewTongTien.setText(String.format("Tổng Tiền: %,.0f VNĐ", chiTietItem.getGiatien() * chiTietItem.getSoluong()));//"Tổng Tiền: " + chiTietItem.getGiatien() + " VNĐ"
         viewHolder.textViewNguoiNhan.setText("Người Nhận: " + taiKhoan.getHoten());
         viewHolder.textViewDiaChiNhan.setText("Địa Chỉ: " + taiKhoan.getDiachi());
         viewHolder.textViewSdt.setText("Số điện thoại: " + taiKhoan.getSdt());

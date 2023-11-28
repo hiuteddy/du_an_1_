@@ -45,11 +45,11 @@
     <RatingBar
         android:id="@+id/ratingBart"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
+        android:layout_height="48dp"
         android:numStars="5"
-
-        android:isIndicator="true" />
+        android:isIndicator="true"
+        android:scaleX="0.6"
+        android:scaleY="0.6" />
 
     <!-- Ô nhập nhận xét -->
     <TextView
