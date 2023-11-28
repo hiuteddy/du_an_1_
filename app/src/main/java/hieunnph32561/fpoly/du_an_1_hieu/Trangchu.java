@@ -154,9 +154,7 @@ public class Trangchu extends AppCompatActivity {
                     toolbar.setTitle("Top 10");
 
                 }
-                if (item.getItemId() == R.id.sub_hotro) {
-                    startActivity(new Intent(Trangchu.this, hotrokhachhang.class));
-                }
+
                 if (item.getItemId() == R.id.sub_DoanhThu) {
                     fragment = new FragmentDoanhThu();
                     toolbar.setTitle("Doanh thu");

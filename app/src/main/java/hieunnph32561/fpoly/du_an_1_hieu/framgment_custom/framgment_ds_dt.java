@@ -54,7 +54,7 @@ public class framgment_ds_dt extends Fragment {
         txtload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                loaddata();
+                dsdt();
             }
         });
         txtgiam.setOnClickListener(new View.OnClickListener() {
@@ -69,7 +69,7 @@ public class framgment_ds_dt extends Fragment {
                 sxtang();
             }
         });
-
+        dsdt();
         loaddata();
         return v;
     }
@@ -99,16 +99,12 @@ public class framgment_ds_dt extends Fragment {
     }
 
     public void loaddata() {
-        dtDAO = new dienthoaiDAO(getContext());
         loaidtDAO loaiDAO = new loaidtDAO(getContext());
         ArrayList<LoaiSeries> listLoai = loaiDAO.getAll();
-
         adapter_loaidt adapterLoai = new adapter_loaidt(getContext(), listLoai);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rcvLoai.setLayoutManager(layoutManager);
         rcvLoai.setAdapter(adapterLoai);
-
-        // Thiết lập sự kiện click cho danh sách loại sản phẩm
         adapterLoai.setOnItemClickListener(new adapter_loaidt.OnItemClickListener() {
             @Override
             public void onItemClick(int position) {
@@ -122,8 +118,10 @@ public class framgment_ds_dt extends Fragment {
                 adapter_dienthoai.updateData(listSanPham);
             }
         });
+    }
 
-        // Hiển thị danh sách sản phẩm ban đầu
+    public void dsdt() {
+        dtDAO = new dienthoaiDAO(getContext());
         list = dtDAO.getAll();
         adapter_dienthoai = new adapter_dienthoai(getContext(), list);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(), 2);

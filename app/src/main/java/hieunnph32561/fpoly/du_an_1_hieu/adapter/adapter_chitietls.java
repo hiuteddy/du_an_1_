@@ -36,6 +36,7 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
     dienthoaiDAO dienthoaiDAO;
     loaidtDAO loaidtDAO;
 
+
     public adapter_chitietls(Context context, ArrayList<ChiTiet> list) {
         this.context = context;
         this.list = list;
@@ -76,8 +77,9 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
         } else {
             holder.imganh.setImageResource(R.drawable.iphone15);
         }
-        if (hoaDon.getTrangThai() == 3){
+        if (hoaDon.getTrangThai() == 3 ){
             holder.btndg.setVisibility(View.VISIBLE);
+
         }else {
             holder.btndg.setVisibility(View.GONE);
         }

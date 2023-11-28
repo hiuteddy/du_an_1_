@@ -96,26 +96,7 @@ public class taikhoanDAO {
         }
     }
 
-    @SuppressLint("Range")
-    public int getMaKhachHangByUsername(String username) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        int maKhachHang = -1; // Giá trị không hợp lệ
 
-        String[] columns = {"maTk"};
-        String selection = "tenDN = ?";
-        String[] selectionArgs = {username};
-
-        Cursor cursor = db.query("TaiKhoan", columns, selection, selectionArgs, null, null, null);
-
-        if (cursor.moveToFirst()) {
-            maKhachHang = cursor.getInt(cursor.getColumnIndex("maTk"));
-        }
-
-        cursor.close();
-        db.close();
-
-        return maKhachHang;
-    }
 
     public long insert(TaiKhoan s) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();

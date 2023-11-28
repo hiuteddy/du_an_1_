@@ -2,6 +2,8 @@ package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -17,8 +19,10 @@ import androidx.appcompat.widget.Toolbar;
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.Trangchu;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.danhgiaDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DanhGia;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class MainActivity_danh_gia_custom extends AppCompatActivity {
@@ -30,8 +34,10 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
     private Button buttonSubmit;
     danhgiaDAO danhgiaDAO;
     taikhoanDAO taikhoanDAO;
+    dienthoaiDAO dienthoaiDAO;
     long millis = System.currentTimeMillis();
     java.sql.Date date = new java.sql.Date(millis);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,7 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
 
         danhgiaDAO = new danhgiaDAO(this);
         taikhoanDAO = new taikhoanDAO(this);
+        dienthoaiDAO = new dienthoaiDAO(this);
         // Tham chiếu các phần tử trong bảng đánh giá
         imageProduct = findViewById(R.id.imageProduct);
         textProductName = findViewById(R.id.textProductName);
@@ -58,17 +65,36 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
         editComment = findViewById(R.id.editComment);
         buttonSubmit = findViewById(R.id.buttonSubmit);
 
-        // Thiết lập sự kiện khi nút "Gửi đánh giá" được nhấn
+
+        Intent intent = getIntent();
+        int tenDT = intent.getIntExtra("productId", 0);
+
+        DienThoai dienThoai=dienthoaiDAO.getID(String.valueOf(tenDT));
+        textProductName.setText(dienThoai.getTenDT());
+
+        byte[] anhData = dienthoaiDAO.getAnhByMaDT(dienThoai.getMaDT());
+        if (anhData != null) {
+            Bitmap bitmap = BitmapFactory.decodeByteArray(anhData, 0, anhData.length);
+            imageProduct.setImageBitmap(bitmap);
+        } else {
+            imageProduct.setImageResource(R.drawable.iphone15);
+        }
+
+
+
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = getIntent();
-                int tenDT = intent.getIntExtra("productId", 0);
+
                 SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
                 String username = preferences.getString("username", "");
+
                 TaiKhoan maKhachHang = taikhoanDAO.getID(username);
                 float rating = ratingBar.getRating();
                 String comment = editComment.getText().toString();
+
+                Intent intent = getIntent();
+                int tenDT = intent.getIntExtra("productId", 0);
 
                 DanhGia danhGia = new DanhGia();
                 danhGia.setMaDt(tenDT);

@@ -79,10 +79,7 @@
                     android:icon="@drawable/baseline_shopping_cart_24"
                     android:title="Giỏ hàng"
                    />
-                <item
-                    android:id="@+id/sub_hotro"
-                    android:title="Chăm sóc khách hàng"
-                    />
+
             </menu>
         </item>
 

@@ -5,11 +5,7 @@
     android:background="@drawable/bgr_dg"
     android:orientation="vertical">
 
-    <!-- Tiêu đề đánh giá -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="#E8CECE" />
+
 
     <!-- Thông tin sản phẩm -->
     <TextView
@@ -52,7 +48,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:numStars="5"
-        android:stepSize="1"
+
         android:isIndicator="true" />
 
     <!-- Ô nhập nhận xét -->

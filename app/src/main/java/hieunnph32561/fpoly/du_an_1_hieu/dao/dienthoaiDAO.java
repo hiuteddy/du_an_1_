@@ -13,7 +13,8 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 
 public class dienthoaiDAO {
     private DbHelper dbHelper;
-    SQLiteDatabase  database;
+    SQLiteDatabase database;
+
     public dienthoaiDAO(Context context) {
         dbHelper = new DbHelper(context);
     }
@@ -22,7 +23,7 @@ public class dienthoaiDAO {
         ContentValues values = new ContentValues();
         database = dbHelper.getReadableDatabase();
         values.put("maLoaiSeries", dienThoai.getMaLoaiSeri());
-        values.put("imageUrl",dienThoai.getAnhDT());
+        values.put("imageUrl", dienThoai.getAnhDT());
         values.put("tenDT", dienThoai.getTenDT());
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
@@ -31,12 +32,13 @@ public class dienthoaiDAO {
 
         return database.insert("DienThoai", null, values);
     }
+
     public int update(DienThoai dienThoai, int maSPOld) {
         database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
         values.put("maDT", dienThoai.getMaDT());
         values.put("maLoaiSeries", dienThoai.getMaLoaiSeri());
-        values.put("imageUrl",dienThoai.getAnhDT());
+        values.put("imageUrl", dienThoai.getAnhDT());
         values.put("tenDT", dienThoai.getTenDT());
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
@@ -71,6 +73,7 @@ public class dienthoaiDAO {
         String sql = "SELECT * FROM DienThoai";
         return (ArrayList<DienThoai>) getALLSACH(sql);
     }
+
     public DienThoai getID(String id) {
         String sql = "select * from DienThoai where maDT=?";
         ArrayList<DienThoai> list = getALLSACH(sql, id);
@@ -81,20 +84,22 @@ public class dienthoaiDAO {
             return new DienThoai();
         }
     }
+
     public ArrayList<DienThoai> getDienThoaiByLoai(int maLoaiSeries) {
         String sql = "SELECT * FROM DienThoai WHERE maLoaiSeries = ?";
         return getALLSACH(sql, String.valueOf(maLoaiSeries));
     }
+
     public void updateSoLuong(int maDT, int soLuongGiam) {
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-        // Truy vấn và cập nhật số lượng trong bảng DienThoai
         String sqlUpdate = "UPDATE DienThoai SET soLuong = soLuong - ? WHERE maDT = ?";
         Object[] args = {soLuongGiam, maDT};
         db.execSQL(sqlUpdate, args);
 
         db.close();
     }
+
     @SuppressLint("Range")
     public byte[] getAnhByMaDT(int maDT) {
         byte[] anh = null;

@@ -77,8 +77,19 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         TextView tvsoluong = findViewById(R.id.tvsoluong);
         TextView tvdanhGiaTB = findViewById(R.id.textView11);
         dienThoai = dao.getID(String.valueOf(maDt));
+
         double tb=0;
-        setTBDanhGia(tb);
+
+        int tong = 0, tg = 0;
+        for (DanhGia x: list) {
+            if (x.getMaDt() == dienThoai.getMaDT()){
+                tong = tong+x.getDiem();
+                tg = tg + 1;
+            }
+        }
+        if (tong != 0 && tg != 0){
+            tb = tong/tg;
+        }
 
         tvName.setText("Title: " + ten);
         tvloaidt.setText("Series: " + maLoaiSeries);
@@ -135,7 +146,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
 
                 if (dao.checkExistence(maDt)) {
                     Toast.makeText(MainActivity_chi_tiet_dt.this, "Tên đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
+//                    (startActivityintent);
                 } else {
                     if (dao.insert(gioHang) > 0) {
                         startActivity(intent);
@@ -149,18 +160,9 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         });
     }
 
-    public void setTBDanhGia(double tb) {
-        int tong = 0, tg = 0;
-        for (DanhGia x: list) {
-            if (x.getMaDt() == dienThoai.getMaDT()){
-                tong = tong+x.getDiem();
-                tg = tg + 1;
-            }
-        }
-        if (tong != 0 && tg != 0){
-            tb = tong/tg;
-        }
-    }
+//    public void setTBDanhGia(double tb) {
+
+//    }
 
     public void loaddata() {
         Intent intent = getIntent();
