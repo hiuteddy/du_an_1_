@@ -75,12 +75,13 @@ public class FragmentDangGiao extends Fragment {
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
+                adapter.filter(query);
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //handleSearch(newText);
+                adapter.filter(newText);
                 return true;
             }
         });

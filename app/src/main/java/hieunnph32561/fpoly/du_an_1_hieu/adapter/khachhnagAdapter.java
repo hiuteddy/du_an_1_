@@ -79,6 +79,7 @@ public class khachhnagAdapter extends RecyclerView.Adapter<khachhnagAdapter.khac
 
             }
         });
+
         holder.btndelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

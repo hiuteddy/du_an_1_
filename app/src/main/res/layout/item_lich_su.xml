@@ -3,8 +3,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
-    android:background="@drawable/brg_item_dt"
+    android:background="@drawable/bg_btn"
     android:elevation="8dp"
+    android:padding="5dp"
     android:orientation="vertical">
 
     <TextView
@@ -89,31 +90,23 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="end">
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:padding="10dp">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnchitiett"
                 android:layout_width="125dp"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_cart_bgr"
-                android:backgroundTint="#7E59C1"
-                android:text="Chi tiết đơn"
-                android:textColor="#FFFFFF" />
-        </LinearLayout>
+                android:background="@drawable/bg_btn"
+                android:layout_marginRight="10dp"
+                android:text="Chi tiết đơn"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="end">
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnxoa"
                 android:layout_width="125dp"
-                android:layout_marginTop="10dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_cart_bgr"
-                android:backgroundTint="#8356D5"
-                android:text="Hủy"
-                android:textColor="#FFFFFF" />
+                android:background="@drawable/bg_btn"
+                android:text="Hủy"/>
         </LinearLayout>
 
     </LinearLayout>

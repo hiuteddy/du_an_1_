@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
@@ -27,7 +28,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
     private Context context;
-    private List<ChiTiet> chiTietList;
+    private List<ChiTiet> chiTietList, listGoc;
     private hoadonDAO daoHD;
     private dienthoaiDAO daoDT;
     private chitietDAO daoCT;
@@ -40,6 +41,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
         super(context, R.layout.item_ql_hoa_don, chiTietList);
         this.context = context;
         this.chiTietList = chiTietList;
+        this.listGoc = chiTietList;
         daoHD = new hoadonDAO(context);
         daoDT = new dienthoaiDAO(context);
         daoCT = new chitietDAO(context);
@@ -87,7 +89,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
        // holder.txtngay.setText("Ngày đặt: " + String.valueOf(sdf.format(hoaDon.getNgay())));
         viewHolder.textViewTenDT.setText(dienThoai.getTenDT());
         viewHolder.textViewSoLuong.setText("Số Lượng: " + chiTietItem.getSoluong());
-        viewHolder.textViewDonGia.setText("Đơn Giá: " + dienThoai.getGiaTien() + " VNĐ");
+        viewHolder.textViewDonGia.setText(String.format("Giá Tiền: %,.0f VNĐ", dienThoai.getGiaTien()) );
         viewHolder.textViewTongTien.setText("Tổng Tiền: " + chiTietItem.getGiatien() + " VNĐ");
         viewHolder.textViewNguoiNhan.setText("Người Nhận: " + taiKhoan.getHoten());
         viewHolder.textViewDiaChiNhan.setText("Địa Chỉ: " + taiKhoan.getDiachi());
@@ -131,6 +133,18 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
         });
 
         return convertView;
+    }
+    public void filter(String keyword) {
+        ArrayList<ChiTiet> filteredList = new ArrayList<>();
+        for (ChiTiet ct : listGoc) {
+            String i = String.valueOf(ct.getMahd());
+            if (i.toLowerCase().contains(keyword.toLowerCase())) {
+                filteredList.add(ct);
+            }
+        }
+        chiTietList.clear();
+        chiTietList.addAll(filteredList);
+        notifyDataSetChanged();
     }
     public void updateList() {
         chiTietList.clear();

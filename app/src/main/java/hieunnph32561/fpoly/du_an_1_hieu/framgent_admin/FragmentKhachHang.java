@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -31,11 +30,8 @@ import java.util.Comparator;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_qlsp;
 import hieunnph32561.fpoly.du_an_1_hieu.adapter.khachhnagAdapter;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
-import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
-import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class FragmentKhachHang extends Fragment {
@@ -69,7 +65,7 @@ public class FragmentKhachHang extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //handleSearch(newText);
+
                 return false;
             }
         });

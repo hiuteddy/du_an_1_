@@ -24,6 +24,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_danh_gia_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
+import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_chitietls.ViewHodelsanpham> {
@@ -59,12 +60,14 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
 
         LoaiSeries loaiSeries = loaidtDAO.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
 
+        HoaDon hoaDon = hoadonDAO.getID(String.valueOf(chiTiet.getMahd()));
+
         holder.txtmachitiet.setText("Mã chi tiết đơn: " + String.valueOf(chiTiet.getMact()));
         holder.txtmadt.setText("Tên điện thoại: " + String.valueOf(dienThoai.getTenDT()));
         holder.txthoadon.setText("Tên loại: " + loaiSeries.getTenLoaiSeri());
         holder.txtsoluong.setText("Số lượng: " + chiTiet.getSoluong());
-        holder.txtgiatien.setText("Giá điện thoại: " + chiTiet.getGiatien());
-        holder.txttongtien.setText("Tổng tiền:" + chiTiet.getGiatien() * chiTiet.getSoluong());
+        holder.txtgiatien.setText(String.format("Giá điện thoại: %,.0f VNĐ", chiTiet.getGiatien()) );
+        holder.txttongtien.setText(String.format("Tổng tiền: %,.0f VNĐ", chiTiet.getGiatien()* chiTiet.getSoluong()) );
 
         byte[] anhData = dienthoaiDAO.getAnhByMaDT(dienThoai.getMaDT());
         if (anhData != null) {
@@ -73,7 +76,11 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
         } else {
             holder.imganh.setImageResource(R.drawable.iphone15);
         }
-
+        if (hoaDon.getTrangThai() == 3){
+            holder.btndg.setVisibility(View.VISIBLE);
+        }else {
+            holder.btndg.setVisibility(View.GONE);
+        }
         holder.btndg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

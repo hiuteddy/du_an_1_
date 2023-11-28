@@ -62,7 +62,6 @@ public class Trangchu extends AppCompatActivity {
 
         // toolbar.setTitle("Quản lý phiếu mượn"); // Thay "Tên Fragment mặc định" bằng tiêu đề bạn muốn hiển thị
 
-
         headerLayout = navigationView.getHeaderView(0);
         textView = headerLayout.findViewById(R.id.textViewEmail);
         SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);

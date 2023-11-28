@@ -108,7 +108,7 @@
             android:id="@+id/btnHuyDon"
             android:layout_width="125dp"
             android:layout_height="wrap_content"
-            android:background="@drawable/item_cart_bgr"
+            android:background="@drawable/bg_btn"
             android:backgroundTint="#707570"
             android:text="Hủy"
             android:textColor="#FFFFFF"/>
@@ -121,7 +121,7 @@
                 android:id="@+id/btnXN"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_cart_bgr"
+                android:background="@drawable/bg_btn"
                 android:backgroundTint="#00CC08"
                 android:text="Xác Nhận"
                 android:textColor="#FFFFFF"/>

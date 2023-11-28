@@ -110,14 +110,14 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.radioshipcode) {
                     phuongThucVanChuyen = "Ship cod";
-                    shipperPrice = 20.000;
-                    txtphiship.setText("" + 20.000);
+                    shipperPrice = 20000.0;
+                    txtphiship.setText(String.format("%,d VNĐ", 20000));
                     updateTotalValues();
 
                 } else if (checkedId == R.id.radioonile) {
                     phuongThucVanChuyen = "Thanh toán online";
                     shipperPrice = 0.0;
-                    txtphiship.setText("" + 0.0);
+                    txtphiship.setText(String.format("%,d VNĐ", 0));
                     updateTotalValues();
 
                 }
@@ -139,6 +139,15 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
             }
         });
 
+        btnstar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity_gio_hang_custom.this, Trangchu.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
         SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
         String username = preferences.getString("username", "");
         taiKhoan = taikhoanDAO.getID(username);
@@ -148,7 +157,6 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     }
 
     public void showKhachHangInputDialog() {
-        // Lấy đối tượng khóa học tương ứng
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Xác nhận đặt hàng");
         builder.setMessage("Bạn có chắc chắn muốn đặt hàng này?");
@@ -234,7 +242,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         }
         totalPrice += shipperPrice;
         txtTongSoLuong.setText(String.valueOf(totalQuantity));
-        txtTongGia.setText(String.valueOf(totalPrice));
+        txtTongGia.setText(String.format("%,.0f VNĐ",totalPrice));
     }
 
     @SuppressLint("MissingPermission")

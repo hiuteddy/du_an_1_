@@ -75,15 +75,17 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         TextView tvgia = findViewById(R.id.tvGiadt);
         TextView tvmota = findViewById(R.id.tvChitiet);
         TextView tvsoluong = findViewById(R.id.tvsoluong);
+        TextView tvdanhGiaTB = findViewById(R.id.textView11);
         dienThoai = dao.getID(String.valueOf(maDt));
-
+        double tb=0;
+        setTBDanhGia(tb);
 
         tvName.setText("Title: " + ten);
         tvloaidt.setText("Series: " + maLoaiSeries);
-        tvgia.setText("$: " + giaTien + " đ");
+        tvgia.setText(String.format("Giá điện thoại: %,.0f VNĐ", giaTien));
         tvmota.setText("Chi tiết: " + moTa);
         tvsoluong.setText("" + dienThoai.getSoLuong());
-
+        tvdanhGiaTB.setText("Đánh giá và nhận xét: " + tb);
 
         Toolbar toolbar = findViewById(R.id.toolbarr);
         setSupportActionBar(toolbar);
@@ -125,7 +127,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
             public void onClick(View v) {
                 GioHang gioHang = new GioHang(maDt, giaTien, quantity);
                 giohangDAO dao = new giohangDAO(getApplicationContext());
-
+                Intent intent1 = new Intent(MainActivity_chi_tiet_dt.this, MainActivity_gio_hang_custom.class);
                 if (quantity > dienThoai.getSoLuong()) {
                     Toast.makeText(MainActivity_chi_tiet_dt.this, "Không the đặt hàng số lượng trong kho không đủ", Toast.LENGTH_SHORT).show();
                     return;
@@ -133,9 +135,10 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
 
                 if (dao.checkExistence(maDt)) {
                     Toast.makeText(MainActivity_chi_tiet_dt.this, "Tên đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
+                    startActivity(intent);
                 } else {
                     if (dao.insert(gioHang) > 0) {
-                        startActivity(new Intent(MainActivity_chi_tiet_dt.this, MainActivity_gio_hang_custom.class));
+                        startActivity(intent);
                         Toast.makeText(MainActivity_chi_tiet_dt.this, "Thêm thành công vào giỏ hàng", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity_chi_tiet_dt.this, "Thêm thất bại", Toast.LENGTH_SHORT).show();
@@ -144,6 +147,19 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void setTBDanhGia(double tb) {
+        int tong = 0, tg = 0;
+        for (DanhGia x: list) {
+            if (x.getMaDt() == dienThoai.getMaDT()){
+                tong = tong+x.getDiem();
+                tg = tg + 1;
+            }
+        }
+        if (tong != 0 && tg != 0){
+            tb = tong/tg;
+        }
     }
 
     public void loaddata() {

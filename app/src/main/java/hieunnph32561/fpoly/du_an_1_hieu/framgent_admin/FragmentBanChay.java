@@ -65,7 +65,7 @@ public class FragmentBanChay extends Fragment {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                //handleSearch(newText);
+                
                 return true;
             }
         });

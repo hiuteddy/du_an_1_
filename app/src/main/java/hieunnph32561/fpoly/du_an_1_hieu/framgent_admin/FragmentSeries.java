@@ -3,6 +3,7 @@ package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
 import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -69,6 +70,21 @@ public class FragmentSeries extends Fragment {
             @Override
             public void onClick(View v) {
                 showAddDialog();
+            }
+        });
+        int space = getResources().getDimensionPixelSize(R.dimen.item_space);
+
+        recyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
+                outRect.left = space;
+                outRect.right = space;
+                outRect.bottom = space;
+                if (parent.getChildAdapterPosition(view) == 0) {
+                    outRect.top = space;
+                } else {
+                    outRect.top = 0;
+                }
             }
         });
 

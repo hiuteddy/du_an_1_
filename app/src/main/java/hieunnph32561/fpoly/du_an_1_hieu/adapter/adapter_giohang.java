@@ -62,8 +62,8 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
 
         holder.tenDt.setText("" + dienThoai.getTenDT());
         holder.soluong.setText("" + gioHang.getSoLuong());
-        holder.giaDt.setText("" + gioHang.getGia());
-        holder.tongtien.setText("" + gioHang.getSoLuong() * gioHang.getGia() + 20000);
+        holder.giaDt.setText(String.format("%,.0f VNĐ", gioHang.getGia()));
+        holder.tongtien.setText(String.format("%,.0f VNĐ", gioHang.getSoLuong() * gioHang.getGia() + 20000) );
         holder.soluong.setText(String.valueOf(gioHang.getSoLuong()));
 
         //update giá từng sản phẩm
@@ -168,7 +168,7 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
 
     private void updateTotalPrice(adapter_giohang.ViewHodelsanpham holder, GioHang gioHang) {
         int tongTien = (int) (gioHang.getSoLuong() * gioHang.getGia());
-        holder.tongtien.setText(String.valueOf(tongTien));
+        holder.tongtien.setText(String.format("%,d VNĐ",tongTien));
     }
 
     private void updateTotalValues() {

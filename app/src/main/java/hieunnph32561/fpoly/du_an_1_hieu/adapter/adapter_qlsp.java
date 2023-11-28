@@ -23,6 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
@@ -36,7 +38,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
     public static ImageView anhDT;
     public static int REQUEST_CODE_ADD = 111;
     private Context context;
-    private ArrayList<DienThoai> list;
+    private ArrayList<DienThoai> list,listGoc;
     DienThoai dienThoai;
     private dienthoaiDAO dao;
     private loaidtDAO daoo;
@@ -47,6 +49,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         this.context = context;
         this.list = list;
         this.fragment = fragment;
+        this.listGoc = list;
         dao = new dienthoaiDAO(context);
         daoo = new loaidtDAO(context);
         listLS = daoo.getAll();
@@ -62,13 +65,12 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
     @Override
     public void onBindViewHolder(@NonNull ViewHodelsanpham holder, int position) {
         dienThoai = list.get(position);
-
         LoaiSeries loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
 
         holder.tenDt.setText(dienThoai.getTenDT());
         holder.loaiDt.setText(loaiSeries.getTenLoaiSeri());
-        holder.giaDt.setText(String.format("%s VNĐ", dienThoai.getGiaTien()));
-        holder.soluong.setText(""+dienThoai.getSoLuong());
+        holder.giaDt.setText(String.format("Giá: %,.0f VNĐ", dienThoai.getGiaTien()));
+        holder.soluong.setText("Số Lượng: "+dienThoai.getSoLuong());
 
         Bitmap bitmap;
         byte[] hinhanhDT = dienThoai.getAnhDT();
@@ -139,7 +141,6 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         edtMota.setText(dienThoai.getMoTa());
         edtsl.setText(String.valueOf(dienThoai.getSoLuong()));
 
-
         spinnerTypeAdapter = new SpinnerTypeAdapter(context, listLS);
         editqlSeries.setAdapter(spinnerTypeAdapter);
         editqlSeries.setSelection(getSpinnerPosition(dienThoai.getMaLoaiSeri()));
@@ -185,7 +186,35 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         dialog.setCancelable(true);
         dialog.show();
     }
+    public void sortDescending() {
+        Collections.sort(listGoc, new Comparator<DienThoai>() {
+            @Override
+            public int compare(DienThoai dt1, DienThoai dt2) {
+                return Integer.compare(dt2.getSoLuong(), dt1.getSoLuong());
+            }
+        });
+        notifyDataSetChanged();
+    }
+    public void sortAscending() {
+        Collections.sort(listGoc, new Comparator<DienThoai>() {
+            @Override
+            public int compare(DienThoai dt1, DienThoai dt2) {
+                return Integer.compare(dt1.getSoLuong(), dt2.getSoLuong());
+            }
+        });
+        notifyDataSetChanged();
+    }
 
+    public void filter(String keyword) {
+        ArrayList<DienThoai> filteredList = new ArrayList<>();
+        for (DienThoai dt : listGoc) {
+            if (dt.getTenDT().toLowerCase().contains(keyword.toLowerCase())) {
+                filteredList.add(dt);
+            }
+        }
+        list = filteredList;
+        notifyDataSetChanged();
+    }
     private int getSpinnerPosition(int maLoaiSeri) {
         for (int i = 0; i < listLS.size(); i++) {
             if (listLS.get(i).getMaLoaiSeri() == maLoaiSeri) {

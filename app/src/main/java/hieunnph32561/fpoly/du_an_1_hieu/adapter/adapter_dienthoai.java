@@ -16,9 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.danhgiaDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_chi_tiet_dt;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DanhGia;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
@@ -26,15 +28,17 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
     Context context;
     dienthoaiDAO dao;
     loaidtDAO daoo;
+    danhgiaDAO dgDao;
     ArrayList<DienThoai> list;
     LoaiSeries loaiSeries;
-
+    DienThoai dienThoai;
 
     public adapter_dienthoai(Context context, ArrayList<DienThoai> list) {
         this.context = context;
         this.list = list;
         dao = new dienthoaiDAO(context);
         daoo = new loaidtDAO(context);
+        dgDao = new danhgiaDAO(context);
     }
 
 
@@ -47,13 +51,26 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHodelsanpham holder, int position) {
-        DienThoai dienThoai = list.get(position);
+        dienThoai = list.get(position);
 
         loaiSeries = daoo.getID(String.valueOf(dienThoai.getMaLoaiSeri()));
 
         holder.tenDt.setText("" + dienThoai.getTenDT());
         holder.loaiDt.setText(loaiSeries.getTenLoaiSeri());
-        holder.giaDt.setText("" + dienThoai.getGiaTien());
+        holder.giaDt.setText(String.format("%,.0f VNĐ", dienThoai.getGiaTien()));
+
+        double tb = 0;
+        int tong = 0, tg = 0;
+        for (DanhGia x: dgDao.getAll()) {
+            if (x.getMaDt() == dienThoai.getMaDT()){
+                tong = tong+x.getDiem();
+                tg = tg + 1;
+            }
+        }
+        if (tong != 0 && tg != 0){
+            tb = tong/tg;
+        }
+        holder.danhGiaTB.setText("Đánh Giá: " + tb);
 
         //lấy ảnh
         Bitmap bitmap;
@@ -92,14 +109,13 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
         list.addAll(newList);
         notifyDataSetChanged();
     }
-
     @Override
     public int getItemCount() {
         return list.size();
     }
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
-        TextView  tenDt, giaDt, loaiDt, chiTiet;
+        TextView  tenDt, giaDt, loaiDt, danhGiaTB;
         ImageView anhdt;
 
         public ViewHodelsanpham(@NonNull View itemView) {
@@ -107,8 +123,8 @@ public class adapter_dienthoai extends RecyclerView.Adapter<adapter_dienthoai.Vi
             tenDt = itemView.findViewById(R.id.txttendt);
             giaDt = itemView.findViewById(R.id.txtgia);
             loaiDt = itemView.findViewById(R.id.txtloaisr);
-            chiTiet = itemView.findViewById(R.id.txtchitiet);
             anhdt = itemView.findViewById(R.id.imganh);
+            danhGiaTB = itemView.findViewById(R.id.danhGiaTB);
         }
     }
 }

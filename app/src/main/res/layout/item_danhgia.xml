@@ -52,7 +52,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:numStars="5"
-        android:stepSize="1" />
+        android:stepSize="1"
+        android:isIndicator="true" />
 
     <!-- Ô nhập nhận xét -->
     <TextView
