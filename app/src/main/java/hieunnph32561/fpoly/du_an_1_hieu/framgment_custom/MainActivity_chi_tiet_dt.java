@@ -1,6 +1,7 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -21,9 +22,11 @@ import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu.adapter_danhgia
 import hieunnph32561.fpoly.du_an_1_hieu.dao.danhgiaDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.giohangDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DanhGia;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
 public class MainActivity_chi_tiet_dt extends AppCompatActivity {
@@ -34,6 +37,8 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
     dienthoaiDAO dao;
     RecyclerView rcldg;
     danhgiaDAO danhgiaDAO;
+    taikhoanDAO taikhoanDAO;
+
     adapter_danhgia adapter_dg;
     ArrayList<DanhGia> list = new ArrayList<>();
 
@@ -45,6 +50,8 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         rcldg = findViewById(R.id.rcldanhgia);
         dao = new dienthoaiDAO(getApplicationContext());
         danhgiaDAO = new danhgiaDAO(this);
+        taikhoanDAO = new taikhoanDAO(this);
+
         loaddata();
 
         TextView btngio = findViewById(R.id.addgiohang);
@@ -78,17 +85,17 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         TextView tvdanhGiaTB = findViewById(R.id.textView11);
         dienThoai = dao.getID(String.valueOf(maDt));
 
-        double tb=0;
+        double tb = 0;
 
         int tong = 0, tg = 0;
-        for (DanhGia x: list) {
-            if (x.getMaDt() == dienThoai.getMaDT()){
-                tong = tong+x.getDiem();
+        for (DanhGia x : list) {
+            if (x.getMaDt() == dienThoai.getMaDT()) {
+                tong = tong + x.getDiem();
                 tg = tg + 1;
             }
         }
-        if (tong != 0 && tg != 0){
-            tb = tong/tg;
+        if (tong != 0 && tg != 0) {
+            tb = tong / tg;
         }
 
         tvName.setText("Title: " + ten);
@@ -136,7 +143,10 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         btngio.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                GioHang gioHang = new GioHang(maDt, giaTien, quantity);
+                SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+                String username = preferences.getString("username", "");
+                TaiKhoan taiKhoan = taikhoanDAO.getID(username);
+                GioHang gioHang = new GioHang(maDt, giaTien, quantity, taiKhoan.getMaTk());
                 giohangDAO dao = new giohangDAO(getApplicationContext());
                 Intent intent = new Intent(MainActivity_chi_tiet_dt.this, MainActivity_gio_hang_custom.class);
                 if (quantity > dienThoai.getSoLuong()) {
@@ -160,9 +170,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         });
     }
 
-//    public void setTBDanhGia(double tb) {
 
-//    }
 
     public void loaddata() {
         Intent intent = getIntent();

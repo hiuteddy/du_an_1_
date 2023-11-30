@@ -26,10 +26,11 @@ public class giohangDAO {
 
         while (cursor.moveToNext()) {
             @SuppressLint("Range") GioHang s = new GioHang(
-                   cursor.getInt(cursor.getColumnIndex("maGh")),
+                    cursor.getInt(cursor.getColumnIndex("maGh")),
                     cursor.getInt(cursor.getColumnIndex("maDT")),
                     cursor.getDouble(cursor.getColumnIndex("giaTien")),
-                    cursor.getInt(cursor.getColumnIndex("soLuong"))
+                    cursor.getInt(cursor.getColumnIndex("soLuong")),
+                    cursor.getInt(cursor.getColumnIndex("maTk"))
 
             );
             list.add(s);
@@ -44,12 +45,16 @@ public class giohangDAO {
         values.put("maDT", s.getMadt());
         values.put("giaTien", s.getGia());
         values.put("soLuong", s.getSoLuong());
+        values.put("maTk", s.getMaTk());
+
         return database.insert("GioHang", null, values); // Trả về ID của hàng được chèn
     }
+
     public long deleteAllGioHang() {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         return database.delete("GioHang", null, null);
     }
+
     public long delete(int mgh) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         long check = database.delete("GioHang", "maDT=?", new String[]{String.valueOf(mgh)});
@@ -78,5 +83,10 @@ public class giohangDAO {
         return (ArrayList<GioHang>) getALLGIOHANG(sql);
     }
 
+    public ArrayList<GioHang> getAllByMaKhachHang(int maKhachHang) {
+        String sql = "SELECT * FROM GioHang WHERE maTk = ?";
+        String[] selectionArgs = {String.valueOf(maKhachHang)};
+        return getALLGIOHANG(sql, selectionArgs);
+    }
 
 }

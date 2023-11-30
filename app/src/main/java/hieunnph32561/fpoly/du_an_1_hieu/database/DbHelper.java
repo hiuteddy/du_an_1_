@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 60;
+    public static final int DB_VERSION = 61;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -57,10 +57,12 @@ public class DbHelper extends SQLiteOpenHelper {
 
         String createGioHangTable = "CREATE TABLE GioHang" +
                 " (maGh INTEGER PRIMARY KEY AUTOINCREMENT," +
+                "maTk INTEGER," +
                 " maDT TEXT," +
                 " giaTien DOUBLE," +
                 " soLuong INTEGER," +
-                " FOREIGN KEY (maDT) REFERENCES DienThoai(maDT))";
+                "FOREIGN KEY (maDT) REFERENCES DienThoai(maDT), " +
+                "FOREIGN KEY (maTk) REFERENCES TaiKhoan(maTk))";
 
         String createHoaDonTable = "CREATE TABLE HoaDon " +
                 "(maHD INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -132,8 +134,8 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 7000, '2023-11-02', 1, '2')");
 
         // Thêm dữ liệu mẫu vào bảng GioHang
-        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (1, 1000, 2)");
-        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (2, 2000, 3)");
+//        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (1, 1000, 2)");
+//        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (2, 2000, 3)");
 
         // Thêm dữ liệu mẫu vào bảng ChiTietDonHang
         db.execSQL("INSERT INTO ChiTietDonHang (maHD, maDT, soLuong, giaTien) VALUES (1, 1, 2, 2000)");

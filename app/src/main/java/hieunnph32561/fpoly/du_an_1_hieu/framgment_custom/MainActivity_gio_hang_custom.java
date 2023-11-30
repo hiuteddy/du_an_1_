@@ -189,8 +189,11 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
+        SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String username = preferences.getString("username", "");
+        taiKhoan = taikhoanDAO.getID(username);
         ghDAO = new giohangDAO(this);
-        gioHangList = ghDAO.getAll();
+        gioHangList = ghDAO.getAllByMaKhachHang(taiKhoan.getMaTk());
         adapterGioHang = new adapter_giohang(this, this, gioHangList);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         rcvgh.setLayoutManager(layoutManager);

@@ -5,18 +5,35 @@ public class GioHang {
     private int madt;
     private Double gia;
     private int soLuong;
+    private int maTk;
 
-    public GioHang(int maGh,int madt, Double gia, int soLuong) {
+    public GioHang(int maGh,int madt, Double gia, int soLuong,int maTk) {
         this.maGh = maGh;
         this.madt = madt;
         this.gia = gia;
         this.soLuong = soLuong ;
+        this.maTk = maTk ;
+
     }
 
-    public GioHang(int madt, Double gia, int soLuong) {
+    public GioHang(int madt, Double gia, int soLuong, int maTk) {
         this.madt = madt;
         this.gia = gia;
         this.soLuong = soLuong;
+        this.maTk = maTk;
+    }
+    //    public GioHang(int madt, Double gia, int soLuong) {
+//        this.madt = madt;
+//        this.gia = gia;
+//        this.soLuong = soLuong;
+//    }
+
+    public int getMaTk() {
+        return maTk;
+    }
+
+    public void setMaTk(int maTk) {
+        this.maTk = maTk;
     }
 
     public int getMadt() {

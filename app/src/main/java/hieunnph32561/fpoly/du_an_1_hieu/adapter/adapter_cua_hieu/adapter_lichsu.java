@@ -1,5 +1,6 @@
 package hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -54,7 +55,7 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
     }
 
     @Override
-    public void onBindViewHolder(@NonNull adapter_lichsu.ViewHodelsanpham holder, int position) {
+    public void onBindViewHolder(@NonNull adapter_lichsu.ViewHodelsanpham holder, @SuppressLint("RecyclerView") int position) {
         HoaDon hoaDon = list.get(position);
 
 
@@ -64,7 +65,7 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
         holder.txtngay.setText("Ngày đặt: " + String.valueOf(sdf.format(hoaDon.getNgay())));
         holder.txtdienthoai.setText("Số điện thoại: " + "" + taiKhoan.getSdt());
         holder.txtmaKH.setText("Tên khách hàng: " + "" + taiKhoan.getHoten());
-        holder.txttongTien.setText("Tổng tiền: " + hoaDon.getTongTien());
+        holder.txttongTien.setText(String.format("Tổng Đơn: %,.0f VNĐ ", hoaDon.getTongTien()));
         holder.txttrangThai.setText("Trạng thái: " + hoaDon.getTrangThai());
         if (hoaDon.getTrangThai() == 0) {
             holder.txttrangThai.setText("Trạng thái: Chờ xác nhân");
@@ -105,8 +106,7 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
                             Toast.makeText(context, "Hủy thành công", Toast.LENGTH_SHORT).show();
                             list.remove(position);
                             notifyDataSetChanged(); // Cập nhật lại dữ liệu trên RecyclerView // Cập nhật lại dữ liệu trên RecyclerView
-                        }
-                        else {
+                        } else {
                             Toast.makeText(context, "Hủy thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -151,7 +151,6 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
 
         }
     }
-
 
 
 }
