@@ -18,11 +18,13 @@ import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.danhgiaDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_danh_gia_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DanhGia;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
@@ -33,6 +35,7 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
     ArrayList<ChiTiet> list;
     chitietDAO dao;
     hoadonDAO hoadonDAO;
+    danhgiaDAO danhgiaDAO;
     dienthoaiDAO dienthoaiDAO;
     loaidtDAO loaidtDAO;
 
@@ -41,6 +44,7 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
         this.context = context;
         this.list = list;
         this.dao = new chitietDAO(context);
+        danhgiaDAO = new danhgiaDAO(context);
         hoadonDAO = new hoadonDAO(context);
         dienthoaiDAO = new dienthoaiDAO(context);
         loaidtDAO = new loaidtDAO(context);
@@ -77,11 +81,12 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
         } else {
             holder.imganh.setImageResource(R.drawable.iphone15);
         }
-        if (hoaDon.getTrangThai() == 3 ){
-            holder.btndg.setVisibility(View.VISIBLE);
-
-        }else {
-            holder.btndg.setVisibility(View.GONE);
+        for (DanhGia x: danhgiaDAO.getAll()) {
+            if (hoaDon.getTrangThai() == 3 || x.getMaDt() == dienThoai.getMaDT()){
+                holder.btndg.setVisibility(View.GONE);
+            }else {
+                holder.btndg.setVisibility(View.VISIBLE);
+            }
         }
         holder.btndg.setOnClickListener(new View.OnClickListener() {
             @Override

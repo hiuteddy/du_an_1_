@@ -101,7 +101,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
         tvName.setText("Title: " + ten);
         tvloaidt.setText("Series: " + maLoaiSeries);
         tvgia.setText(String.format("Giá điện thoại: %,.0f VNĐ", giaTien));
-        tvmota.setText("Chi tiết: " + moTa);
+        tvmota.setText(moTa);
         tvsoluong.setText("" + dienThoai.getSoLuong());
         tvdanhGiaTB.setText("Đánh giá và nhận xét: " + tb);
 
