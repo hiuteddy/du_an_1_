@@ -20,13 +20,17 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.denzcoskun.imageslider.ImageSlider;
+import com.denzcoskun.imageslider.constants.ScaleTypes;
+import com.denzcoskun.imageslider.models.SlideModel;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_dienthoai;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_loaidt;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu.adapter_dienthoai;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu.adapter_loaidt;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
@@ -34,6 +38,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 
 public class framgment_ds_dt extends Fragment {
+
     private SearchView searchView;
     RecyclerView rcvdt, rcvLoai;
     dienthoaiDAO dtDAO;
@@ -41,6 +46,9 @@ public class framgment_ds_dt extends Fragment {
     ImageView txtload, txttang, txtgiam;
     ArrayList<DienThoai> list = new ArrayList<>();
     ArrayList<DienThoai> listcleak = new ArrayList<>();
+    ImageSlider imageSlider;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +59,11 @@ public class framgment_ds_dt extends Fragment {
         txtload = v.findViewById(R.id.imglist);
         txtgiam = v.findViewById(R.id.imglen);
         txttang = v.findViewById(R.id.imgxuong);
+         imageSlider = v.findViewById(R.id.constraintLayout);
+
+
+
+
         txtload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,6 +84,7 @@ public class framgment_ds_dt extends Fragment {
         });
         dsdt();
         loaddata();
+        slide();
         return v;
     }
 
@@ -165,6 +179,8 @@ public class framgment_ds_dt extends Fragment {
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+
+
     }
 
     @Override
@@ -177,4 +193,13 @@ public class framgment_ds_dt extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+    public void slide() {
+        ArrayList<SlideModel> imageList = new ArrayList<>();
+        imageList.add(new SlideModel(R.drawable.slide2, "Trải Nghiệm Sự Mượt Mà", ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.slide_3, "Bầu Trời Công nghệ", ScaleTypes.CENTER_CROP));
+        imageList.add(new SlideModel(R.drawable.slide_4, "Thiết Kế Sang Trọng", ScaleTypes.CENTER_CROP));
+
+        imageSlider.setImageList(imageList);
+    }
+
 }

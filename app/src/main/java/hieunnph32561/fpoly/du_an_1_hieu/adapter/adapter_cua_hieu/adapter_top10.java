@@ -1,4 +1,4 @@
-package hieunnph32561.fpoly.du_an_1_hieu.adapter;
+package hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu;
 
 import android.content.Context;
 import android.view.LayoutInflater;

@@ -1,6 +1,5 @@
-package hieunnph32561.fpoly.du_an_1_hieu.adapter;
+package hieunnph32561.fpoly.du_an_1_hieu.adapter.adpter_cua_nam;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -52,7 +51,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
     }
 
     static class ViewHolder {
-        TextView textViewMaHoaDon,textViewNgayHoaDon,textViewTenDT,textViewSoLuong,textViewDonGia,textViewTongTien,textViewNguoiNhan,textViewDiaChiNhan,textViewSdt;
+        TextView textViewMaHoaDon,textViewNgayHoaDon,textViewTenDT,textViewSoLuong,textViewDonGia,textViewTongTien,textViewNguoiNhan,textViewDiaChiNhan,textViewSdt,textViewpt;
         Button btnxn, btnHuy;
         ImageView imgHoaDon;
 
@@ -74,6 +73,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
             viewHolder.textViewNguoiNhan = convertView.findViewById(R.id.tvNguoiNhan);
             viewHolder.textViewDiaChiNhan = convertView.findViewById(R.id.tvDiachiNhan);
             viewHolder.textViewSdt = convertView.findViewById(R.id.tvsdt);
+            viewHolder.textViewpt = convertView.findViewById(R.id.tvphuongthuc);
             viewHolder.imgHoaDon = convertView.findViewById(R.id.imgHoaDon);
 
             viewHolder.btnxn = convertView.findViewById(R.id.btnXN);
@@ -108,6 +108,7 @@ public class adapterQLHoaDon extends ArrayAdapter<ChiTiet> {
         viewHolder.textViewNguoiNhan.setText("Người Nhận: " + taiKhoan.getHoten());
         viewHolder.textViewDiaChiNhan.setText("Địa Chỉ: " + taiKhoan.getDiachi());
         viewHolder.textViewSdt.setText("Số điện thoại: " + taiKhoan.getSdt());
+        viewHolder.textViewpt.setText("" + hoaDon.getPhuongthuc());
 
         trangThai = hoaDon.getTrangThai();
         if (trangThai == 0) {

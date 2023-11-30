@@ -1,7 +1,7 @@
-package hieunnph32561.fpoly.du_an_1_hieu.adapter;
+package hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu;
 
-import android.content.Context;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -27,7 +27,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 
-public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHodelsanpham> {
+public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHodelsanpham> {
     Context context;
     ArrayList<HoaDon> list;
     chitietDAO dao;
@@ -37,14 +37,13 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
 
-
     public adapter_lichsu(Context context, ArrayList<HoaDon> list) {
         this.context = context;
         this.list = list;
         this.dao = new chitietDAO(context);
         hoadonDAO = new hoadonDAO(context);
         dienthoaiDAO = new dienthoaiDAO(context);
-        taikhoanDAO=new taikhoanDAO(context);
+        taikhoanDAO = new taikhoanDAO(context);
     }
 
     @NonNull
@@ -57,7 +56,6 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
     @Override
     public void onBindViewHolder(@NonNull adapter_lichsu.ViewHodelsanpham holder, int position) {
         HoaDon hoaDon = list.get(position);
-
 
 
         TaiKhoan taiKhoan = taikhoanDAO.getIDma(String.valueOf(hoaDon.getMaTk()));
@@ -85,7 +83,6 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
         holder.txtdiaChi.setText("Địa chỉ: " + taiKhoan.getDiachi());
         holder.txtphuongthuc.setText("Phương thức: " + hoaDon.getPhuongthuc());
 
-
         holder.btnchitiet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -106,10 +103,10 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
                     public void onClick(DialogInterface dialog, int which) {
                         if (hoadonDAO.update(hoaDon.getMaHD(), 4) > 0) {
                             Toast.makeText(context, "Hủy thành công", Toast.LENGTH_SHORT).show();
-                            list.clear();
-                            list.addAll(hoadonDAO.getAll());
-                            notifyDataSetChanged(); // Cập nhật lại dữ liệu trên RecyclerView
-                        } else {
+                            list.remove(position);
+                            notifyDataSetChanged(); // Cập nhật lại dữ liệu trên RecyclerView // Cập nhật lại dữ liệu trên RecyclerView
+                        }
+                        else {
                             Toast.makeText(context, "Hủy thất bại", Toast.LENGTH_SHORT).show();
                         }
                     }
@@ -134,9 +131,9 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
 
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
-        TextView txtmaKH, txttongTien, txtngay, txttrangThai, txtdiaChi, txtmadon, txtdienthoai,txtphuongthuc;
+        TextView txtmaKH, txttongTien, txtngay, txttrangThai, txtdiaChi, txtmadon, txtdienthoai, txtphuongthuc;
         Button btnchitiet;
-        Button  btnhuy;
+        Button btnhuy;
 
 
         public ViewHodelsanpham(@NonNull View itemView) {
@@ -148,10 +145,13 @@ public abstract class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu
             txtdiaChi = itemView.findViewById(R.id.txtdiachi);
             txttongTien = itemView.findViewById(R.id.tongTien);
             txtdienthoai = itemView.findViewById(R.id.txtdienthoai);
-            txtphuongthuc=itemView.findViewById(R.id.txtphuongthuc);
+            txtphuongthuc = itemView.findViewById(R.id.txtphuongthuc);
             btnchitiet = itemView.findViewById(R.id.btnchitiett);
             btnhuy = itemView.findViewById(R.id.btnxoa);
 
         }
     }
+
+
+
 }

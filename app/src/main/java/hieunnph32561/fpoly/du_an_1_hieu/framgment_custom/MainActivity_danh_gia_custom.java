@@ -115,4 +115,5 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
             }
         });
     }
+
 }

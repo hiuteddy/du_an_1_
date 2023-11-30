@@ -144,9 +144,16 @@
                 android:layout_margin="16dp"
                 android:layout_weight="1"
                 android:text="description"
-                android:textColor="#686767"
+                android:textColor="@color/black"
                 android:textSize="20sp"
                 android:textStyle="bold" />
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="2dp"
+                android:layout_marginTop="40dp"
+                android:background="@drawable/bgr_dg"
+                />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -154,6 +161,8 @@
                 android:layout_marginBottom="70dp"
                 android:background="@drawable/bgr_dg"
                 android:orientation="vertical">
+
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -169,6 +178,7 @@
                         android:text="Đánh giá và nhận xét: "
                         android:textColor="@color/black"
                         android:textSize="20sp"
+                        android:layout_margin="10dp"
                         android:textStyle="bold" />
                     <ImageView
                         android:layout_width="30dp"
@@ -177,6 +187,8 @@
                         android:tint="#FFEB3B"
                         tools:ignore="UseAppTint" />
                 </LinearLayout>
+
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rcldanhgia"

@@ -1,10 +1,7 @@
 package hieunnph32561.fpoly.du_an_1_hieu.adapter;
 
-import static java.security.AccessController.getContext;
-
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.TextUtils;
@@ -12,15 +9,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -29,10 +22,9 @@ import java.util.List;
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.FragmentKhachHang;
-import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
-public class khachhnagAdapter extends RecyclerView.Adapter<khachhnagAdapter.khachhangViewHolder>  {
+public class adapter_khach_hang extends RecyclerView.Adapter<adapter_khach_hang.khachhangViewHolder>  {
     FragmentKhachHang fragment;
     private Context context;
     private ArrayList<TaiKhoan> list,listOld;
@@ -41,13 +33,13 @@ public class khachhnagAdapter extends RecyclerView.Adapter<khachhnagAdapter.khac
     RecyclerView rcc;
 
 
-    public khachhnagAdapter(Context context, ArrayList<TaiKhoan> list) {
+    public adapter_khach_hang(Context context, ArrayList<TaiKhoan> list) {
         this.context = context;
         this.list = list;
         taikhoanDAO = new taikhoanDAO(context);
     }
 
-    public khachhnagAdapter(@NonNull Context context, FragmentKhachHang fragmentKhachHang, List<TaiKhoan> listSearch) {
+    public adapter_khach_hang(@NonNull Context context, FragmentKhachHang fragmentKhachHang, List<TaiKhoan> listSearch) {
         this.context = context;
         this.fragment = fragmentKhachHang;
         this.listSearch = listSearch;

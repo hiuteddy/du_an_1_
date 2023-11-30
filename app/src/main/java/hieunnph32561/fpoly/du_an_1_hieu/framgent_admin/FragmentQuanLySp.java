@@ -40,8 +40,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.SpinnerTypeAdapter;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_qlsp;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adpter_cua_nam.SpinnerTypeAdapter;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adpter_cua_nam.adapter_qlsp;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;

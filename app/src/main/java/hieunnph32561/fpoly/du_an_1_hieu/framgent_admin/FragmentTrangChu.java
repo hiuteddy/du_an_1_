@@ -97,7 +97,7 @@ public class FragmentTrangChu extends Fragment {
     private void setToolbarTitle(String title) {
         if (getActivity() instanceof Trangchu) {
             Trangchu activity = (Trangchu) getActivity();
-            activity.settitleToolbar(title);
+            activity.setTitle(title);
         }
     }
 }

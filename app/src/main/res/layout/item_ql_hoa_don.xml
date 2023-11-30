@@ -85,6 +85,13 @@
         android:textSize="22dp"
         android:layout_marginLeft="20dp"/>
     <TextView
+        android:id="@+id/tvphuongthuc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Phương thức: "
+        android:textSize="22dp"
+        android:layout_marginLeft="20dp"/>
+    <TextView
         android:id="@+id/tvDiachiNhan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

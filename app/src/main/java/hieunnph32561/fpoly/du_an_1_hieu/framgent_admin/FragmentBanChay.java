@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_top10;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu.adapter_top10;
 import hieunnph32561.fpoly.du_an_1_hieu.model.Top;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.thongkeDAO;
 

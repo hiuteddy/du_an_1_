@@ -1,4 +1,4 @@
-package hieunnph32561.fpoly.du_an_1_hieu.adapter;
+package hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu;
 
 import android.content.Context;
 import android.content.Intent;
@@ -27,7 +27,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
-public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_chitietls.ViewHodelsanpham> {
+public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.ViewHodelsanpham> {
 
     Context context;
     ArrayList<ChiTiet> list;
@@ -48,13 +48,13 @@ public class adapter_chitietls extends RecyclerView.Adapter<hieunnph32561.fpoly.
 
     @NonNull
     @Override
-    public hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_chitietls.ViewHodelsanpham onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public adapter_chitietls.ViewHodelsanpham onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.item_lschitiet, parent, false);
-        return new hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_chitietls.ViewHodelsanpham(view);
+        return new adapter_chitietls.ViewHodelsanpham(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_chitietls.ViewHodelsanpham holder, int position) {
+    public void onBindViewHolder(@NonNull adapter_chitietls.ViewHodelsanpham holder, int position) {
         ChiTiet chiTiet = list.get(position);
 
         DienThoai dienThoai = dienthoaiDAO.getID(String.valueOf(chiTiet.getMadt()));

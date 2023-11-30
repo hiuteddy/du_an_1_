@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_chitietls;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu.adapter_chitietls;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 

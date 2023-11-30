@@ -30,14 +30,14 @@ import java.util.Comparator;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.khachhnagAdapter;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_khach_hang;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class FragmentKhachHang extends Fragment {
     private SearchView searchView;
     private List<TaiKhoan> list = new ArrayList<>();
-    private khachhnagAdapter adapter;
+    private adapter_khach_hang adapter;
     private RecyclerView rcc;
     private taikhoanDAO taikhoanDAO;
     private FloatingActionButton floatAdd;
@@ -86,7 +86,7 @@ public class FragmentKhachHang extends Fragment {
         ArrayList<TaiKhoan> list = taikhoanDAO.getDSDL();
         LinearLayoutManager manager = new LinearLayoutManager(getContext());
         rcc.setLayoutManager(manager);
-        khachhnagAdapter adapter = new khachhnagAdapter(getContext(),list);
+        adapter_khach_hang adapter = new adapter_khach_hang(getContext(),list);
         rcc.setAdapter(adapter);
         floatAdd.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +131,7 @@ public class FragmentKhachHang extends Fragment {
                         ArrayList<TaiKhoan> list = taikhoanDAO.getDSDL();
                         LinearLayoutManager manager = new LinearLayoutManager(getContext());
                         rcc.setLayoutManager(manager);
-                        khachhnagAdapter adapter = new khachhnagAdapter(getContext(),list);
+                        adapter_khach_hang adapter = new adapter_khach_hang(getContext(),list);
                         rcc.setAdapter(adapter);
                     }else {
                         Toast.makeText(getContext(), "Them that bai", Toast.LENGTH_SHORT).show();
@@ -161,7 +161,7 @@ public class FragmentKhachHang extends Fragment {
                 return taiKhoan.getTenDN().toLowerCase().compareTo(t1.getTenDN().toLowerCase());
             }
         });
-        adapter = new khachhnagAdapter(getContext(), (ArrayList<TaiKhoan>) list);
+        adapter = new adapter_khach_hang(getContext(), (ArrayList<TaiKhoan>) list);
         adapter.notifyDataSetChanged();
     }
     //sap xep giam dan
@@ -172,7 +172,7 @@ public class FragmentKhachHang extends Fragment {
                 return t1.getTenDN().toLowerCase().compareTo(taiKhoan.getTenDN().toLowerCase());
             }
             });
-        adapter = new khachhnagAdapter(getContext(), (ArrayList<TaiKhoan>) list);
+        adapter = new adapter_khach_hang(getContext(), (ArrayList<TaiKhoan>) list);
         adapter.notifyDataSetChanged();
     }
     @Override

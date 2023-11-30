@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 58;
+    public static final int DB_VERSION = 60;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -99,7 +99,22 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO LoaiSeriesDT (maLoaiSeries, tenLoaiSeries) VALUES (3, 'Series 13')");
 
         // Thêm dữ liệu mẫu vào bảng DienThoai
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (1, 1, '', 'Iphone 15 Pro', 1000, 'Mô tả 1',3)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa, soLuong) VALUES (1, 1, '', 'Iphone 15 Pro', 1000, 'Thời gian xem video lên đến 26 giờ chú thích ⁴\n" +
+                "Hệ thống camera kép tiên tiến" +
+                "\n" +
+                "Chính 48MP | Ultra Wide" +
+                "\n" +
+                "Ảnh có độ phân giải siêu cao (24MP và 48MP)" +
+                "\n" +
+                "Ảnh chân dung thế hệ mới với Focus và Depth Control" +
+                "Chip A16 Bionic với GPU 5 lõi\n" +
+                "Màn hình Super Retina XDR chú thích " +
+                "\n" +
+                "Màn hình Luôn Bật" +
+                "\n" +
+                "Công nghệ ProMotionDynamic Island" +
+                "\n" +
+                "Một cách tuyệt diệu để tương tác với iPhone', 3)");
         db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (2, 2, '', 'Iphone 15 ', 2000, 'Mô tả 2',4)");
         db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (3, 3, '', 'Iphone 15 Pro Max', 3000, 'Mô tả 3',5)");
 
@@ -136,6 +151,8 @@ public class DbHelper extends SQLiteOpenHelper {
             db.execSQL("drop table if exists GioHang");
             db.execSQL("drop table if exists ChiTietDonHang");
             db.execSQL("drop table if exists Admin");
+            db.execSQL("drop table if exists DanhGia");
+
             onCreate(db);
         }
     }

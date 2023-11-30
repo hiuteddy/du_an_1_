@@ -1,4 +1,4 @@
-package hieunnph32561.fpoly.du_an_1_hieu.adapter;
+package hieunnph32561.fpoly.du_an_1_hieu.adapter.adpter_cua_nam;
 
 import android.app.Dialog;
 import android.content.Context;

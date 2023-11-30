@@ -1,43 +1,28 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
 
 import android.app.Dialog;
-import android.app.SearchManager;
-import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.widget.AppCompatButton;
-import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.SpinnerTypeAdapter;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_qlSeries;
-import hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_qlsp;
-import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.adapter.adpter_cua_nam.adapter_qlSeries;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
-import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 public class FragmentSeries extends Fragment {

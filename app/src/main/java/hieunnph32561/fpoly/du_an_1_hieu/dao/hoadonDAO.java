@@ -109,7 +109,7 @@ public class hoadonDAO {
 
     public List<ChiTiet> getChiTietByMaHoaDon(int maHoaDon) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        List<ChiTiet> chiTietList = new ArrayList<>();
+        ArrayList<ChiTiet> chiTietList = new ArrayList<>();
 
         // Câu truy vấn SQL lấy danh sách chi tiết đơn hàng thuộc mã hóa đơn
         String query = "SELECT * FROM ChiTietDonHang WHERE maHd = ?";
