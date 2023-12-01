@@ -48,7 +48,7 @@ public class framgment_lich_su_hoa_don extends Fragment {
         taikhoanDAO = new taikhoanDAO(getContext());
 //        loaddata();
 
-        // setHasOptionsMenu(true); // Bật menuư=
+        // setHasOptionsMenu(true); // Bật menu
         tabLayout = v.findViewById(R.id.tablayout);
         viewPager2 = v.findViewById(R.id.viewpage2);
         adapter_tablayout_ls = new adapter_tablayout_ls(getActivity());
@@ -72,6 +72,9 @@ public class framgment_lich_su_hoa_don extends Fragment {
                         tab.setText("Thành công");
                         break;
                     case 4:
+                        tab.setText("Chờ Hủy");
+                        break;
+                    case 5:
                         tab.setText("Hủy");
                         break;
                 }

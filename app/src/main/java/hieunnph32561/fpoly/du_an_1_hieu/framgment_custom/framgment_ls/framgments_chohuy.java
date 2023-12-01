@@ -21,7 +21,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
-public class framgments_huy extends Fragment {
+public class framgments_chohuy extends Fragment {
     private RecyclerView recyclerView;
     private adapter_lichsu adapter;
     private List<HoaDon> chiTietList;
@@ -54,7 +54,7 @@ public class framgments_huy extends Fragment {
         listsetAdapter.clear(); // Xóa danh sách cũ
 
         for (HoaDon x : chiTietList) {
-            if (x.getTrangThai() == 5 && x.getMaTk()==(taiKhoan.getMaTk())) {
+            if (x.getTrangThai() == 4 && x.getMaTk()==(taiKhoan.getMaTk())) {
                 listsetAdapter.add(x); // Thêm vào danh sách mới chỉ khi trạng thái là 0 và mã khách hàng khớp
             }
         }
