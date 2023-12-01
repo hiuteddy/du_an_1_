@@ -130,16 +130,16 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
         // Thêm dữ liệu mẫu vào bảng HoaDon
-        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 5000, '2023-11-01', 1, '1')");
-        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 7000, '2023-11-02', 1, '2')");
-
-        // Thêm dữ liệu mẫu vào bảng GioHang
-//        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (1, 1000, 2)");
-//        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (2, 2000, 3)");
-
-        // Thêm dữ liệu mẫu vào bảng ChiTietDonHang
-        db.execSQL("INSERT INTO ChiTietDonHang (maHD, maDT, soLuong, giaTien) VALUES (1, 1, 2, 2000)");
-        db.execSQL("INSERT INTO ChiTietDonHang (maHD, maDT, soLuong, giaTien) VALUES (2, 2, 3, 6000)");
+//        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 500000, '2023-11-01', 1, '1')");
+//        db.execSQL("INSERT INTO HoaDon (maTk, tongTien, ngay, trangThai, phuongThuc) VALUES (1, 7000, '2023-11-02', 1, '2')");
+//
+//        // Thêm dữ liệu mẫu vào bảng GioHang
+////        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (1, 1000, 2)");
+////        db.execSQL("INSERT INTO GioHang (maDT, giaTien, soLuong) VALUES (2, 2000, 3)");
+//
+//        // Thêm dữ liệu mẫu vào bảng ChiTietDonHang
+//        db.execSQL("INSERT INTO ChiTietDonHang (maHD, maDT, soLuong, giaTien) VALUES (1, 1, 2, 2000)");
+//        db.execSQL("INSERT INTO ChiTietDonHang (maHD, maDT, soLuong, giaTien) VALUES (2, 2, 3, 6000)");
     }
 
 

@@ -1,4 +1,4 @@
-package hieunnph32561.fpoly.du_an_1_hieu;
+package hieunnph32561.fpoly.du_an_1_hieu.account;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 

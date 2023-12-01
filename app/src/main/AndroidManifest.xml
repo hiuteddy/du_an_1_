@@ -50,7 +50,7 @@
             android:name=".framgment_custom.hotrokhachhang"
             android:exported="false" />
         <activity
-            android:name=".Dang_ky"
+            android:name=".account.Dang_ky"
             android:exported="false" />
         <activity
             android:name=".framgment_custom.MainActivity_chi_tiet_ls"
@@ -63,13 +63,13 @@
             android:name=".framgment_custom.MainActivity_gio_hang_custom"
             android:exported="false" />
         <activity
-            android:name=".Dangnhap"
+            android:name=".account.Dangnhap"
             android:exported="false" />
         <activity
             android:name=".Trangchu"
             android:exported="false" />
         <activity
-            android:name=".Manhinhcho"
+            android:name=".account.Manhinhcho"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -15,12 +15,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.thongkeDAO;
 
 public class FragmentDoanhThu extends Fragment {
@@ -88,7 +89,15 @@ public class FragmentDoanhThu extends Fragment {
                 Log.e("Doan thu", "Doanh thu");
                 String tu = ed_tuNGay.getText().toString();
                 String den = ed_denNGay.getText().toString();
-                tv_soTien.setText("" + thongKeDao.getDoanhThu(tu, den) + ".VNĐ");
+                double doanhThu = thongKeDao.getDoanhThu(tu, den); // Lấy số tiền doanh thu từ thongKeDao
+
+                // Định dạng số tiền thành VND
+                NumberFormat format = NumberFormat.getCurrencyInstance(new Locale("vi", "VN"));
+                String doanhThuDaFormat = format.format(doanhThu);
+
+                // Đặt giá trị đã định dạng vào TextView
+                tv_soTien.setText(doanhThuDaFormat, TextView.BufferType.NORMAL);
+              //  tv_soTien.setText( thongKeDao.getDoanhThu(tu, den), TextView.BufferType.valueOf(" %,.0f VNĐ"));
             }
         });
         return view;

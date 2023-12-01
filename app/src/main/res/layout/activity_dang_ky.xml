@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:backgroundTint="@color/design_default_color_on_primary"
-    tools:context=".Dang_ky">
+    tools:context=".account.Dang_ky">
 
 
     <ImageView

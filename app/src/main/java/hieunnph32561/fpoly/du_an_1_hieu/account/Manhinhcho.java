@@ -1,10 +1,12 @@
-package hieunnph32561.fpoly.du_an_1_hieu;
-
-import androidx.appcompat.app.AppCompatActivity;
+package hieunnph32561.fpoly.du_an_1_hieu.account;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import hieunnph32561.fpoly.du_an_1_hieu.R;
 
 public class Manhinhcho extends AppCompatActivity {
 

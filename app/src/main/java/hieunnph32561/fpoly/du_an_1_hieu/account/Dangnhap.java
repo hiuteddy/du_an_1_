@@ -1,4 +1,4 @@
-package hieunnph32561.fpoly.du_an_1_hieu;
+package hieunnph32561.fpoly.du_an_1_hieu.account;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import hieunnph32561.fpoly.du_an_1_hieu.R;
+import hieunnph32561.fpoly.du_an_1_hieu.Trangchu;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 
 public class Dangnhap extends AppCompatActivity {
@@ -69,7 +71,7 @@ public class Dangnhap extends AppCompatActivity {
         txtload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(Dangnhap.this,Dang_ky.class));
+                startActivity(new Intent(Dangnhap.this, Dang_ky.class));
             }
         });
     }
