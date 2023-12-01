@@ -27,7 +27,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
-public class FragmentDXN extends Fragment {
+public class FragmentChoHuy extends Fragment {
 
     private  SearchView searchView;
     private ListView listView;
@@ -79,7 +79,7 @@ public class FragmentDXN extends Fragment {
         hoaDonList = daoHD.getAll();
 
         for (HoaDon x : hoaDonList) {
-            if (x.getTrangThai() == 1) {
+            if (x.getTrangThai() == 4) {
                 listsetAdapter.add(x); // Add to the new list only when the status is 0 and the account ID matches
             }else {
                 listsetAdapter.remove(x);

@@ -78,6 +78,9 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
             holder.txttrangThai.setText("Trạng thái: Giao hàng thành công");
             holder.btnhuy.setVisibility(View.GONE);
         } else if (hoaDon.getTrangThai() == 4) {
+            holder.txttrangThai.setText("Trạng thái: Chờ hủy");
+            holder.btnhuy.setVisibility(View.GONE);
+        }if (hoaDon.getTrangThai() == 5) {
             holder.txttrangThai.setText("Trạng thái: Đã hủy");
             holder.btnhuy.setVisibility(View.GONE);
         }
@@ -97,12 +100,28 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
             @Override
             public void onClick(View v) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setTitle("Xác nhận hủy");
+                if (hoaDon.getTrangThai()!=0){
+                    builder.setTitle("Hủy Đơn Hàng");
+                    builder.setMessage("Hủy sản phẩm này cần Admin xác nhận vui lòng chờ");
+                    builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            if (hoadonDAO.update(hoaDon.getMaHD(), 4) > 0) {
+                                Toast.makeText(context, "Chờ Admin xác nhận", Toast.LENGTH_SHORT).show();
+                                list.remove(position);
+                                notifyDataSetChanged();
+                            } else {
+                                Toast.makeText(context, "Hủy thất bại", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                }else {
+                builder.setTitle("Hủy Đơn Hàng");
                 builder.setMessage("Bạn có chắc chắn muốn hủy sản phẩm này?");
                 builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (hoadonDAO.update(hoaDon.getMaHD(), 4) > 0) {
+                        if (hoadonDAO.update(hoaDon.getMaHD(), 5) > 0) {
                             Toast.makeText(context, "Hủy thành công", Toast.LENGTH_SHORT).show();
                             list.remove(position);
                             notifyDataSetChanged(); // Cập nhật lại dữ liệu trên RecyclerView // Cập nhật lại dữ liệu trên RecyclerView
@@ -111,6 +130,7 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
                         }
                     }
                 });
+                }
                 builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

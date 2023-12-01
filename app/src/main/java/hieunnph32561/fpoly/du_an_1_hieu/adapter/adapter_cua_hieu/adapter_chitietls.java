@@ -67,11 +67,10 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
 
         HoaDon hoaDon = hoadonDAO.getID(String.valueOf(chiTiet.getMahd()));
 
-        holder.txtmachitiet.setText("Mã chi tiết đơn: " + String.valueOf(chiTiet.getMact()));
-        holder.txtmadt.setText("Tên điện thoại: " + String.valueOf(dienThoai.getTenDT()));
-        holder.txthoadon.setText("Tên loại: " + loaiSeries.getTenLoaiSeri());
+        holder.txtmadt.setText("Điện thoại: " + dienThoai.getTenDT());
+        holder.txthoadon.setText("Loại: " + loaiSeries.getTenLoaiSeri());
         holder.txtsoluong.setText("Số lượng: " + chiTiet.getSoluong());
-        holder.txtgiatien.setText(String.format("Giá điện thoại: %,.0f VNĐ", chiTiet.getGiatien()) );
+        holder.txtgiatien.setText(String.format("Giá: %,.0f VNĐ", chiTiet.getGiatien()) );
         holder.txttongtien.setText(String.format("Tổng tiền: %,.0f VNĐ", chiTiet.getGiatien()* chiTiet.getSoluong()) );
 
         byte[] anhData = dienthoaiDAO.getAnhByMaDT(dienThoai.getMaDT());
@@ -82,11 +81,14 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
             holder.imganh.setImageResource(R.drawable.iphone15);
         }
         for (DanhGia x: danhgiaDAO.getAll()) {
-            if (hoaDon.getTrangThai() == 3 || x.getMaDt() == dienThoai.getMaDT()){
+            if (hoaDon.getTrangThai() == 3 && x.getMaDt() == dienThoai.getMaDT() ){
                 holder.btndg.setVisibility(View.GONE);
             }else {
                 holder.btndg.setVisibility(View.VISIBLE);
             }
+        }
+        if (hoaDon.getTrangThai() != 3){
+            holder.btndg.setVisibility(View.GONE);
         }
         holder.btndg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,13 +107,12 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
     }
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
-        TextView txtmachitiet, txtmadt, txthoadon, txtsoluong, txtgiatien, txttongtien;
+        TextView txtmadt, txthoadon, txtsoluong, txtgiatien, txttongtien;
         ImageView imganh;
         Button btndg;
 
         public ViewHodelsanpham(@NonNull View itemView) {
             super(itemView);
-            txtmachitiet = itemView.findViewById(R.id.txtmachitiet);
             txtmadt = itemView.findViewById(R.id.txtmadt);
             txthoadon = itemView.findViewById(R.id.txthoadon);
             txtsoluong = itemView.findViewById(R.id.txtsoluong);

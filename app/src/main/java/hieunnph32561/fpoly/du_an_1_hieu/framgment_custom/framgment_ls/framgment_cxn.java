@@ -58,7 +58,7 @@ public class framgment_cxn extends Fragment {
             if (x.getTrangThai() == 0 && x.getMaTk() == taiKhoan.getMaTk()) {
                 listsetAdapter.add(x); // Add to the new list only when the status is 0 and the account ID matches
             }
-            if (x.getTrangThai() == 4 && x.getMaTk() == taiKhoan.getMaTk()) {
+            if (x.getTrangThai() == 5 && x.getMaTk() == taiKhoan.getMaTk()) {
                 listsetAdapter.remove(x);
                 // Remove the invoice from the list if the status is 4 and the account ID matches
             }

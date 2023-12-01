@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ls.framgment_cxn;
+import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ls.framgments_chohuy;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ls.framgments_dg;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ls.framgment_dxn;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ls.framgments_huy;
@@ -27,6 +28,8 @@ public class adapter_tablayout_ls extends FragmentStateAdapter {
                 return new framgments_dg();
             } else if (position == 3) {
                 return new framgments_tc();
+            } else if (position == 4) {
+                return new framgments_chohuy();
             } else
                 return new framgments_huy();
             }
@@ -34,7 +37,7 @@ public class adapter_tablayout_ls extends FragmentStateAdapter {
 
         @Override
         public int getItemCount() {
-            return 5;
+            return 6;
         }
 
     }

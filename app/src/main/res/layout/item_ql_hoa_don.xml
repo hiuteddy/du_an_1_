@@ -2,139 +2,122 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@drawable/brg_item_dt"
     android:gravity="end"
     android:padding="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="end"
-        android:padding="12dp">
-        <TextView
-            android:id="@+id/maHoaDon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Mã Hóa Đơn:"
-            android:textSize="24dp"/>
-        <TextView
-            android:id="@+id/ngayHoaDon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="11/11/2023"
-            android:textSize="24dp"
-            android:layout_marginTop="5dp"
-            android:gravity="end"/>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/imgHoaDon"
-            android:layout_width="60dp"
-            android:layout_height="90dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="5dp"
-            android:src="@drawable/baseline_smartphone_24"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@drawable/bg_btn">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:paddingLeft="10dp">
-
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end"
+            android:padding="12dp">
             <TextView
-                android:id="@+id/hdTendt"
+                android:id="@+id/maHoaDon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Mã Hóa Đơn:"
+                android:textSize="24dp"/>
+            <TextView
+                android:id="@+id/ngayHoaDon"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="dien thoai 1"
-                android:textSize="18dp"
-                android:textStyle="bold"/>
-            <TextView
-                android:id="@+id/hdSoLuong"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Số Lượng: 1"
-                android:textSize="18dp"/>
-            <TextView
-                android:id="@+id/hdDonGia"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Đơn Giá:"
-                android:textSize="18dp"/>
-            <TextView
-                android:id="@+id/hdTongTien"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tổng Tiền:"
-                android:textSize="18dp"
-                android:textStyle="bold"/>
+                android:text="11/11/2023"
+                android:textSize="24dp"
+                android:layout_marginTop="5dp"
+                android:gravity="end"/>
         </LinearLayout>
-    </LinearLayout>
-
-    <TextView
-        android:id="@+id/tvNguoiNhan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Người nhận:"
-        android:textSize="22dp"
-        android:layout_marginLeft="20dp"/>
-    <TextView
-        android:id="@+id/tvphuongthuc"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Phương thức: "
-        android:textSize="22dp"
-        android:layout_marginLeft="20dp"/>
-    <TextView
-        android:id="@+id/tvDiachiNhan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Địa Chỉ:"
-        android:textSize="22dp"
-        android:layout_marginLeft="20dp"/>
-    <TextView
-        android:id="@+id/tvsdt"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Số điện thoại: "
-        android:textSize="22dp"
-        android:layout_marginLeft="20dp"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="10dp">
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnHuyDon"
-            android:layout_width="125dp"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_btn"
-            android:backgroundTint="#707570"
-            android:text="Hủy"
-            android:textColor="#FFFFFF"/>
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="end">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imgHoaDon"
+                android:layout_width="60dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginBottom="5dp"
+                android:src="@drawable/baseline_request_quote_24"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingLeft="10dp">
+                <TextView
+                    android:id="@+id/hdTongTien"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tổng Tiền:"
+                    android:textSize="22dp"
+                    android:textColor="#DD0F0F"
+                    android:textStyle="bold"/>
+
+                <TextView
+                    android:id="@+id/tvNguoiNhan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Người nhận:"
+                    android:textSize="22dp"/>
+                <TextView
+                    android:id="@+id/tvphuongthuc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Phương thức: "
+                    android:textSize="22dp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvDiachiNhan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Địa Chỉ:"
+            android:textSize="22dp"
+            android:layout_marginLeft="20dp"/>
+        <TextView
+            android:id="@+id/tvsdt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Số điện thoại: "
+            android:textSize="22dp"
+            android:layout_marginLeft="20dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="10dp">
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnXN"
+                android:id="@+id/btnHuyDon"
                 android:layout_width="125dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_btn"
-                android:backgroundTint="#00CC08"
-                android:text="Xác Nhận"
-                android:textColor="#FFFFFF"/>
+                android:text="Hủy"
+                android:textColor="#000000"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="end">
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnXN"
+                    android:layout_width="125dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/bg_btn"
+                    android:text="Xác Nhận"
+                    android:textColor="#000000"/>
+            </LinearLayout>
+
         </LinearLayout>
 
     </LinearLayout>
-
 
 </LinearLayout>

@@ -2,6 +2,7 @@ package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -24,13 +25,15 @@ import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class FragmentHuy extends Fragment {
 
     private  SearchView searchView;
     private ListView listView;
     private adapterQLHoaDon adapter;
-    private List<ChiTiet> chiTietList;
+    private List<HoaDon> hoaDonList;
+    List<HoaDon> listsetAdapter;
     chitietDAO daoCT;
     hoadonDAO daoHD;
 
@@ -47,21 +50,44 @@ public class FragmentHuy extends Fragment {
         listView = view.findViewById(R.id.lvQuanLyHoaDon);
         daoCT = new chitietDAO(getContext());
         daoHD = new hoadonDAO(getContext());
-        chiTietList = new ArrayList<>();
-        List<ChiTiet> listsetAdapter = new ArrayList<>();
-        chiTietList = daoCT.getAll();
-
-        for (ChiTiet x: chiTietList) {
-            HoaDon don = daoHD.getID(String.valueOf(x.getMahd()));
-            if (don.getTrangThai()==4){
-                listsetAdapter.add(x);
-            }
-        }
+        hoaDonList = new ArrayList<>();
+        listsetAdapter = new ArrayList<>();
+        hoaDonList = daoHD.getAll();
 
         adapter = new adapterQLHoaDon(getContext(), listsetAdapter);
         listView.setAdapter(adapter);
 
         return view;
+    }
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if (isVisibleToUser && isResumed()) {
+            updateAdapterData();
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getUserVisibleHint()) {
+            updateAdapterData();
+        }
+    }
+    private void updateAdapterData() {
+        listsetAdapter.clear(); // Clear old list
+        hoaDonList = daoHD.getAll();
+
+        for (HoaDon x : hoaDonList) {
+            if (x.getTrangThai() == 5) {
+                listsetAdapter.add(x); // Add to the new list only when the status is 0 and the account ID matches
+            }else {
+                listsetAdapter.remove(x);
+                // Remove the invoice from the list if the status is 4 and the account ID matches
+            }
+        }
+
+        adapter.notifyDataSetChanged(); // Update the adapter
     }
 
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
