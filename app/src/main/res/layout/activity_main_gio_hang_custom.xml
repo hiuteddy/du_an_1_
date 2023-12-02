@@ -126,6 +126,26 @@
                         android:textColor="@color/black"
                         android:textSize="18sp"
                         android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/textView10"
+                        android:textStyle="bold"
+                        android:layout_marginLeft="33sp"
+                        android:textSize="19sp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ngân hàng: Mbbank " />
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_marginLeft="33sp"
+                        android:layout_width="match_parent"
+                        android:layout_marginTop="10dp"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="19sp"
+                        android:text="Số tài khoản: 0123213121 " />
+
+
                 </RadioGroup>
 
             </LinearLayout>

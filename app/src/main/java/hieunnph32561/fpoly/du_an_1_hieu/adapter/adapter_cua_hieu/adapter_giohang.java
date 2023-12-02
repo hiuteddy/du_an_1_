@@ -1,8 +1,11 @@
 package hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -21,10 +24,12 @@ import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.giohangDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_gio_hang_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.GioHang;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHodelsanpham> {
     Context context;
@@ -34,8 +39,10 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
     LoaiSeries loaiSeries;
     DienThoai dienThoai;
     loaidtDAO loaidtDAO;
+    taikhoanDAO taikhoanDAO;
 
     private MainActivity_gio_hang_custom mActivity;
+
 
     public adapter_giohang(MainActivity_gio_hang_custom activity, Context context, ArrayList<GioHang> list) {
         this.mActivity = activity;
@@ -44,6 +51,7 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
         this.dao = new giohangDAO(context);
         daoo = new dienthoaiDAO(context);
         loaidtDAO = new loaidtDAO(context);
+        taikhoanDAO=new taikhoanDAO(context);
     }
 
     @NonNull
@@ -112,16 +120,19 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
         holder.txtdelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                SharedPreferences preferences = context.getSharedPreferences("USER_DATA", MODE_PRIVATE);
+                String username = preferences.getString("username", "");
+                TaiKhoan taiKhoan = taikhoanDAO.getID(username);
                 AlertDialog.Builder builder = new AlertDialog.Builder(context);
                 builder.setTitle("Xác nhận xóa");
                 builder.setMessage("Bạn có chắc chắn muốn xóa sản phẩm này?");
                 builder.setPositiveButton("Xóa", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        if (dao.delete(Integer.parseInt(String.valueOf(gioHang.getMadt()))) > 0) {
-                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
+                        if (dao.delete(gioHang.getMaTk(),gioHang.getMadt()) > 0) {
                             list.clear();
-                            list.addAll(dao.getAll());
+                            list.addAll(dao.getAllByMaKhachHang(taiKhoan.getMaTk()));
+                            Toast.makeText(context, "Xóa thành công", Toast.LENGTH_SHORT).show();
                             notifyDataSetChanged();
                             updateTotalValues(); // Cập nhật tổng số lượng và tổng giá trị
                         } else {
@@ -130,14 +141,10 @@ public class adapter_giohang extends RecyclerView.Adapter<adapter_giohang.ViewHo
                     }
                 });
 
-                builder.setNegativeButton("Hủy", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-                AlertDialog dialog = builder.create();
-                dialog.show();
+                // Các phần code khác của AlertDialog nếu có
+
+                AlertDialog alertDialog = builder.create();
+                alertDialog.show();
             }
         });
 

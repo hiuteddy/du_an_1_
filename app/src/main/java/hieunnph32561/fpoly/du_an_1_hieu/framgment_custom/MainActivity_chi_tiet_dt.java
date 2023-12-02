@@ -146,7 +146,7 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
                 SharedPreferences preferences = getSharedPreferences("USER_DATA", MODE_PRIVATE);
                 String username = preferences.getString("username", "");
                 TaiKhoan taiKhoan = taikhoanDAO.getID(username);
-                GioHang gioHang = new GioHang(maDt, giaTien, quantity, taiKhoan.getMaTk());
+                GioHang gioHang = new GioHang(dienThoai.getMaDT(), giaTien, quantity, taiKhoan.getMaTk());
                 giohangDAO dao = new giohangDAO(getApplicationContext());
                 Intent intent = new Intent(MainActivity_chi_tiet_dt.this, MainActivity_gio_hang_custom.class);
                 if (quantity > dienThoai.getSoLuong()) {
@@ -154,9 +154,8 @@ public class MainActivity_chi_tiet_dt extends AppCompatActivity {
                     return;
                 }
 
-                if (dao.checkExistence(maDt)) {
+                if (dao.checkExistence(taiKhoan.getMaTk(),maDt)) {
                     Toast.makeText(MainActivity_chi_tiet_dt.this, "Tên đã tồn tại trong giỏ hàng", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
                 } else {
                     if (dao.insert(gioHang) > 0) {
                         startActivity(intent);

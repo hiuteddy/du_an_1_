@@ -50,20 +50,24 @@ public class giohangDAO {
         return database.insert("GioHang", null, values); // Trả về ID của hàng được chèn
     }
 
-    public long deleteAllGioHang() {
+    public long deleteAllGioHang(int matk) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        return database.delete("GioHang", null, null);
+        String whereClause = "maTk=?";
+        String[] whereArgs = {String.valueOf(matk)};
+        return database.delete("GioHang", whereClause, whereArgs);
     }
 
-    public long delete(int mgh) {
+    public long delete(int maTk, int maDT) {
         SQLiteDatabase database = dbHelper.getWritableDatabase();
-        long check = database.delete("GioHang", "maDT=?", new String[]{String.valueOf(mgh)});
+        String whereClause = "maTk=? AND maDT=?";
+        String[] whereArgs = {String.valueOf(maTk), String.valueOf(maDT)};
+        long check = database.delete("GioHang", whereClause, whereArgs);
         return check;
     }
 
-    public boolean checkExistence(int tenDT) {
-        String query = "SELECT COUNT(*) FROM GioHang WHERE maDT = ?";
-        String[] selectionArgs = {String.valueOf(tenDT)};
+    public boolean checkExistence(int tenTaiKhoan, int maDT) {
+        String query = "SELECT COUNT(*) FROM GioHang WHERE maTk = ? AND maDT = ?";
+        String[] selectionArgs = {String.valueOf(tenTaiKhoan), String.valueOf(maDT)};
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Cursor cursor = database.rawQuery(query, selectionArgs);
         int count = 0;

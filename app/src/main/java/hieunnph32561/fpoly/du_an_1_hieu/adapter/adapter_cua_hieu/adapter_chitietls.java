@@ -1,7 +1,10 @@
 package hieunnph32561.fpoly.du_an_1_hieu.adapter.adapter_cua_hieu;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.view.LayoutInflater;
@@ -18,14 +21,18 @@ import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.chitietDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.danhgiaDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.hoadonDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.loaidtDAO;
+import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_danh_gia_custom;
 import hieunnph32561.fpoly.du_an_1_hieu.model.ChiTiet;
+import hieunnph32561.fpoly.du_an_1_hieu.model.DanhGia;
 import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.HoaDon;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
+import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
 
 public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.ViewHodelsanpham> {
 
@@ -35,6 +42,8 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
     hoadonDAO hoadonDAO;
     dienthoaiDAO dienthoaiDAO;
     loaidtDAO loaidtDAO;
+    danhgiaDAO danhgiaDAO;
+    taikhoanDAO taikhoanDAO;
 
 
     public adapter_chitietls(Context context, ArrayList<ChiTiet> list) {
@@ -44,6 +53,8 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
         hoadonDAO = new hoadonDAO(context);
         dienthoaiDAO = new dienthoaiDAO(context);
         loaidtDAO = new loaidtDAO(context);
+        danhgiaDAO = new danhgiaDAO(context);
+        taikhoanDAO = new taikhoanDAO(context);
     }
 
     @NonNull
@@ -63,12 +74,12 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
 
         HoaDon hoaDon = hoadonDAO.getID(String.valueOf(chiTiet.getMahd()));
 
-        holder.txtmachitiet.setText("Mã chi tiết đơn: " + String.valueOf(chiTiet.getMact()));
+//        holder.txtmachitiet.setText("Mã chi tiết đơn: " + String.valueOf(chiTiet.getMact()));
         holder.txtmadt.setText("Tên điện thoại: " + String.valueOf(dienThoai.getTenDT()));
         holder.txthoadon.setText("Tên loại: " + loaiSeries.getTenLoaiSeri());
         holder.txtsoluong.setText("Số lượng: " + chiTiet.getSoluong());
-        holder.txtgiatien.setText(String.format("Giá điện thoại: %,.0f VNĐ", chiTiet.getGiatien()) );
-        holder.txttongtien.setText(String.format("Tổng tiền: %,.0f VNĐ", chiTiet.getGiatien()* chiTiet.getSoluong()) );
+        holder.txtgiatien.setText(String.format("Giá điện thoại: %,.0f VNĐ", chiTiet.getGiatien()));
+        holder.txttongtien.setText(String.format("Tổng tiền: %,.0f VNĐ", chiTiet.getGiatien() * chiTiet.getSoluong()));
 
         byte[] anhData = dienthoaiDAO.getAnhByMaDT(dienThoai.getMaDT());
         if (anhData != null) {
@@ -77,12 +88,27 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
         } else {
             holder.imganh.setImageResource(R.drawable.iphone15);
         }
-        if (hoaDon.getTrangThai() == 3 ){
-            holder.btndg.setVisibility(View.VISIBLE);
+        SharedPreferences preferences = context.getSharedPreferences("USER_DATA", MODE_PRIVATE);
+        String username = preferences.getString("username", "");
 
-        }else {
+
+        TaiKhoan taiKhoan = taikhoanDAO.getID(username);
+
+        for (DanhGia x : danhgiaDAO.getAll()) {
+            if (hoaDon.getTrangThai() == 3 && x.getMaDt() == dienThoai.getMaDT() && taiKhoan.getMaTk() == x.getMaTk()) {
+                holder.btndg.setVisibility(View.GONE);
+            } else {
+                holder.btndg.setVisibility(View.VISIBLE);
+            }
+        }
+        if (hoaDon.getTrangThai() != 3) {
             holder.btndg.setVisibility(View.GONE);
         }
+        if (username.equalsIgnoreCase("admin")) {
+            holder.btndg.setVisibility(View.GONE);
+        }
+
+
         holder.btndg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,20 +126,20 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
     }
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
-        TextView txtmachitiet, txtmadt, txthoadon, txtsoluong, txtgiatien, txttongtien;
+        TextView txtmadt, txthoadon, txtsoluong, txtgiatien, txttongtien;
         ImageView imganh;
-        Button btndg;
+        Button btndg, txtmachitiet;
 
         public ViewHodelsanpham(@NonNull View itemView) {
             super(itemView);
-            txtmachitiet = itemView.findViewById(R.id.txtmachitiet);
+            // txtmachitiet = itemView.findViewById(R.id.txtmachitiet);
             txtmadt = itemView.findViewById(R.id.txtmadt);
             txthoadon = itemView.findViewById(R.id.txthoadon);
             txtsoluong = itemView.findViewById(R.id.txtsoluong);
             txtgiatien = itemView.findViewById(R.id.txtgiadt);
             txttongtien = itemView.findViewById(R.id.txttongtien);
-            imganh=itemView.findViewById(R.id.imganh);
-            btndg=itemView.findViewById(R.id.btndanhg);
+            imganh = itemView.findViewById(R.id.imganh);
+            btndg = itemView.findViewById(R.id.btndanhg);
 
         }
     }

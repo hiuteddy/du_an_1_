@@ -42,7 +42,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
 
     private RecyclerView rcvgh;
     private adapter_giohang adapterGioHang;
-    private TextView txtTongSoLuong, txtphiship, txtTongGia, txthoten, txtdiachi, txtsdt, dathang;
+    private TextView txtTongSoLuong, txtphiship, txtTongGia, txthoten, txtdiachi, txtsdt, dathang, stk, tnh;
     private String phuongThucVanChuyen;
     private hoadonDAO hoadonDAO;
     private chitietDAO chitietDAO;
@@ -84,10 +84,16 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
         imggio = findViewById(R.id.gio);
         btnstar = findViewById(R.id.chu);
         suatt = findViewById(R.id.imgsua);
+        stk = findViewById(R.id.textView10);
+        tnh = findViewById(R.id.textView6);
+
         hoadonDAO = new hoadonDAO(this);
         chitietDAO = new chitietDAO(this);
         taikhoanDAO = new taikhoanDAO(this);
         dienthoaiDAO = new dienthoaiDAO(this);
+        stk.setVisibility(View.GONE);
+        tnh.setVisibility(View.GONE);
+
     }
 
     private void setupToolbar() {
@@ -107,13 +113,16 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                 shipperPrice = 20000.0;
                 txtphiship.setText(String.format("%,d VNĐ", 20000));
                 updateTotalValues();
+                stk.setVisibility(View.GONE);
+                tnh.setVisibility(View.GONE);
 
             } else if (checkedId == R.id.radioonile) {
                 phuongThucVanChuyen = "Thanh toán online";
                 shipperPrice = 0.0;
                 txtphiship.setText(String.format("%,d VNĐ", 0));
                 updateTotalValues();
-
+                stk.setVisibility(View.VISIBLE);
+                tnh.setVisibility(View.VISIBLE);
             }
         });
 
@@ -170,7 +179,7 @@ public class MainActivity_gio_hang_custom extends AppCompatActivity {
                     showNotification();
                 }
             }
-            ghDAO.deleteAllGioHang();
+            ghDAO.deleteAllGioHang(taiKhoan.getMaTk());
             gioHangList.clear();
             adapterGioHang.notifyDataSetChanged();
             updateTotalValues();
