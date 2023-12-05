@@ -195,9 +195,9 @@ public class framgment_ds_dt extends Fragment {
     }
     public void slide() {
         ArrayList<SlideModel> imageList = new ArrayList<>();
-        imageList.add(new SlideModel(R.drawable.slide2, "Trải Nghiệm Sự Mượt Mà", ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel(R.drawable.slide_3, "Bầu Trời Công nghệ", ScaleTypes.CENTER_CROP));
-        imageList.add(new SlideModel(R.drawable.slide_4, "Thiết Kế Sang Trọng", ScaleTypes.CENTER_CROP));
+//        imageList.add(new SlideModel(R.drawable.slide2, "Trải Nghiệm Sự Mượt Mà", ScaleTypes.CENTER_CROP));
+//        imageList.add(new SlideModel(R.drawable.slide_3, "Bầu Trời Công nghệ", ScaleTypes.CENTER_CROP));
+//        imageList.add(new SlideModel(R.drawable.slide_4, "Thiết Kế Sang Trọng", ScaleTypes.CENTER_CROP));
 
         imageSlider.setImageList(imageList);
     }
