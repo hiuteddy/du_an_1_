@@ -95,6 +95,15 @@
             android:inputType="text" />
     </com.google.android.material.textfield.TextInputLayout>
 
+    <Spinner
+        android:id="@+id/editqlTT"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:hint="Series"
+        android:inputType="text"
+        android:padding="5dp"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btnSumbit"
         android:layout_width="160dp"

@@ -10,8 +10,9 @@ public class DienThoai {
     private double giaTien;
     private String moTa;
     private int soLuong;
+    private int trangThai;
 
-    public DienThoai(int maDT, int maLoaiSeri,byte[] anhDT, String tenDT, double giaTien, String moTa,int soLuong) {
+    public DienThoai(int maDT, int maLoaiSeri,byte[] anhDT, String tenDT, double giaTien, String moTa,int soLuong, int trangThai) {
         this.maDT = maDT;
         this.maLoaiSeri = maLoaiSeri;
         this.anhDT = anhDT;
@@ -19,6 +20,7 @@ public class DienThoai {
         this.giaTien = giaTien;
         this.moTa = moTa;
         this.soLuong=soLuong;
+        this.trangThai = trangThai;
     }
 
     public byte[] getAnhDT() {
@@ -58,6 +60,14 @@ public class DienThoai {
     }
 
     public DienThoai() {
+    }
+
+    public int getTrangThai() {
+        return trangThai;
+    }
+
+    public void setTrangThai(int trangThai) {
+        this.trangThai = trangThai;
     }
 
     public int getMaDT() {

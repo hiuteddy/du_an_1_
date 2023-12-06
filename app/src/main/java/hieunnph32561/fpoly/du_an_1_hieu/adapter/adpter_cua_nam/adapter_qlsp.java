@@ -5,11 +5,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
@@ -17,15 +20,18 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
@@ -72,24 +78,29 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         holder.giaDt.setText(String.format("Giá: %,.0f VNĐ", dienThoai.getGiaTien()));
         holder.soluong.setText("Số Lượng: "+dienThoai.getSoLuong());
 
-        Bitmap bitmap;
-        byte[] hinhanhDT = dienThoai.getAnhDT();
-        if (hinhanhDT != null && hinhanhDT.length > 0) {
-            bitmap = BitmapFactory.decodeByteArray(hinhanhDT, 0, hinhanhDT.length);
-            holder.imgqldt.setImageBitmap(bitmap);
-        } else {
-            bitmap = null;
-            holder.imgqldt.setImageResource(R.drawable.baseline_phone_iphone_24);
-        }
-        holder.delete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Xử lý sự kiện xóa sản phẩm tại vị trí position
-            }
-        });
+        try {
+            Bitmap bitmap;
+            byte[] hinhanhDT = dienThoai.getAnhDT();
 
-        // Xử lý sự kiện khi item RecyclerView được click
-        holder.itemView.setOnClickListener(v -> showEditDialog(position, bitmap));
+            bitmap = BitmapFactory.decodeByteArray(hinhanhDT, 0, hinhanhDT.length);
+
+            holder.imgqldt.setImageBitmap(bitmap);
+            holder.itemView.setOnClickListener(v -> showEditDialog(position, bitmap));
+        } catch (Exception e) {
+            e.printStackTrace();
+            Drawable vectorDrawable = AppCompatResources.getDrawable(context, R.drawable.baseline_phone_iphone_24);
+
+            Bitmap bitmap = Bitmap.createBitmap(
+                    vectorDrawable.getIntrinsicWidth(),
+                    vectorDrawable.getIntrinsicHeight(),
+                    Bitmap.Config.ARGB_8888
+            );
+            Canvas canvas = new Canvas(bitmap);
+            vectorDrawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+            vectorDrawable.draw(canvas);
+            holder.imgqldt.setImageBitmap(bitmap);
+            holder.itemView.setOnClickListener(v -> showEditDialog(position, bitmap));
+        }
     }
 
     @Override
@@ -99,14 +110,13 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
 
     public static class ViewHodelsanpham extends RecyclerView.ViewHolder {
         TextView tenDt, giaDt, loaiDt, soluong;
-        ImageView delete,imgqldt;
+        ImageView imgqldt;
 
         public ViewHodelsanpham(@NonNull View itemView) {
             super(itemView);
             tenDt = itemView.findViewById(R.id.txtqltendt);
             giaDt = itemView.findViewById(R.id.txtqlgia);
             loaiDt = itemView.findViewById(R.id.txtqlloai);
-            delete = itemView.findViewById(R.id.btnxoa);
             soluong = itemView.findViewById(R.id.txtqlsl);
             imgqldt = itemView.findViewById(R.id.imgqldt);
         }
@@ -127,14 +137,21 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         EditText edtMota = dialog.findViewById(R.id.editqlDescribe);
         EditText edtsl = dialog.findViewById(R.id.editsoluong);
         Spinner editqlSeries = dialog.findViewById(R.id.editqlSeries);
+        Spinner spinner = dialog.findViewById(R.id.editqlTT);
         AppCompatButton btnSubmit = dialog.findViewById(R.id.btnSumbit);
 
+        ArrayList<String> spinnerItems = new ArrayList<>();
+        String[] spinnerData = context.getResources().getStringArray(R.array.spinner_data);
+        spinnerItems.addAll(Arrays.asList(spinnerData));
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(context, android.R.layout.simple_spinner_item, spinnerItems);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(adapter);
+        spinner.setSelection(dienThoai.getTrangThai());
+
         anhDT= dialog.findViewById(R.id.anhDT);
-        if (bitmap!=null) {
-            anhDT.setImageBitmap(bitmap);
-        }else {
-            anhDT.setImageResource(R.drawable.baseline_phone_iphone_24);
-        }
+        anhDT.setImageBitmap(bitmap);
+
 
         edtTenSP.setText(dienThoai.getTenDT());
         edtGia.setText(String.valueOf(dienThoai.getGiaTien()));
@@ -159,26 +176,37 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
             BitmapDrawable bitmapDrawable = (BitmapDrawable) anhDT.getDrawable();
             Bitmap bitmapEdit = bitmapDrawable.getBitmap();
             ByteArrayOutputStream byteArray = new ByteArrayOutputStream();
-            bitmapEdit.compress(Bitmap.CompressFormat.PNG, 100,byteArray);
-            byte [] bytesAnh = byteArray.toByteArray();
+            try {
+                bitmapEdit.compress(Bitmap.CompressFormat.PNG, 100, byteArray);
+                // Các xử lý khác sau khi nén thành công
 
-            int selectedSeriesPosition = editqlSeries.getSelectedItemPosition();
+                byte [] bytesAnh = byteArray.toByteArray();
+                boolean check = dienThoai.getTrangThai() == spinner.getSelectedItemPosition();
+                int selectedSeriesPosition = editqlSeries.getSelectedItemPosition();
 
-            if (TextUtils.isEmpty(tenSP) || TextUtils.isEmpty(gia) || TextUtils.isEmpty(mota) || TextUtils.isEmpty(soluong)) {
-                Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
-            } else {
-                dienThoai.setTenDT(tenSP);
-                dienThoai.setGiaTien(Double.parseDouble(gia));
-                dienThoai.setMoTa(mota);
-                dienThoai.setSoLuong(Integer.parseInt(soluong));
-                dienThoai.setMaLoaiSeri(listLS.get(selectedSeriesPosition).getMaLoaiSeri());
-                dienThoai.setAnhDT(bytesAnh);
+                if (TextUtils.isEmpty(tenSP) || TextUtils.isEmpty(gia) || TextUtils.isEmpty(mota) || TextUtils.isEmpty(soluong)) {
+                    Toast.makeText(context, "Vui lòng nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+                } else {
+                    dienThoai.setTenDT(tenSP);
+                    dienThoai.setGiaTien(Double.parseDouble(gia));
+                    dienThoai.setMoTa(mota);
+                    dienThoai.setSoLuong(Integer.parseInt(soluong));
+                    dienThoai.setMaLoaiSeri(listLS.get(selectedSeriesPosition).getMaLoaiSeri());
+                    dienThoai.setAnhDT(bytesAnh);
+                    dienThoai.setTrangThai(spinner.getSelectedItemPosition());
 
-                dao.update(dienThoai, dienThoai.getMaDT());
-                list.set(index, dienThoai);
-                notifyDataSetChanged();
-                Toast.makeText(context, "Cập nhật sản phẩm thành công!", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
+                    dao.update(dienThoai, dienThoai.getMaDT());
+                    if (check){
+                        list.set(index, dienThoai);
+                    }else {
+                        list.remove(index);
+                    }
+                    notifyDataSetChanged();
+                    Toast.makeText(context, "Cập nhật sản phẩm thành công!", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }} catch (Exception e) {
+                e.printStackTrace();
+                Toast.makeText(context, "Vui lòng Chọn ảnh", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -186,6 +214,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         dialog.setCancelable(true);
         dialog.show();
     }
+
     public void sortDescending() {
         Collections.sort(listGoc, new Comparator<DienThoai>() {
             @Override

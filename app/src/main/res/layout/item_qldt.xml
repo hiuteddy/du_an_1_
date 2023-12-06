@@ -37,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:orientation="vertical"
+            android:paddingTop="20dp"
             android:gravity="end">
             <TextView
                 android:id="@+id/txtqlloai"
@@ -51,6 +52,7 @@
                 android:layout_height="wrap_content"
                 android:text="1000000 VNĐ"
                 android:textSize="20dp"
+                android:textStyle="bold"
                 android:layout_marginLeft="10dp"
                 android:textColor="#FF0000"/>
             <TextView
@@ -60,12 +62,6 @@
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#FF0000"/>
-            <ImageView
-                android:id="@+id/btnxoa"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/baseline_close_24"
-                android:layout_marginRight="30dp"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

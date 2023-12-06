@@ -28,7 +28,8 @@ public class DbHelper extends SQLiteOpenHelper {
                 "tenDT TEXT, " +
                 "giaTien DOUBLE, " +
                 "moTa TEXT," +
-                "soLuong INTEGER, FOREIGN KEY (maLoaiSeries) REFERENCES LoaiSeriesDT(maLoaiSeries))";
+                "soLuong INTEGER," +
+                "trangThai INTEGER, FOREIGN KEY (maLoaiSeries) REFERENCES LoaiSeriesDT(maLoaiSeries))";
 
         String createTaiKhoanTable = "CREATE TABLE TaiKhoan " +
                 "(maTk INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -101,7 +102,7 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO LoaiSeriesDT (maLoaiSeries, tenLoaiSeries) VALUES (3, 'Series 13')");
 
         // Thêm dữ liệu mẫu vào bảng DienThoai
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa, soLuong) VALUES (1, 1, '', 'Iphone 15 Pro', 1000, 'Thời gian xem video lên đến 26 giờ chú thích ⁴\n" +
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa, soLuong, trangThai) VALUES (1, 1, '', 'Iphone 15 Pro', 1000, 'Thời gian xem video lên đến 26 giờ chú thích ⁴\n" +
                 "Hệ thống camera kép tiên tiến" +
                 "\n" +
                 "Chính 48MP | Ultra Wide" +
@@ -116,9 +117,9 @@ public class DbHelper extends SQLiteOpenHelper {
                 "\n" +
                 "Công nghệ ProMotionDynamic Island" +
                 "\n" +
-                "Một cách tuyệt diệu để tương tác với iPhone', 3)");
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (2, 2, '', 'Iphone 15 ', 2000, 'Mô tả 2',4)");
-        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong) VALUES (3, 3, '', 'Iphone 15 Pro Max', 3000, 'Mô tả 3',5)");
+                "Một cách tuyệt diệu để tương tác với iPhone', 3,0)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong, trangThai) VALUES (2, 2, '', 'Iphone 15 ', 2000, 'Mô tả 2',4,0)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong, trangThai) VALUES (3, 3, '', 'Iphone 15 Pro Max', 3000, 'Mô tả 3',5,0)");
 
         // Thêm dữ liệu mẫu vào bảng TaiKhoan
         db.execSQL("INSERT INTO Admin (maTk, tenDN, matKhau,hoTen,sdt,diaChi) VALUES (1, 'admin', 'admin','Nguyễn Văn A',123456789 ,'hanoi')");

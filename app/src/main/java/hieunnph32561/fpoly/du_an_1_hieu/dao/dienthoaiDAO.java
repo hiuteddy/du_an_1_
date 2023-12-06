@@ -28,7 +28,7 @@ public class dienthoaiDAO {
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
         values.put("soLuong", dienThoai.getSoLuong());
-
+        values.put("trangThai", dienThoai.getTrangThai());
 
         return database.insert("DienThoai", null, values);
     }
@@ -36,13 +36,13 @@ public class dienthoaiDAO {
     public int update(DienThoai dienThoai, int maSPOld) {
         database = dbHelper.getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put("maDT", dienThoai.getMaDT());
         values.put("maLoaiSeries", dienThoai.getMaLoaiSeri());
         values.put("imageUrl", dienThoai.getAnhDT());
         values.put("tenDT", dienThoai.getTenDT());
         values.put("giaTien", dienThoai.getGiaTien());
         values.put("moTa", dienThoai.getMoTa());
         values.put("soLuong", dienThoai.getSoLuong());
+        values.put("trangThai", dienThoai.getTrangThai());
 
         return database.update("DienThoai", values, "maDT = ?", new String[]{String.valueOf(maSPOld)});
     }
@@ -61,7 +61,8 @@ public class dienthoaiDAO {
                     cursor.getString(cursor.getColumnIndex("tenDT")),
                     cursor.getDouble(cursor.getColumnIndex("giaTien")),
                     cursor.getString(cursor.getColumnIndex("moTa")),
-                    cursor.getInt(cursor.getColumnIndex("soLuong"))
+                    cursor.getInt(cursor.getColumnIndex("soLuong")),
+                    cursor.getInt(cursor.getColumnIndex("trangThai"))
             );
             list.add(s);
         }
@@ -72,6 +73,15 @@ public class dienthoaiDAO {
     public ArrayList<DienThoai> getAll() {
         String sql = "SELECT * FROM DienThoai";
         return (ArrayList<DienThoai>) getALLSACH(sql);
+    }
+    public ArrayList<DienThoai> getAllKD() {
+        String sql = "SELECT * FROM DienThoai WHERE trangThai=0";
+        return getALLSACH(sql);
+    }
+
+    public ArrayList<DienThoai> getAllNKD() {
+        String sql = "SELECT * FROM DienThoai WHERE trangThai=1";
+        return getALLSACH(sql);
     }
 
     public DienThoai getID(String id) {
