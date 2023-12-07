@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="80dp"
         android:padding="10dp"
-        android:text="Login_to_Accoun"
+        android:text="Login_to_Account"
         android:textColor="#ffffff"
         android:textSize="40dp"
         android:textStyle="bold"

@@ -102,6 +102,8 @@ public class FragmentSeries extends Fragment {
 
                 dao.add(series);
                 dataList.add(series);
+                adapter.notifyDataSetChanged();
+
 
                 showToast("Đã Thêm Series");
                 dialog.dismiss();

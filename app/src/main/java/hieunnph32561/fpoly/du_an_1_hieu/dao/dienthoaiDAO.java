@@ -96,7 +96,7 @@ public class dienthoaiDAO {
     }
 
     public ArrayList<DienThoai> getDienThoaiByLoai(int maLoaiSeries) {
-        String sql = "SELECT * FROM DienThoai WHERE maLoaiSeries = ?";
+        String sql = "SELECT * FROM DienThoai WHERE maLoaiSeries = ? AND trangThai = 0";
         return getALLSACH(sql, String.valueOf(maLoaiSeries));
     }
 

@@ -82,10 +82,10 @@ public class giohangDAO {
         return (count > 0);
     }
 
-    public ArrayList<GioHang> getAll() {
-        String sql = "SELECT * FROM GioHang";
-        return (ArrayList<GioHang>) getALLGIOHANG(sql);
-    }
+//    public ArrayList<GioHang> getAll() {
+//        String sql = "SELECT * FROM GioHang";
+//        return (ArrayList<GioHang>) getALLGIOHANG(sql);
+//    }
 
     public ArrayList<GioHang> getAllByMaKhachHang(int maKhachHang) {
         String sql = "SELECT * FROM GioHang WHERE maTk = ?";

@@ -31,7 +31,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.ResourceBundle;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.dienthoaiDAO;
@@ -198,7 +197,8 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
                     dao.update(dienThoai, dienThoai.getMaDT());
                     if (check){
                         list.set(index, dienThoai);
-                    }else {
+                    }
+                    else {
                         list.remove(index);
                     }
                     notifyDataSetChanged();

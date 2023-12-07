@@ -9,7 +9,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.util.ArrayList;
 
 import hieunnph32561.fpoly.du_an_1_hieu.database.DbHelper;
-import hieunnph32561.fpoly.du_an_1_hieu.model.DienThoai;
 import hieunnph32561.fpoly.du_an_1_hieu.model.LoaiSeries;
 
 public class loaidtDAO {
@@ -25,13 +24,12 @@ public class loaidtDAO {
 
         return database.insert("LoaiSeriesDT", null, values);
     }
-    public int update(LoaiSeries loaiSeries, int maSPOld) {
+    public int update(LoaiSeries loaiSeries) {
         database = dBhelper.getReadableDatabase();
         ContentValues values = new ContentValues();
-        values.put("maLoaiSeries", loaiSeries.getMaLoaiSeri());
         values.put("tenLoaiSeries", loaiSeries.getTenLoaiSeri());
 
-        return database.update("LoaiSeriesDT", values, "maLoaiSeries = ?", new String[]{String.valueOf(maSPOld)});
+        return database.update("LoaiSeriesDT", values, "maLoaiSeries = ?", new String[]{String.valueOf(loaiSeries.getMaLoaiSeri())});
     }
 
     public ArrayList<LoaiSeries> getALLSACH(String sql, String... selectionArgs) {

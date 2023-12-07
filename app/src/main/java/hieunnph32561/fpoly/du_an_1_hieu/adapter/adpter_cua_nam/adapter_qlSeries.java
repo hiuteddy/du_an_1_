@@ -30,6 +30,7 @@ public class adapter_qlSeries extends RecyclerView.Adapter<adapter_qlSeries.View
     public adapter_qlSeries(Context context, List<LoaiSeries> dataList) {
         this.context = context;
         this.ListLoaiDT = dataList;
+        dao=new loaidtDAO(context);
     }
 
     @NonNull
@@ -94,8 +95,11 @@ public class adapter_qlSeries extends RecyclerView.Adapter<adapter_qlSeries.View
             } else {
                 series.setTenLoaiSeri(tenSeries);
 
-                dao.update(series,series.getMaLoaiSeri());
-                ListLoaiDT.add(series);
+                dao.update(series);
+                notifyDataSetChanged();
+
+
+           //     ListLoaiDT.add(series);
 
                 showToast("Đã Upload Series");
                 dialog.dismiss();

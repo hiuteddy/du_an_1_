@@ -92,7 +92,8 @@ public class adapter_lichsu extends RecyclerView.Adapter<adapter_lichsu.ViewHode
             public void onClick(View v) {
                 Toast.makeText(context, "Bạn đã chọn hóa đơn: " + hoaDon.getMaHD(), Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(context, MainActivity_chi_tiet_ls.class);
-                intent.putExtra("productId", hoaDon.getMaHD()); // Truyền mã sản phẩm
+                intent.putExtra("productId", hoaDon.getMaHD());
+                // Truyền mã sản phẩm
                 context.startActivity(intent);
             }
         });
