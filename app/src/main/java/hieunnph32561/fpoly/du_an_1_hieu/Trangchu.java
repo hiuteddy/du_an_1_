@@ -32,7 +32,6 @@ import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.MainActivity_gio_hang_c
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_ds_dt;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_lich_su_hoa_don;
 import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.framgment_taikhoan;
-import hieunnph32561.fpoly.du_an_1_hieu.framgment_custom.hotrokhachhang;
 
 public class Trangchu extends AppCompatActivity {
     private DrawerLayout drawerLayout;
@@ -98,9 +97,7 @@ public class Trangchu extends AppCompatActivity {
                 fragmentTitle = "Tài khoản";
             } else if (itemId == R.id.sub_giohang) {
                 startActivity(new Intent(Trangchu.this, MainActivity_gio_hang_custom.class));
-            }else if (itemId == R.id.sub_hotro) {
-                startActivity(new Intent(Trangchu.this, hotrokhachhang.class));}
-            else if (itemId == R.id.sub_Logout) {
+            } else if (itemId == R.id.sub_Logout) {
                 showExitDialog();
             } else if (itemId == R.id.nav_Home) {
                 fragment = new FragmentTrangChu();
