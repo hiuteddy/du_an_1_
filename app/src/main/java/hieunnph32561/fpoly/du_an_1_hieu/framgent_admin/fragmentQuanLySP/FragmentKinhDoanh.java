@@ -56,26 +56,14 @@ public class FragmentKinhDoanh extends Fragment {
     Dialog dialog;
     ImageView imgHinhSP;
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-        @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && isResumed()) {
-            updateAdapterData();
-        }
-    }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (getUserVisibleHint()) {
-            updateAdapterData();
-        }
+        updateAdapterData();
+        //  loaddata();
     }
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -87,19 +75,32 @@ public class FragmentKinhDoanh extends Fragment {
         dtDAO = new dienthoaiDAO(getContext());
         loaidao = new loaidtDAO(getContext());
         listLS = loaidao.getAll();
-        list = dtDAO.getAllKD();
+        list = dtDAO.getAllKDD(0);
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rcvqldt.setLayoutManager(linearLayoutManager);
 
         adapter = new adapter_qlsp(getContext(), list, this);
         rcvqldt.setAdapter(adapter);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
-        rcvqldt.setLayoutManager(linearLayoutManager);
+
         updateAdapterData();
+
         return view;
+    }
+
+
+    public void loaddata() {
+        list = dtDAO.getAllKDD(0);
+        adapter = new adapter_qlsp(getContext(), list, this);
+        rcvqldt.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+        // Các dòng code khác (LinearLayoutManager và rcvqldt.setLayoutManager) không cần thiết để nằm trong phương thức này.
     }
 
     private void updateAdapterData() {
         list.clear(); // Clear old list
-        listdlm = dtDAO.getAll();
+        listdlm = dtDAO.getAllKDD(0);
 
         for (DienThoai x : listdlm) {
             if (x.getTrangThai() == 0) {

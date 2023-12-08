@@ -43,21 +43,17 @@ public class FragmentNgungKinhDoanh extends Fragment {
     dienthoaiDAO dtDAO;
     loaidtDAO loaidao;
     ImageView imgHinhSP;
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if (isVisibleToUser && isResumed()) {
-            updateAdapterData();
-        }
-    }
+
 
     @Override
     public void onResume() {
         super.onResume();
-        if (getUserVisibleHint()) {
-            updateAdapterData();
-        }
+      //  loaddata();
+        updateAdapterData();
+
     }
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,18 +69,19 @@ public class FragmentNgungKinhDoanh extends Fragment {
         dtDAO = new dienthoaiDAO(getContext());
         loaidao = new loaidtDAO(getContext());
         listLS = loaidao.getAll();
-        list = dtDAO.getAllNKD();
+        list = dtDAO.getAllNKD(1);
 
-        adapter = new adapter_qlsp(getContext(), list,this);
+        adapter = new adapter_qlsp(getContext(), list, this);
         rcvqldt.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rcvqldt.setLayoutManager(linearLayoutManager);
         updateAdapterData();
         return view;
     }
+
     private void updateAdapterData() {
         list.clear(); // Clear old list
-        listdlm = dtDAO.getAll();
+        listdlm = dtDAO.getAllNKD(1);
 
         for (DienThoai x : listdlm) {
             if (x.getTrangThai() == 1) {
@@ -99,7 +96,14 @@ public class FragmentNgungKinhDoanh extends Fragment {
         adapter.notifyDataSetChanged(); // Update
     }
 
-
+    public void loaddata() {
+        list = dtDAO.getAllKDD(1);
+        adapter = new adapter_qlsp(getContext(), list, this);
+        rcvqldt.setAdapter(adapter);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        rcvqldt.setLayoutManager(linearLayoutManager);
+        adapter.notifyDataSetChanged();
+    }
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -108,10 +112,10 @@ public class FragmentNgungKinhDoanh extends Fragment {
             if (imageUri != null) {
                 try {
                     Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireActivity().getContentResolver(), imageUri);
-                    if (imgHinhSP !=null) {
+                    if (imgHinhSP != null) {
                         imgHinhSP.setImageBitmap(bitmap);
                     }
-                    if (adapter_qlsp.anhDT != null){
+                    if (adapter_qlsp.anhDT != null) {
                         adapter_qlsp.anhDT.setImageBitmap(bitmap);
                     }
 
@@ -124,6 +128,7 @@ public class FragmentNgungKinhDoanh extends Fragment {
             }
         }
     }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -136,6 +141,7 @@ public class FragmentNgungKinhDoanh extends Fragment {
         }
         return super.onOptionsItemSelected(item);
     }
+
     private void showToast(String message) {
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }

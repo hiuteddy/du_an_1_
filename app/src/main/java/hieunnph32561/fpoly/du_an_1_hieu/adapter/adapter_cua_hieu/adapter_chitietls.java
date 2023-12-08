@@ -93,13 +93,19 @@ public class adapter_chitietls extends RecyclerView.Adapter<adapter_chitietls.Vi
 
 
         TaiKhoan taiKhoan = taikhoanDAO.getID(username);
+        boolean hasReviewed = false;
 
         for (DanhGia x : danhgiaDAO.getAll()) {
-            if (hoaDon.getTrangThai() == 3 && x.getMaDt() == dienThoai.getMaDT() && taiKhoan.getMaTk() == x.getMaTk()) {
-                holder.btndg.setVisibility(View.GONE);
-            } else {
-                holder.btndg.setVisibility(View.VISIBLE);
+            if (hoaDon.getTrangThai() == 3 && x.getMaDt() == chiTiet.getMadt() && taiKhoan.getMaTk() == x.getMaTk()) {
+                hasReviewed = true;
+                break;
             }
+        }
+
+        if (hasReviewed) {
+            holder.btndg.setVisibility(View.GONE);
+        } else {
+            holder.btndg.setVisibility(View.VISIBLE);
         }
         if (hoaDon.getTrangThai() != 3) {
             holder.btndg.setVisibility(View.GONE);

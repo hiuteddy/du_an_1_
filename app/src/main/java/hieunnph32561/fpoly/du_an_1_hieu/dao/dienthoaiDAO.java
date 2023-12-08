@@ -78,10 +78,13 @@ public class dienthoaiDAO {
         String sql = "SELECT * FROM DienThoai WHERE trangThai=0";
         return getALLSACH(sql);
     }
-
-    public ArrayList<DienThoai> getAllNKD() {
-        String sql = "SELECT * FROM DienThoai WHERE trangThai=1";
-        return getALLSACH(sql);
+    public ArrayList<DienThoai> getAllKDD(int trangThai) {
+        String sql = "SELECT * FROM DienThoai WHERE trangThai = ?";
+        return getALLSACH(sql, String.valueOf(trangThai));
+    }
+    public ArrayList<DienThoai> getAllNKD(int trangThai) {
+        String sql = "SELECT * FROM DienThoai WHERE trangThai = ?";
+        return getALLSACH(sql, String.valueOf(trangThai));
     }
 
     public DienThoai getID(String id) {

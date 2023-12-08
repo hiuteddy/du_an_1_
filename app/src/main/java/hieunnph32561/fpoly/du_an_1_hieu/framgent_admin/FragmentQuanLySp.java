@@ -1,37 +1,28 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgent_admin;
 
-import static android.app.Activity.RESULT_OK;
-
-import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.MediaStore;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentCXN;
-import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentHoaDon.FragmentDXN;
+import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentQuanLySP.FragmentDanhGia;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentQuanLySP.FragmentKinhDoanh;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentQuanLySP.FragmentNgungKinhDoanh;
 
@@ -39,7 +30,7 @@ import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.fragmentQuanLySP.Fragment
 public class FragmentQuanLySp extends Fragment {
     private SearchView searchView;
 
-    private final String[] tabTitles = {"Kinh Doanh","Ngừng Kinh Doanh"};
+    private final String[] tabTitles = {"Kinh Doanh","Ngừng Kinh Doanh","Danh Sách Đánh Gia"};
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,6 +97,8 @@ class adapter_tablayout extends FragmentStateAdapter {
                 return new FragmentKinhDoanh();
             case 1:
                 return new FragmentNgungKinhDoanh();
+            case 2:
+                return new FragmentDanhGia();
             default:
                 return null;
         }
@@ -114,7 +107,7 @@ class adapter_tablayout extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 2;
+        return 3;
     }
 
 }
