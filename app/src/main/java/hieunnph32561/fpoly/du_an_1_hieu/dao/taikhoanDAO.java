@@ -78,7 +78,7 @@ public class taikhoanDAO {
     public String getSDT() {
         SQLiteDatabase database = dbHelper.getReadableDatabase();
         String result = "";
-        Cursor cursor = database.rawQuery("SELECT sdt FROM TaiKhoan where maTk = 1", null);
+        Cursor cursor = database.rawQuery("SELECT sdt FROM Admin where maTk = 1", null);
         while (cursor.moveToNext()) {
             result += cursor.getString(0) + "\n";
         }

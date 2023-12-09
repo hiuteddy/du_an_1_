@@ -201,7 +201,7 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
                     else {
                         list.remove(index);
                     }
-                    notifyDataSetChanged();
+                    notifyItemChanged(index);
                     Toast.makeText(context, "Cập nhật sản phẩm thành công!", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
                 }} catch (Exception e) {

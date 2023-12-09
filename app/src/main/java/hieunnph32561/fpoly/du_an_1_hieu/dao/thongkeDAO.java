@@ -46,7 +46,7 @@ public class thongkeDAO {
 
     @SuppressLint("Range")
     public int getDoanhThu(String tuNgay, String denNgay) {
-        String sqlDoanhThu = "SELECT SUM(tongTien) AS doanhThu FROM HoaDon WHERE ngay BETWEEN ? AND ?";
+        String sqlDoanhThu = "SELECT SUM(tongTien) AS doanhThu FROM HoaDon WHERE ngay BETWEEN ? AND ? AND trangThai = 3";
         SQLiteDatabase database = dbhelper.getReadableDatabase();
         Cursor cursor = database.rawQuery(sqlDoanhThu, new String[]{tuNgay, denNgay});
 

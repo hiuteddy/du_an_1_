@@ -61,7 +61,6 @@ public class FragmentKinhDoanh extends Fragment {
     public void onResume() {
         super.onResume();
         updateAdapterData();
-        //  loaddata();
     }
 
 
@@ -83,7 +82,6 @@ public class FragmentKinhDoanh extends Fragment {
         adapter = new adapter_qlsp(getContext(), list, this);
         rcvqldt.setAdapter(adapter);
 
-        updateAdapterData();
 
         return view;
     }
@@ -112,7 +110,6 @@ public class FragmentKinhDoanh extends Fragment {
             }
         }
 
-        adapter.notifyDataSetChanged(); // Update
     }
 
     private void showAddDialog() {

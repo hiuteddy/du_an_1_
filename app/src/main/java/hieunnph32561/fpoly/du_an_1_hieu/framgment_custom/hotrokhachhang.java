@@ -1,20 +1,18 @@
 package hieunnph32561.fpoly.du_an_1_hieu.framgment_custom;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import hieunnph32561.fpoly.du_an_1_hieu.R;
-import hieunnph32561.fpoly.du_an_1_hieu.Trangchu;
 import hieunnph32561.fpoly.du_an_1_hieu.dao.taikhoanDAO;
 import hieunnph32561.fpoly.du_an_1_hieu.framgent_admin.MapsActivity;
 import hieunnph32561.fpoly.du_an_1_hieu.model.TaiKhoan;
@@ -29,6 +27,7 @@ public class hotrokhachhang extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_hotrokhachhang);
         txtcall = findViewById(R.id.txtcall);
+        dao=new taikhoanDAO(this);
         TextView txtmap = findViewById(R.id.txtvitri);
         Toolbar toolbar = findViewById(R.id.toolbarr);
         setSupportActionBar(toolbar);
@@ -41,8 +40,9 @@ public class hotrokhachhang extends AppCompatActivity {
                 onBackPressed();
             }
         });
-        SharedPreferences preferences = getSharedPreferences("PHONE", MODE_PRIVATE);
-        String data = preferences.getString("call", "");
+    //    SharedPreferences preferences = getSharedPreferences("PHONE", MODE_PRIVATE);
+       // String data = preferences.getString("call", "");
+        String data=dao.getSDT();
         txtcall.setText(data);
         txtcall.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 73;
+    public static final int DB_VERSION = 75;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -100,53 +100,53 @@ public class DbHelper extends SQLiteOpenHelper {
 
 
 //        // Thêm dữ liệu mẫu vào bảng DienThoai
-//        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa, soLuong, trangThai) VALUES (1, 1, 'iphone15.png', 'Iphone 15 Pro', 30000000, 'Thời gian xem video lên đến 26 giờ chú thích ⁴\n" +
-//                "Hệ thống camera kép tiên tiến" +
-//                "\n" +
-//                "Chính 48MP | Ultra Wide" +
-//                "\n" +
-//                "Ảnh có độ phân giải siêu cao (24MP và 48MP)" +
-//                "\n" +
-//                "Ảnh chân dung thế hệ mới với Focus và Depth Control" +
-//                "Chip A16 Bionic với GPU 5 lõi\n" +
-//                "Màn hình Super Retina XDR chú thích " +
-//                "\n" +
-//                "Màn hình Luôn Bật" +
-//                "\n" +
-//                "Công nghệ ProMotionDynamic Island" +
-//                "\n" +
-//                "Một cách tuyệt diệu để tương tác với iPhone', 10,0)");
-//
-//        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong, trangThai) VALUES (2, 1, 'iphone14plus.png', 'Iphone 15 ', 22000000, '\"Hệ thống camera kép tiên tiến\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Chính 48MP | Ultra Wide\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Ảnh có độ phân giải siêu cao (24MP và 48MP)\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Ảnh chân dung thế hệ mới với Focus và Depth Control\" +\n" +
-//                "                \"Chip A16 Bionic với GPU 5 lõi\\n\" +\n" +
-//                "                \"Màn hình Super Retina XDR chú thích \" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Màn hình Luôn Bật\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Công nghệ ProMotionDynamic Island\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Một cách tuyệt diệu để tương tác với iPhone',10,0)");
-//        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong, trangThai) VALUES (3, 1, 'iphone15promax.png', 'Iphone 15 Pro Max', 33000000, '\"Hệ thống camera kép tiên tiến\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Chính 48MP | Ultra Wide\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Ảnh có độ phân giải siêu cao (24MP và 48MP)\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Ảnh chân dung thế hệ mới với Focus và Depth Control\" +\n" +
-//                "                \"Chip A16 Bionic với GPU 5 lõi\\n\" +\n" +
-//                "                \"Màn hình Super Retina XDR chú thích \" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Màn hình Luôn Bật\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Công nghệ ProMotionDynamic Island\" +\n" +
-//                "                \"\\n\" +\n" +
-//                "                \"Một cách tuyệt diệu để tương tác với iPhone',10,0)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa, soLuong, trangThai) VALUES (1, 1, 'iphone15.png', 'Iphone 15 Pro', 30000000, 'Thời gian xem video lên đến 26 giờ chú thích ⁴\n" +
+                "Hệ thống camera kép tiên tiến" +
+                "\n" +
+                "Chính 48MP | Ultra Wide" +
+                "\n" +
+                "Ảnh có độ phân giải siêu cao (24MP và 48MP)" +
+                "\n" +
+                "Ảnh chân dung thế hệ mới với Focus và Depth Control" +
+                "Chip A16 Bionic với GPU 5 lõi\n" +
+                "Màn hình Super Retina XDR chú thích " +
+                "\n" +
+                "Màn hình Luôn Bật" +
+                "\n" +
+                "Công nghệ ProMotionDynamic Island" +
+                "\n" +
+                "Một cách tuyệt diệu để tương tác với iPhone', 10,0)");
+
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong, trangThai) VALUES (2, 1, 'iphone14plus.png', 'Iphone 15 ', 22000000, '\"Hệ thống camera kép tiên tiến\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Chính 48MP | Ultra Wide\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Ảnh có độ phân giải siêu cao (24MP và 48MP)\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Ảnh chân dung thế hệ mới với Focus và Depth Control\" +\n" +
+                "                \"Chip A16 Bionic với GPU 5 lõi\\n\" +\n" +
+                "                \"Màn hình Super Retina XDR chú thích \" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Màn hình Luôn Bật\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Công nghệ ProMotionDynamic Island\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Một cách tuyệt diệu để tương tác với iPhone',10,0)");
+        db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong, trangThai) VALUES (3, 1, 'iphone15promax.png', 'Iphone 15 Pro Max', 33000000, '\"Hệ thống camera kép tiên tiến\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Chính 48MP | Ultra Wide\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Ảnh có độ phân giải siêu cao (24MP và 48MP)\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Ảnh chân dung thế hệ mới với Focus và Depth Control\" +\n" +
+                "                \"Chip A16 Bionic với GPU 5 lõi\\n\" +\n" +
+                "                \"Màn hình Super Retina XDR chú thích \" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Màn hình Luôn Bật\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Công nghệ ProMotionDynamic Island\" +\n" +
+                "                \"\\n\" +\n" +
+                "                \"Một cách tuyệt diệu để tương tác với iPhone',10,0)");
 
         db.execSQL("INSERT INTO LoaiSeriesDT (maLoaiSeries, tenLoaiSeries) VALUES (1, 'Series 15')");
         db.execSQL("INSERT INTO LoaiSeriesDT (maLoaiSeries, tenLoaiSeries) VALUES (2, 'Series 14')");

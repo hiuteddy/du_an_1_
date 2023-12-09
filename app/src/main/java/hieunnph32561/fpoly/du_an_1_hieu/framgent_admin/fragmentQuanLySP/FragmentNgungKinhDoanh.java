@@ -48,7 +48,6 @@ public class FragmentNgungKinhDoanh extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-      //  loaddata();
         updateAdapterData();
 
     }
@@ -75,7 +74,6 @@ public class FragmentNgungKinhDoanh extends Fragment {
         rcvqldt.setAdapter(adapter);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rcvqldt.setLayoutManager(linearLayoutManager);
-        updateAdapterData();
         return view;
     }
 
@@ -93,7 +91,6 @@ public class FragmentNgungKinhDoanh extends Fragment {
             }
         }
 
-        adapter.notifyDataSetChanged(); // Update
     }
 
     public void loaddata() {
