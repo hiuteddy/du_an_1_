@@ -69,7 +69,7 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
         Intent intent = getIntent();
         int tenDT = intent.getIntExtra("productId", 0);
 
-        DienThoai dienThoai=dienthoaiDAO.getID(String.valueOf(tenDT));
+        DienThoai dienThoai = dienthoaiDAO.getID(String.valueOf(tenDT));
         textProductName.setText(dienThoai.getTenDT());
 
         byte[] anhData = dienthoaiDAO.getAnhByMaDT(dienThoai.getMaDT());
@@ -79,7 +79,6 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
         } else {
             imageProduct.setImageResource(R.drawable.iphone15);
         }
-
 
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
@@ -102,6 +101,10 @@ public class MainActivity_danh_gia_custom extends AppCompatActivity {
                 danhGia.setDiem((int) rating);
                 danhGia.setNhanxet(comment);
                 danhGia.setThoigian((java.sql.Date.valueOf(String.valueOf(date))));
+                if (comment.isEmpty() || rating == 0) {
+                    Toast.makeText(MainActivity_danh_gia_custom.this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 long insertedId = danhgiaDAO.insert(danhGia);
 

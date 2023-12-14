@@ -83,14 +83,15 @@ public class FragmentNgungKinhDoanh extends Fragment {
 
         for (DienThoai x : listdlm) {
             if (x.getTrangThai() == 1) {
-                list.add(x); // Add to the new list only when the status is 0 and the account ID matches
+                list.add(x);
+                adapter.notifyDataSetChanged();// Add to the new list only when the status is 0 and the account ID matches
             }
             if (x.getTrangThai() == 0) {
                 list.remove(x);
                 // Remove the invoice from the list if the status is 4 and the account ID matches
             }
         }
-
+adapter.notifyDataSetChanged();
     }
 
     public void loaddata() {

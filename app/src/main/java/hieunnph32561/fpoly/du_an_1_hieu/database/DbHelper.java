@@ -9,7 +9,7 @@ import androidx.annotation.Nullable;
 
 public class DbHelper extends SQLiteOpenHelper {
     public static final String DB_NAME = "duan1";
-    public static final int DB_VERSION = 75;
+    public static final int DB_VERSION = 77;
 
     public DbHelper(@Nullable Context context) {
         super(context, DB_NAME, null, DB_VERSION);
@@ -115,7 +115,7 @@ public class DbHelper extends SQLiteOpenHelper {
                 "\n" +
                 "Công nghệ ProMotionDynamic Island" +
                 "\n" +
-                "Một cách tuyệt diệu để tương tác với iPhone', 10,0)");
+                "Một cách tuyệt diệu để tương tác với iPhone', 10,1)");
 
         db.execSQL("INSERT INTO DienThoai (maDT, maLoaiSeries, imageUrl, tenDT, giaTien, moTa,soLuong, trangThai) VALUES (2, 1, 'iphone14plus.png', 'Iphone 15 ', 22000000, '\"Hệ thống camera kép tiên tiến\" +\n" +
                 "                \"\\n\" +\n" +

@@ -214,6 +214,9 @@ public class adapter_qlsp extends RecyclerView.Adapter<adapter_qlsp.ViewHodelsan
         dialog.setCancelable(true);
         dialog.show();
     }
+    public void updateAdapterData(int index) {
+        notifyItemChanged(index);
+    }
 
     public void sortDescending() {
         Collections.sort(listGoc, new Comparator<DienThoai>() {

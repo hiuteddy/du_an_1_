@@ -175,19 +175,19 @@ public class FragmentKhachHang extends Fragment {
         adapter = new adapter_khach_hang(getContext(), (ArrayList<TaiKhoan>) list);
         adapter.notifyDataSetChanged();
     }
-    @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.asc){
-            sortBooksByNameAscending();
-            return true;
-        }else if(id == R.id.desc){
-            sortBooksByNameDescending();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
+//    @Override
+//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.asc){
+//            sortBooksByNameAscending();
+//            return true;
+//        }else if(id == R.id.desc){
+//            sortBooksByNameDescending();
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
+//
 
 
 }

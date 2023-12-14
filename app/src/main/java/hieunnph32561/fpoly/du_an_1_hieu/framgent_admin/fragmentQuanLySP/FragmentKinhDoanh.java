@@ -61,7 +61,9 @@ public class FragmentKinhDoanh extends Fragment {
     public void onResume() {
         super.onResume();
         updateAdapterData();
-    }
+//        int index = 0; // Chỉ số của mục cần cập nhật
+//        adapter.updateAdapterData(index);
+        }
 
 
     @Override
@@ -102,13 +104,15 @@ public class FragmentKinhDoanh extends Fragment {
 
         for (DienThoai x : listdlm) {
             if (x.getTrangThai() == 0) {
-                list.add(x); // Add to the new list only when the status is 0 and the account ID matches
+                list.add(x);
+              //  adapter.notifyDataSetChanged();// Add to the new list only when the status is 0 and the account ID matches
             }
             if (x.getTrangThai() == 1) {
                 list.remove(x);
                 // Remove the invoice from the list if the status is 4 and the account ID matches
             }
         }
+        adapter.notifyDataSetChanged();
 
     }
 
